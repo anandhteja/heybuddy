@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit profile</title>
+</head>
+<body>
+    <div>
+    <form method='POST' enctype="multipart/form-data">
+
+
+
+Change Username:<input type='username' name='username'>&nbsp;&nbsp;(Mandatory)<br/><br/>
+Update Description:<input type='text' name='description'>&nbsp;&nbsp;(Mandatory)<br/><br/>
+<button type='submit'>Save</button>
+{% csrf_token %}
+
+</form>
+<br/>
+<br/>
+<br/>
+<h1 style="color:red">Note:Deleting your account will delete all your data and it can't be reversed</h1>
+<br/>
+<br/>
+still want to continue?
+<br/>
+<br/>
+<br/>
+
+
+<form  method='POST' enctype="multipart/form-data" action="/deleteaccount/{{username}}/">
+
+<button type="submit">Delete My account</button>
+{% csrf_token %}
+
+</form>
+
+
+</div>
+
+</body>
+</html>

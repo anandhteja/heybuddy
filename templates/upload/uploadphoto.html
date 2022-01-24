@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload photo</title>
+</head>
+<body>
+  <form method='POST' enctype="multipart/form-data">
+
+      
+      Photo:<input type='file' name='photos' accept="image/*"><br/>
+      <br/>
+
+      Description: <input type='text' name='description', placeholder="Add Description"><br/>
+      <br/>
+      <button type="submit">Add Post</button>
+      
+       
+
+
+      {% csrf_token %}
+    </form> 
+</body>
+</html>
