@@ -7,9 +7,6 @@ from cloudinary_storage.storage import MediaCloudinaryStorage, RawMediaCloudinar
 from cloudinary_storage.validators import validate_video
 
 
-
-
-
 # Create your models here.
 
 def validate_image(value):
