@@ -34,7 +34,7 @@ class Profile(models.Model):
 class Post(models.Model):
     username=models.CharField(max_length=100)
     photos=models.ImageField(upload_to='photos', null=True,blank=True, validators=[validate_image])
-    videos=models.ImageField(upload_to='videos', null=True,blank=True,)
+    videos=models.FileField(upload_to='videos', null=True,blank=True,)
     video_description=models.TextField(max_length=1000, null=True,blank=True)
     description=models.TextField(max_length=1000, null=True,blank=True)
     status=models.TextField(max_length=1000, null=True,blank=True)
