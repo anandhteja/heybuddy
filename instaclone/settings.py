@@ -157,4 +157,3 @@ CLOUDINARY_STORAGE = {
     
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'  
-CLOUDINARY_URL=cloudinary://484285915783131:lgPEa-537Ys4xnr0GCD0V1GUOJ8@hcqybuysg
