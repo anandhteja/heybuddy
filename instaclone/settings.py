@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'home','rest_framework'
+    'cloudinary_storage','cloudinary',
+    'home','rest_framework',
+
 ]
 
 MIDDLEWARE = [
@@ -148,3 +150,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'htv1rywd2',
+    'API_KEY': '692233728149172',
+    'API_SECRET': 'f4LimqxcJN7uYDDLlOFGK2lDWaY',
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'  
