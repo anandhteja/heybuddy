@@ -248,7 +248,9 @@ def editprofile(request):
 
 def deletepost(request,id):
     p=Post.objects.get(id=id)
+    co=Comment.objects.filter(postid=id)
     p.delete()
+    co.delete()
     return HttpResponse('deleted successfully')
 
 
@@ -294,7 +296,7 @@ def deleteaccount(request, name):
     u.delete()
     p.delete()
     po.delete()
-    co.delet()
+    co.delete()
     return HttpResponse('account deleted succesfully')
 
 
