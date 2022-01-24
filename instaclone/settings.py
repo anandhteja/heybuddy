@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-(ewv664&anwa)+5&t!ruys88!c&f_ni#489fmqvx943m9+^b!i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tej-socialmedia.herokuapp.com']
 
 
 # Application definition
@@ -79,17 +79,17 @@ DATABASES = {
 
     'default': {
 
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': 'instagram',
+        'NAME': 'dds1cci2aeqgpb',
 
-        'USER': 'root',
+        'USER': 'nvrqsvmfixsikq',
 
-        'PASSWORD': 'pass@143',
+        'PASSWORD': 'b28ddc3ee01f9cf18ca522b6a6985efd9495c23a177b85a8d04ccaee11585e5a',
 
-        'HOST': 'localhost',
+        'HOST': 'ec2-54-208-139-247.compute-1.amazonaws.com',
 
-        'PORT': '3306',
+        'PORT': '5432',
 
     }
 
