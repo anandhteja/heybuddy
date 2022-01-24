@@ -90,11 +90,11 @@ def register(request):
         ph=request.FILES['profilephoto']
         d=request.POST['description']
         if User.objects.filter(username=u):
-            return HttpResponse("username altready exists")
+            return HttpResponse("username already exists")
         elif Profile.objects.filter(username=u):
-            return HttpResponse("record altready exists")
+            return HttpResponse("record already exists")
         elif User.objects.filter(email=u):
-            return HttpResponse("email altready exists")
+            return HttpResponse("email already exists")
 
         elif p1==p2:
             pho=Profile.objects.create(username=u, profilephoto=ph,description=d)
