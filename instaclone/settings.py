@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from django.conf import settings
+
 
 
 
@@ -157,6 +159,11 @@ CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'hcqybuysg',
     'API_KEY': '484285915783131',
     'API_SECRET': 'lgPEa-537Ys4xnr0GCD0V1GUOJ8',
+    'INVALID_VIDEO_ERROR_MESSAGE': 'Please upload a valid video file.',
+    'STATIC_VIDEOS_EXTENSIONS': ['mp4', 'webm', 'flv', 'mov', 'ogv' ,'3gp' ,'3g2' ,'wmv' ,
+                                 'mpeg' ,'flv' ,'mkv' ,'avi'],
+    'MAGIC_FILE_PATH': 'magic',
+    'PREFIX': settings.MEDIA_URL
     
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'  
