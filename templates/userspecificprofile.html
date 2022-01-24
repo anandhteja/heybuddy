@@ -126,7 +126,7 @@
         {% for c in co %}
         {% if c.comment %}
         {% if c.postid == po.id %}
-        <a href="/usp/{{po.username}}/" style="text-decoration:none; color:royalblue">{{c.username}}:</a> {{c.comment}} &nbsp;- &nbsp;<u style="font-size:10px">{{c.uploaded_on}}</u><br/>
+        <a href="/usp/{{c.username}}/" style="text-decoration:none; color:royalblue">{{c.username}}:</a> {{c.comment}} &nbsp;- &nbsp;<u style="font-size:10px">{{c.uploaded_on}}</u><br/>
 
         {% endif %}
     
@@ -186,7 +186,7 @@
             {% for c in co %}
         {% if c.comment %}
         {% if c.postid == po.id %}
-            <a href="/usp/{{po.username}}/" style="text-decoration:none; color:royalblue">{{c.username}}:</a> {{c.comment}} &nbsp;- &nbsp;<u style="font-size:10px">{{c.uploaded_on}}</u>
+            <a href="/usp/{{c.username}}/" style="text-decoration:none; color:royalblue">{{c.username}}:</a> {{c.comment}} &nbsp;- &nbsp;<u style="font-size:10px">{{c.uploaded_on}}</u>
             
             {% if c.username == usern %}
             <button type="submit">delete</button>
@@ -265,7 +265,7 @@
             {% for c in co %}
         {% if c.comment %}
         {% if c.postid == po.id %}
-            <a href="/usp/{{po.username}}/" style="text-decoration:none; color:royalblue">{{c.username}}:</a> {{c.comment}} &nbsp;- &nbsp;<u style="font-size:10px">{{c.uploaded_on}}</u>
+            <a href="/usp/{{c.username}}/" style="text-decoration:none; color:royalblue">{{c.username}}:</a> {{c.comment}} &nbsp;- &nbsp;<u style="font-size:10px">{{c.uploaded_on}}</u>
             
             {% if c.username == usern %}
             <button type="submit">delete</button>
