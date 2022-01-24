@@ -87,7 +87,7 @@
       
     <section class="u-clearfix u-palette-1-base u-section-1" id="sec-87b1">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <a href="/media/{{pp.profilephoto}}" target="_blank"><img class="u-image u-image-circle u-image-1" src="/media/{{pp.profilephoto}}" alt="" data-image-width="1280" data-image-height="853"></a>
+        <a href="{{pp.profilephoto.url}}" target="_blank"><img class="u-image u-image-circle u-image-1" src="{{pp.profilephoto.url}}" alt="" data-image-width="1280" data-image-height="853"></a>
         <p class="u-text u-text-default u-text-1">
           <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-white u-btn-1" href="#">{{pp.username}}</a>
         </p>
@@ -111,7 +111,7 @@
     
     <section class="u-align-center u-clearfix u-section-3" id="sec-817e">
       <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <img class="u-image u-image-contain u-image-default u-image-1" data-image-width="480" data-image-height="720" data-href="/media/{{po.photos}}" src="/media/{{po.photos}}" data-target='_blank'>
+        <img class="u-image u-image-contain u-image-default u-image-1" data-image-width="480" data-image-height="720" data-href="{{po.photos.url}}" src="{{po.photos.url}}" data-target='_blank'>
       </div>
     </section>
     <section class="u-clearfix u-section-4" id="sec-bb50">
@@ -243,7 +243,7 @@
      <section class="u-align-center u-clearfix u-section-3" id="sec-817e">
       <div class="u-clearfix u-sheet u-valign-top u-sheet-1">
         <video width="400" height="300" controls>
-            <source src="/media/{{po.videos}}" type="video/mp4">
+            <source src="{{po.videos.url}}" type="video/mp4">
     
             Your browser does not support the video tag.
           </video>      </div>

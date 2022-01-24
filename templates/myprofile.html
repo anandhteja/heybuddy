@@ -87,7 +87,7 @@
       
     <section class="u-clearfix u-palette-1-base u-section-1" id="sec-87b1">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <a href="/media/{{pp.profilephoto}}" target="_blank"><img class="u-image u-image-circle u-image-1" src="/media/{{pp.profilephoto}}" alt="" data-image-width="1280" data-image-height="853"></a>
+        <a href="{{pp.profilephoto.url}}" target="_blank"><img class="u-image u-image-circle u-image-1" src="{{pp.profilephoto.url}}" alt="" data-image-width="1280" data-image-height="853"></a>
         
         <p class="u-text u-text-default u-text-1">
           <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-white u-btn-1" href="#">{{pp.username}}</a>
@@ -114,7 +114,7 @@
     
     <section class="u-align-center u-clearfix u-section-3" id="sec-817e">
       <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <img class="u-image u-image-contain u-image-default u-image-1" data-image-width="480" data-image-height="720" data-href="/media/{{po.photos}}" src="/media/{{po.photos}}" data-target='_blank'>
+        <img class="u-image u-image-contain u-image-default u-image-1" data-image-width="480" data-image-height="720" data-href="{{po.photos.url}}" src="{{po.photos.url}}" data-target='_blank'>
       </div>
     </section>
     <section class="u-clearfix u-section-4" id="sec-bb50">
@@ -276,7 +276,7 @@
     <section class="u-align-center u-clearfix u-section-3" id="sec-817e">
         <div class="u-clearfix u-sheet u-valign-top u-sheet-1">
           <video width="400" height="300" controls>
-              <source src="/media/{{po.videos}}" type="video/mp4">
+              <source src="{{po.videos.url}}" type="video/mp4">
       
               Your browser does not support the video tag.
             </video>      </div>
@@ -374,16 +374,6 @@
     <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-b149"><div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-small-text u-text u-text-variant u-text-1">All rights reserved</p>
       </div></footer>
-    <section class="u-backlink u-clearfix u-grey-80">
-      <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
-        <span>Website Templates</span>
-      </a>
-      <p class="u-text">
-        <span>created with</span>
-      </p>
-      <a class="u-link" href="" target="_blank">
-        <span>Website Builder Software</span>
-      </a>. 
-    </section>
+    
   </body>
 </html>
