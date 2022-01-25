@@ -43,7 +43,7 @@ class Profile(models.Model):
 
 class Post(models.Model):
     username=models.CharField(max_length=100)
-    photos=models.ImageField(upload_to='photos', null=True,blank=True, media=MediaCloudinaryStorage, validators=[validate_image])
+    photos=models.ImageField(upload_to='photos', null=True,blank=True, storage=MediaCloudinaryStorage, validators=[validate_image])
     videos=models.FileField(upload_to='videos', null=True,blank=True, validators=[validate_video])
     video_description=models.TextField(max_length=1000, null=True,blank=True)
     description=models.TextField(max_length=1000, null=True,blank=True)
