@@ -20,7 +20,7 @@ def validate_image(value):
 
 def validate_video(value):
     file_size = value.size
-    if file_size > 5242880:
+    if file_size > 52428800:
         raise ValidationError("Max size of file is 5MB") 
     else:
         return value
@@ -31,7 +31,7 @@ def validate_video(value):
 
 class Profile(models.Model):
     username=models.CharField(max_length=100)
-    profilephoto=models.ImageField(upload_to='profilepicture', null=True,blank=True, validators=[validate_image])
+    profilephoto=models.ImageField(upload_to='profilepicture', null=True,blank=True, storage=MediaCloudinaryStorage, validators=[validate_image])
     description=models.TextField(max_length=1000, null=True,blank=True)
 
     def __str__(self):
