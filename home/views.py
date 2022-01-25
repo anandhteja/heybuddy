@@ -326,10 +326,11 @@ def updateprofilepicture(request):
                 if request.method=='POST':
                     p=request.FILES['profilephoto']
                     ph.profilephoto=p
-                    ph.save()
+                   
                     d='Changed profilepicture'
                     
-                    po=Post(username=v, photos=p, description=d) 
+                    po=Post.objects.create(username=v, photos=p, description=d) 
+                    ph.save()
                     po.save()
                     return HttpResponse('saved successfully')
                     
