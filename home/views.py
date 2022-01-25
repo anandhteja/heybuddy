@@ -323,12 +323,15 @@ def updateprofilepicture(request):
             if k in 'username':
                 ph= Profile.objects.get(username=v)
                 if request.method=='POST':
+                    photo=request.FILES['profilephoto']
+                    d='Changed profilepicture'
+                    po=Post(username=v, photos=photo, description=d)
+                    po.save() 
                     p=request.FILES['profilephoto']
                     ph.profilephoto=p
                     ph.save()
-                    dict={'ph':ph}
                     
-                    return render(request, 'addtohome.html',dict)
+                    return HttpResponse('saved successfully')
 
 
 
@@ -414,12 +417,3 @@ def editvideopost(request, id):
 
     return render(request,'edit/editvideopost.html',dict)
 
-def addtohome(request):
-    if request.method=="POST":
-        u=request.POST['username']
-        d=request.POST['description']
-        p=request.FILES['profilephoto']
-        userinput=Post(username=u, description=d, photos=p)
-        if userinput.is_valid():
-            userinput.save()
-            return HttpResponse('uploaded Successfully')
