@@ -420,5 +420,6 @@ def addtohome(request):
         d=request.POST['description']
         p=request.FILES['profilephoto']
         userinput=Post(username=u, description=d, photos=p)
-        userinput.save()
-        return HttpResponse('uploaded Successfully')
+        if userinput.is_valid():
+            userinput.save()
+            return HttpResponse('uploaded Successfully')
