@@ -328,10 +328,11 @@ def updateprofilepicture(request):
                     
                     d='Changed profile picture'
                     po=Post(username=v, photos=p, description=d)
-                    ph= Profile.objects.filter(username=v).update(profilephoto=p)
-                    ph.save()
-
                     po.save()
+
+                    ph= Profile.objects.get(username=v)
+                    ph.profilephoto=p
+
                     
                     
                     return HttpResponse('saved successfully')
