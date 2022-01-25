@@ -23,3 +23,11 @@ class Editvideopost(forms.ModelForm):
     class Meta:
         model=Post
         fields=('video_description',)
+
+
+
+
+class Updateprofilephoto(forms.ModelForm):
+    class Meta:
+        model=Profile
+        fields=('profilephoto',)

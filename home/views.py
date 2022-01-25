@@ -4,7 +4,7 @@ from home.models import Post, Profile, Comment
 from django.contrib.auth.models import auth, User
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from home.forms import Editprofile,Editpost, Editvideopost
+from home.forms import Editprofile,Editpost, Editvideopost, Updateprofilephoto
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -14,7 +14,6 @@ from rest_framework.generics import ListAPIView
 
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-import os
 
 
 # Create your views here.
@@ -424,3 +423,15 @@ def editvideopost(request, id):
 
     return render(request,'edit/editvideopost.html',dict)
 
+def updateprofilephoto(request):
+     for k,v in request.session.items():
+            if k in 'username':
+                s=Profile.objects.filter(username=v)
+
+                form=Updateprofilephoto(instance=s)
+                dict={'form':form}
+                if request.method == 'POST':
+                    userinput=Updateprofilephoto(request.FILES, instance=s)
+                    userinput.save()
+                    return HttpResponse('saved sucessfully')
+                return render(request, 'updateprofilephoto.html',dict)
