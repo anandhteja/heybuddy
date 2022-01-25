@@ -51,6 +51,8 @@ urlpatterns = [
     path('allcomments/<int:id>/', hm.allcomments, name='allcomments'),
     path('allcomments1/<int:id>/', hm.allcomments1,),
     path('myprofiledeletecomment/<int:id>/', hm.myprofiledeletecomment),
+
+    path('addtohome/', hm.addtohome),
    
 
 

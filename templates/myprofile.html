@@ -122,12 +122,7 @@
         <p class="u-text u-text-default u-text-1">photo description: &nbsp;{{po.description}}</p>
         <p class="u-text u-text-default u-text-2">uploaded on: &nbsp;{{po.uploaded_on}}</p>
 
-        <form method="POST" action="/updateprofilepicture/" enctype="multipart/form-data">
-          <input type="file" name="profilephoto" value={{po.photos.url}} style='visibility: hidden;'>
-          <button type="submit"><p style="font-size: 10px" class="u-text u-text-default u-text-1">use as profilepicture</p></button>
-
-        {% csrf_token %}
-        </form>
+        
 
 
         <a href="/editpost/{{po.id}}" class="u-border-2 u-border-palette-2-base u-btn u-btn-round u-button-style u-hover-palette-2-base u-none u-radius-6 u-text-body-color u-text-hover-white u-btn-1">Edit Post</a>
