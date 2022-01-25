@@ -327,11 +327,12 @@ def updateprofilepicture(request):
                     p=request.FILES['profilephoto']
                     
                     d='Changed profile picture'
+                    ph= Profile.objects.get(username=v)
+                    ph.profilephoto=p
                     po=Post(username=v, photos=p, description=d)
                     po.save()
 
-                    ph= Profile.objects.get(username=v)
-                    ph.profilephoto=p
+                    
 
                     
                     
