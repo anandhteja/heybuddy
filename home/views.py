@@ -326,14 +326,14 @@ def updateprofilepicture(request):
                 if request.method=='POST':
                     p=request.FILES['profilephoto']
                     ph.profilephoto=p
-                    ph.save()
+                    
                     
                     d='Changed profile picture'
                     
                     
                     po=Post(username=v, photos=p, description=d)
                     po.save()
-                    
+                    ph.save()
 
                     
 
