@@ -36,8 +36,6 @@ def home(request):
             
             dict={'usern':usern,'post':po,'pp':pp,'co':c,'p':p}
             
-
-
             return render(request,'home.html',dict)
 
 @login_required(login_url='login')
@@ -291,7 +289,7 @@ def deleteaccount(request, name):
     u=User.objects.get(username=name)
     p=Profile.objects.get(username=name)
     po=Post.objects.filter(username=name)
-    co=Post.objects.filter(username=name)
+    co=Comment.objects.filter(username=name)
     u.delete()
     p.delete()
     po.delete()
@@ -329,17 +327,7 @@ def updateprofilepicture(request):
                     d='Changed profilepicture'
                     ph.profilephoto=p
                     ph.save()
-                    
-                    
-                    po=Post(username=v, photos=p, description=d)
-                    
-                    po.save()
-
-                    poo=Post.objects.filter(username=v).reverse()[0]
-                    poo.photos=p
-                    poo.save()
-                    
-                    
+                
                     return HttpResponse('saved successfully')
 
 
