@@ -4,7 +4,6 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from cloudinary_storage.storage import VideoMediaCloudinaryStorage
-from cloudinary_storage.validators import validate_video
 
 
 
@@ -12,6 +11,14 @@ from cloudinary_storage.validators import validate_video
 # Create your models here.
 
 def validate_image(value):
+    file_size = value.size
+    if file_size > 5242880:
+        raise ValidationError("Max size of file is 5MB") 
+    else:
+        return value
+
+
+def validate_video(value):
     file_size = value.size
     if file_size > 5242880:
         raise ValidationError("Max size of file is 5MB") 
@@ -37,7 +44,7 @@ class Profile(models.Model):
 class Post(models.Model):
     username=models.CharField(max_length=100)
     photos=models.ImageField(upload_to='photos', null=True,blank=True, validators=[validate_image])
-    videos=models.ImageField(upload_to='videos', null=True,blank=True,storage=VideoMediaCloudinaryStorage(),validators=[validate_video])
+    videos=models.ImageField(upload_to='videos', null=True,blank=True, storage=VideoMediaCloudinaryStorage(), validators=[validate_video])
     video_description=models.TextField(max_length=1000, null=True,blank=True)
     description=models.TextField(max_length=1000, null=True,blank=True)
     status=models.TextField(max_length=1000, null=True,blank=True)
