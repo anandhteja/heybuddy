@@ -324,7 +324,7 @@ def updateprofilepicture(request):
             if k in 'username':
                 ph= Profile.objects.get(username=v)
                 if request.method=='POST':
-                    if len(ph.image) >0:
+                    if len(ph.profilephoto) >0:
                         os.remove(ph.profilephoto.path)
                         p=request.FILES['profilephoto']
                         ph.profilephoto=p
