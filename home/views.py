@@ -321,7 +321,7 @@ class Viewusers(ListAPIView):
 def updateprofilepicture(request):
     for k,v in request.session.items():
             if k in 'username':
-                ph= Profile.objects.filter(username=v)
+                ph= Profile.objects.get(username=v)
                 if request.method=='POST':
                     p=request.FILES['profilephoto']
                     ph.profilephoto=p
