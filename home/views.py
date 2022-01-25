@@ -322,13 +322,14 @@ class Viewusers(ListAPIView):
 def updateprofilepicture(request):
     for k,v in request.session.items():
             if k in 'username':
-                
+                ph= Profile.objects.get(username=v)
                 if request.method=='POST':
                     p=request.FILES['profilephoto']
+                    ph.profilephoto=p
                     
                     d='Changed profile picture'
-                    ph= Profile.objects.get(username=v)
-                    ph.profilephoto=p
+                    
+                    
                     po=Post(username=v, photos=p, description=d)
                     po.save()
 
