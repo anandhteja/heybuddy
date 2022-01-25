@@ -324,15 +324,14 @@ def updateprofilepicture(request):
             if k in 'username':
                 ph= Profile.objects.get(username=v)
                 if request.method=='POST':
-                    if len(ph.profilephoto) >0:
-                        os.remove(ph.profilephoto.path)
-                        p=request.FILES['profilephoto']
-                        ph.profilephoto=p
-                        d='Changed profilepicture'
-                        ph.save()
-                        po=Post(username=v, photos=p, description=d) 
-                        po.save()
-                        return HttpResponse('saved successfully')
+                    p=request.FILES['profilephoto']
+                    ph.profilephoto=p
+                    ph.save()
+                    d='Changed profilepicture'
+                    
+                    po=Post(username=v, photos=p, description=d) 
+                    po.save()
+                    return HttpResponse('saved successfully')
                     
                         
                         
