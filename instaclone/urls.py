@@ -47,8 +47,6 @@ urlpatterns = [
     path('deleteaccount/<str:name>/',hm.deleteaccount, name='deleteaccount'),
     path('newfeatures/', hm.newfeatures),
     path('updateprofilepicture/', hm.updateprofilepicture),
-    path('updateprofilepicture1/', hm.updateprofilepicture1),
-    path('updateprofilephoto/', hm.updateprofilephoto),
 
     path('allcomments/<int:id>/', hm.allcomments, name='allcomments'),
     path('allcomments1/<int:id>/', hm.allcomments1,),

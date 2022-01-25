@@ -4,7 +4,7 @@ from home.models import Post, Profile, Comment
 from django.contrib.auth.models import auth, User
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from home.forms import Editprofile,Editpost, Editvideopost, Updateprofilephoto
+from home.forms import Editprofile,Editpost, Editvideopost
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -321,7 +321,7 @@ class Viewusers(ListAPIView):
 def updateprofilepicture(request):
     for k,v in request.session.items():
             if k in 'username':
-                ph= Profile.objects.get(username=v)
+                ph= Profile.objects.filter(username=v)
                 if request.method=='POST':
                     p=request.FILES['profilephoto']
                     ph.profilephoto=p
@@ -330,17 +330,7 @@ def updateprofilepicture(request):
                     return HttpResponse('saved successfully')
 
 
-@login_required(login_url='login')
-def updateprofilepicture1(request):
-    for k,v in request.session.items():
-            if k in 'username':
-                ph= Profile.objects.get(username=v)
-                if request.method=='POST':
-                    p=request.FILES['profilephoto']
-                    ph.profilephoto=p
-                    ph.save()
-                    
-                    return HttpResponse('saved successfully')
+
                     
                         
                         
@@ -423,15 +413,3 @@ def editvideopost(request, id):
 
     return render(request,'edit/editvideopost.html',dict)
 
-def updateprofilephoto(request):
-     for k,v in request.session.items():
-            if k in 'username':
-                s=Profile.objects.filter(username=v)
-
-                form=Updateprofilephoto(instance=s)
-                dict={'form':form}
-                if request.method == 'POST':
-                    userinput=Updateprofilephoto(request.FILES, instance=s)
-                    userinput.save()
-                    return HttpResponse('saved sucessfully')
-                return render(request, 'updateprofilephoto.html',dict)

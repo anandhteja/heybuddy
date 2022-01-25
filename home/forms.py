@@ -27,7 +27,3 @@ class Editvideopost(forms.ModelForm):
 
 
 
-class Updateprofilephoto(forms.ModelForm):
-    class Meta:
-        model=Profile
-        fields=('profilephoto',)
