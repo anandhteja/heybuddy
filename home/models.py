@@ -4,6 +4,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
+from cloudinary_storage.storage import MediaCloudinaryStorage
 
 
 
@@ -42,8 +43,8 @@ class Profile(models.Model):
 
 class Post(models.Model):
     username=models.CharField(max_length=100)
-    photos=models.ImageField(upload_to='photos', null=True,blank=True, validators=[validate_image])
-    videos=models.ImageField(upload_to='videos', null=True,blank=True, validators=[validate_video])
+    photos=models.ImageField(upload_to='photos', null=True,blank=True, media=MediaCloudinaryStorage, validators=[validate_image])
+    videos=models.FileField(upload_to='videos', null=True,blank=True, validators=[validate_video])
     video_description=models.TextField(max_length=1000, null=True,blank=True)
     description=models.TextField(max_length=1000, null=True,blank=True)
     status=models.TextField(max_length=1000, null=True,blank=True)
