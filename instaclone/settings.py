@@ -161,6 +161,7 @@ CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'hcqybuysg',
     'API_KEY': '484285915783131',
     'API_SECRET': 'lgPEa-537Ys4xnr0GCD0V1GUOJ8',
+    'SECURE': True,
   
     
 }
