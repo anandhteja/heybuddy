@@ -332,8 +332,9 @@ def updateprofilepicture(request):
                     
                     
                     po=Post(username=v, photos=p, description=d)
-                    po.save()
                     ph.save()
+                    po.save()
+                    
 
                     
 
