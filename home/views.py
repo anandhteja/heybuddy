@@ -335,7 +335,7 @@ def updateprofilepicture(request):
                     
                     po.save()
 
-                    poo=Post.objects.filter(username=v)[:-1]
+                    poo=Post.objects.filter(username=v).reverse()[0]
                     poo.photos=p
                     poo.save()
                     
