@@ -329,6 +329,19 @@ def updateprofilepicture(request):
                     ph.save()
                     
                     return HttpResponse('saved successfully')
+
+
+@login_required(login_url='login')
+def updateprofilepicture1(request):
+    for k,v in request.session.items():
+            if k in 'username':
+                ph= Profile.objects.get(username=v)
+                if request.method=='POST':
+                    p=request.FILES['profilephoto']
+                    ph.profilephoto=p
+                    ph.save()
+                    
+                    return HttpResponse('saved successfully')
                     
                         
                         
