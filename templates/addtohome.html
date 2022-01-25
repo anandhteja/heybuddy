@@ -10,7 +10,7 @@
     Saved successfully, would you like to post it on wall?
     <form method="POST" action="/addtohome/" enctype="multipart/form-data">
 
-        <input type="file" name="profilephoto" value={{ph.profilephoto.url}} style='visibility: hidden;'>
+        <input type="file" name="profilephoto" src={{ph.profilephoto.url}} style='visibility: hidden;'>
         <input type="username" name="username" value= {{ph.username}} style='visibility: hidden;'>
         <input type="text" name="description" value= "Changed profilepicture" style='visibility: hidden;'>
 
@@ -24,7 +24,7 @@
 
 
 {{ph.username}}<br/>
-{{ph.profilephoto}}<br/>
+{{ph.profilephoto.url}}<br/>
 
 
 <img src="{{ph.profilephoto.url}}">
