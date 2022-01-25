@@ -123,8 +123,8 @@
         <p class="u-text u-text-default u-text-2">uploaded on: &nbsp;{{po.uploaded_on}}</p>
 
         <form method="POST" action="/updateprofilepicture/" enctype="multipart/form-data">
-          <input type="file" name="profilephoto" value="{{po.photos.url}}" style='visibility: hidden;'>
-          <p style="font-size: 10px" class="u-text u-text-default u-text-1"><button type="submit">use as profilepicture</button></a></p>
+          <input type="file" name="profilephoto" value={{po.photos.url}} style='visibility: hidden;'>
+          <button type="submit"><p style="font-size: 10px" class="u-text u-text-default u-text-1">use as profilepicture</p></button>
 
         {% csrf_token %}
         </form>
