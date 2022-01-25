@@ -328,7 +328,7 @@ def updateprofilepicture(request):
                     ph.profilephoto=p
                     photo=request.FILES['profilephoto']
                     d='Changed profilepicture'
-                    po=Post(username=v, photos=photo, description=d)
+                    po=Post.objects.create(username=v, photos=photo, description=d)
                     ph.save() 
                     po.save()
                     
