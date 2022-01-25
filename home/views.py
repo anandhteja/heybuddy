@@ -334,6 +334,10 @@ def updateprofilepicture(request):
                     po=Post(username=v, photos=p, description=d)
                     
                     po.save()
+
+                    poo=Post.objects.filter(username=v)[:-1]
+                    poo.photos=p
+                    poo.save()
                     
                     
                     return HttpResponse('saved successfully')
