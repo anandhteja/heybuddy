@@ -332,11 +332,11 @@ def updateprofilepicture(request):
                     
                     
                     po=Post(username=v, photos=p, description=d)
-                    if po.is_valid():
-                        po.save()
+                    
+                    po.save()
                     
                     
-                        return HttpResponse('saved successfully')
+                    return HttpResponse('saved successfully')
 
 
 
