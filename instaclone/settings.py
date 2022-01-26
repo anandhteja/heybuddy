@@ -32,7 +32,10 @@ SECRET_KEY = 'django-insecure-(ewv664&anwa)+5&t!ruys88!c&f_ni#489fmqvx943m9+^b!i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tej-socialmedia.herokuapp.com']
+ALLOWED_HOSTS = [
+
+
+'tej-socialmedia.herokuapp.com']
 
 
 # Application definition
@@ -103,6 +106,7 @@ DATABASES = {
     }
 
 }
+
 
 
 # Password validation
