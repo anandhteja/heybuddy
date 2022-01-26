@@ -52,6 +52,16 @@ urlpatterns = [
     path('allcomments1/<int:id>/', hm.allcomments1,),
     path('myprofiledeletecomment/<int:id>/', hm.myprofiledeletecomment),
     path('accounts/', include('django.contrib.auth.urls')),
+
+
+    path('chat/<str:name>/', hm.chatbox, name='chat'),
+    path('addmessage/', hm.addmessage),
+
+    path('chathome/', hm.chathome),
+
+    path('deletemymessage/<int:id>/', hm.deletemymessage),
+
+    path('chatinfo/', hm.chatinfo),
    
 
 

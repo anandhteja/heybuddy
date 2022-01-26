@@ -68,10 +68,19 @@ class Comment(models.Model):
 
 
 
+class Chat(models.Model):
+    unique=models.CharField(max_length=200,default='SOME STRING',)
+    sender=models.CharField(max_length=100)
+    receiver=models.CharField(max_length=100)
+    message=models.TextField(max_length=1000, null=True,blank=True)
+    chat_photos=models.ImageField(upload_to='chatphotos', null=True,blank=True, storage=MediaCloudinaryStorage, validators=[validate_image])
+    uploaded_on=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.unique
 
     
     
-
 
 
 

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat home</title>
+    <style type='text/css'>
+        div.tej{padding-left: 90%;}
+        
+
+    </style>
+</head>
+<body>
+    <div class="tej">
+    <button ><a href="/chatinfo/">info</a></button></div>
+    {% for c in chat %}
+      <a href="/chat/{{c.receiver}}">{{c.receiver}}</a><br/>
+      <br/>
+    {% endfor %}
+</body>
+</html>
