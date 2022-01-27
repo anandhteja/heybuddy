@@ -8,6 +8,8 @@ from cloudinary_storage.storage import MediaCloudinaryStorage
 
 
 
+
+
 # Create your models here.
 
 def validate_image(value):
