@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(ewv664&anwa)+5&t!ruys88!c&f_ni#489fmqvx943m9+^b!i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['tej-socialmedia.herokuapp.com']
 
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'home','rest_framework',
+    
 
 ]
 
@@ -103,7 +104,6 @@ DATABASES = {
     }
 
 }
-
 
 
 # Password validation
@@ -181,3 +181,7 @@ EMAIL_HOST_USER = 'anandhteja32@gmail.com'
 EMAIL_HOST_PASSWORD ='qmsoqnoastauouou'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+
+    

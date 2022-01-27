@@ -11,6 +11,18 @@
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
     <title>Home</title>
+
+<style>
+
+
+  .tej{border-radius: 4px;}
+  .tej:hover {
+  background-color: #008CBA;
+  color: white;}
+</style>
+
+
+
     <link rel="stylesheet" href="{% static "home/nicepage.css" %}" media="screen">
 <link rel="stylesheet" href="{% static "home/Contact.css" %}" media="screen">
     <script class="u-script" type="text/javascript" src="{% static "home/jquery.js" %}" defer=""></script>
@@ -93,6 +105,7 @@
                       </div>
                     </nav>
                   </div></header>
+                  
 {% for po in post %}
     {% if po.photos %}  
         
@@ -113,12 +126,40 @@
 
           
           {% endif %}
+          
+            
+          {% if po.username != usern.username %}
+            
+          
+
+
+          {% if po.username in f %}
+          
+            
+          
+          <br/>
+          <br/>
+          <form  method="POST" action="/unfollow/">
+            <input type="hidden"  name="following" value={{po.username}}>
+            {% csrf_token %}
+          <button type="submit" class="tej">Unfollow</button>
+          </form>
+          {% else %}
+          <form  method="POST" action="/addfollow/">
+            <input type="hidden"  name="following" value={{po.username}}><br/>
+          
+          {% csrf_token %}
+          <button type="submit" class="tej">Follow</button>
+          </form>
+          {% endif %}
+          {% endif %}
+          
         </p>
       </div>
     </section>
     
    
-    
+  
       
     
     <section class="u-clearfix u-section-2" id="sec-87b1">
@@ -241,6 +282,27 @@
 
           
           {% endif %}
+          {% if po.username != usern.username %}
+             
+          {% if po.username in f %}
+          <br/>
+          <br/>
+          <form  method="POST" action="/unfollow/">
+            <input type="hidden"  name="following" value={{po.username}}>
+            {% csrf_token %}
+          <button type="submit" class="tej">Unfollow</button>
+          </form>
+
+          {% else %}
+          <form  method="POST" action="/addfollow/">
+            <input type="hidden"  name="following" value={{po.username}}><br/>
+          
+          {% csrf_token %}
+          <button type="submit" class="tej">Follow</button>
+          </form>
+          {% endif %}
+          {% endif %}
+          
         </p>
       </div>
     </section>
@@ -363,6 +425,28 @@
 
           
           {% endif %}
+          {% if po.username != usern.username %}
+
+          {% if po.username in f %}
+          <br/>
+          <br/>
+          <form  method="POST" action="/unfollow/">
+            <input type="hidden"  name="following" value={{po.username}}>
+            {% csrf_token %}
+          <button type="submit" class="tej">Unfollow</button>
+          </form>
+
+          {% else %}
+          <form  method="POST" action="/addfollow/">
+            <input type="hidden"  name="following" value={{po.username}}><br/>
+          
+          {% csrf_token %}
+          <button type="submit" class="tej">Follow</button>
+          </form>
+          {% endif %}
+          {% endif %}
+
+
         </p>
       </div>
     </section>

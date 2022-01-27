@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My followers</title>
+</head>
+<body>
+    
+<h1>Following</h1>
+<br/>
+<br/>
+{% if fo %}
+  
+
+
+{% for f in fo %}
+
+{{f.following}}&nbsp;&nbsp;<button><a href="/usp/{{f.following}}">view profile</a></button>&nbsp;&nbsp;<button><a href="/chat/{{f.following}}">chat</a></button>&nbsp;<button><a href="/unfollowfromprofile/{{f.following}}">unfollow</a></button>
+<br/><br/>
+  
+{% endfor %}
+
+
+{% else %}  
+
+<h3>You are not following anyone</h3>
+
+{% endif %}
+</body>
+</html>

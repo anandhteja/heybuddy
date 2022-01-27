@@ -62,6 +62,13 @@ urlpatterns = [
     path('deletemymessage/<int:id>/', hm.deletemymessage),
 
     path('chatinfo/', hm.chatinfo),
+
+    path('addfollow/', hm.addfollow),
+    path('unfollow/', hm.unfollow),
+    path('unfollowfromprofile/<str:name>/', hm.unfollowfromprofile),
+    path('viewfollowers/', hm.viewfollowers),
+    path('viewfollowing/', hm.viewfollowing),
+    path('chatsendimages/', hm.chatsendimages),
    
 
 

@@ -112,25 +112,56 @@
     
     {% for c in chat  %}
     
+      
+    
     {% if c.sender == receiver.username and c.receiver == user.username %}
+    
     <div class='receive'>
+      {% if c.message %}
 
     {{c.sender}} :<br/>&nbsp;&nbsp;{{c.message}} &nbsp;-&nbsp;<u style="font-size: 10px;">{{c.uploaded_on}}</u>
-</div>
+
+    {% endif %}
+    <br/>
+  
+    {% if c.chat_photos %}
+
+    {{c.sender}} :<br/>&nbsp;&nbsp;<a href="{{c.chat_photos.url}}" target="_blank"><img src="{{c.chat_photos.url}}" width=150 height=150></a> &nbsp;-&nbsp;<u style="font-size: 10px;">{{c.uploaded_on}}</u>
+
+    {% endif %}
+  </div>
+    
     {% endif %}
     
     <br/>
     
-       
+    
     {% if c.sender == user.username and c.receiver == receiver.username %}
+    
     <div class='sender'>
+      {% if c.message %}
     
   me: &nbsp;&nbsp;{{c.message}} &nbsp;-&nbsp;<u style="font-size: 10px;">{{c.uploaded_on}}</u>
 <div class="tej"><button class="tej" type ="submit"><a href="/deletemymessage/{{c.id}}/">delete</a></button></div>
+  {% endif %}
+
+
+
+  {% if c.chat_photos %}
+    
+  me: &nbsp;&nbsp;<a href="{{c.chat_photos.url}}" target="_blank"><img src="{{c.chat_photos.url}}" width=150 height=150></a> &nbsp;-&nbsp;<u style="font-size: 10px;">{{c.uploaded_on}}</u>
+<div class="tej"><button class="tej" type ="submit"><a href="/deletemymessage/{{c.id}}/">delete</a></button></div>
+  {% endif %}
+
+
+
+
+
 </div>
 
 
 
+    
     {% endif %}
     
       <br/>
@@ -147,8 +178,15 @@
     {% csrf_token %}
 <button type="submit">send</button>
 </form>
+<form method='POST' enctype="multipart/form-data" action="/chatsendimages/">
+
+  <input type=hidden name='receiver' value={{receiver.username}}>
+  <u class="tej" style="font-size:11px"><input type="file" name='image'>
+  {% csrf_token %}
+<button type="submit">send</button></u>
+</form>
 </div>
-<br/>
+
 
 
 

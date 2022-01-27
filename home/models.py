@@ -83,8 +83,10 @@ class Chat(models.Model):
     
 
 
-
-
+class Follow(models.Model):
+    follower=models.CharField(max_length=100)
+    following=models.CharField(max_length=100)
+    
 
 
     

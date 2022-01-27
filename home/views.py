@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from home.models import Post, Profile, Comment, Chat
+from home.models import Post, Profile, Comment, Chat, Follow
 from django.contrib.auth.models import auth, User
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -15,6 +15,10 @@ from rest_framework.generics import ListAPIView
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.db.models import Q
+
+
+
+
 
 
 
@@ -34,9 +38,10 @@ def home(request):
            
               
             po=Post.objects.all().order_by('-uploaded_on')
+            f=list(Follow.objects.filter(follower=v).values_list('following',flat=True))
 
             
-            dict={'usern':usern,'post':po,'pp':pp,'co':c,'p':p}
+            dict={'usern':usern,'post':po,'pp':pp,'co':c,'p':p, 'f':f}
             
             return render(request,'home.html',dict)
 
@@ -136,10 +141,12 @@ def mypr(request):
             count=Post.objects.filter(username=usern).count()
             po=Post.objects.filter(username=usern).order_by('-uploaded_on')
             c=Comment.objects.all().order_by('-uploaded_on')[:5]
+            followercount=Follow.objects.filter(following=v).count()
+            followingcount=Follow.objects.filter(follower=v).count()
 
 
             
-            dict={'usern':usern,'post':po,'pp':pp,'co':c,'count':count}
+            dict={'usern':usern,'post':po,'pp':pp,'co':c,'count':count, 'followercount':followercount,'followingcount':followingcount}
             return render(request,'myprofile.html',dict)
 
 
@@ -423,6 +430,7 @@ def editvideopost(request, id):
 
 
 
+
 @login_required(login_url='login')
 def chatbox(request, name):
     for k,v in request.session.items():
@@ -433,7 +441,6 @@ def chatbox(request, name):
                 chat=Chat.objects.filter(unique=unique).order_by('-id') | Chat.objects.filter(unique=unique1).order_by('-id')
                 sender=User.objects.get(username=v)
                 receiver=User.objects.get(username=name)
-                
                 
 
                 dict={'chat':chat, 'user':sender, 'receiver': receiver, 'usern':usern}
@@ -453,6 +460,7 @@ def addmessage(request):
                     unique=v+receiver
                     userinput=Chat(sender=sender, receiver=receiver, message=message, unique=unique)
                     userinput.save()
+                    
                     return redirect(request.META['HTTP_REFERER']) 
 
 
@@ -480,3 +488,63 @@ def deletemymessage(request, id):
 
 def chatinfo(request):
     return render(request, 'chatinfo.html')
+
+
+def addfollow(request):
+    for k,v in request.session.items():
+            if k in 'username':
+                follower=v
+                following=request.POST['following']
+                f=Follow(following=following, follower=follower)
+                f.save()
+                return redirect(request.META['HTTP_REFERER'])
+
+
+
+def unfollow(request):
+    for k,v in request.session.items():
+            if k in 'username':
+                follower=v
+                following=request.POST['following']
+                f=Follow.objects.filter(follower=follower,following=following)
+                f.delete()
+                return redirect(request.META['HTTP_REFERER'])
+
+def viewfollowers(request):
+    for k,v in request.session.items():
+            if k in 'username':
+                f=Follow.objects.filter(following=v)
+                dict={'fo':f}
+                return render(request, 'follow/followers.html', dict)
+
+
+
+def viewfollowing(request):
+    for k,v in request.session.items():
+            if k in 'username':
+                f=Follow.objects.filter(follower=v)                
+                dict={'fo':f}
+                return render(request, 'follow/following.html', dict)
+
+
+def unfollowfromprofile(request, name):
+    for k,v in request.session.items():
+            if k in 'username':
+                follower=v
+                following=name
+                f=Follow.objects.filter(follower=follower,following=following)
+                f.delete()
+                return redirect(request.META['HTTP_REFERER'])
+
+def chatsendimages(request):
+    for k,v in request.session.items():
+            if k in 'username':
+                if request.method == 'POST':
+                    sender=v
+                    receiver=request.POST['receiver']
+                    chatimage=request.FILES['image']
+                    unique=v+receiver
+                    userinput=Chat(sender=sender, receiver=receiver,chat_photos=chatimage , unique=unique)
+                    userinput.save()
+                    
+                    return redirect(request.META['HTTP_REFERER'])
