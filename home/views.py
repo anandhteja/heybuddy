@@ -449,7 +449,7 @@ def chatbox(request, name):
 
 
 
-
+@login_required(login_url='login')
 def addmessage(request):
     for k,v in request.session.items():
             if k in 'username':
@@ -465,7 +465,7 @@ def addmessage(request):
 
 
 
-
+@login_required(login_url='login')
 def chathome(request):
     for k,v in request.session.items():
             if k in 'username':
@@ -477,7 +477,7 @@ def chathome(request):
 
 
 
-
+@login_required(login_url='login')
 def deletemymessage(request, id):
     d=Chat.objects.get(id=id)
     d.delete()
@@ -485,11 +485,11 @@ def deletemymessage(request, id):
     
 
 
-
+@login_required(login_url='login')
 def chatinfo(request):
     return render(request, 'chatinfo.html')
 
-
+@login_required(login_url='login')
 def addfollow(request):
     for k,v in request.session.items():
             if k in 'username':
@@ -500,7 +500,7 @@ def addfollow(request):
                 return redirect(request.META['HTTP_REFERER'])
 
 
-
+@login_required(login_url='login')
 def unfollow(request):
     for k,v in request.session.items():
             if k in 'username':
@@ -509,7 +509,7 @@ def unfollow(request):
                 f=Follow.objects.filter(follower=follower,following=following)
                 f.delete()
                 return redirect(request.META['HTTP_REFERER'])
-
+@login_required(login_url='login')
 def viewfollowers(request):
     for k,v in request.session.items():
             if k in 'username':
@@ -518,7 +518,7 @@ def viewfollowers(request):
                 return render(request, 'follow/followers.html', dict)
 
 
-
+@login_required(login_url='login')
 def viewfollowing(request):
     for k,v in request.session.items():
             if k in 'username':
@@ -526,7 +526,7 @@ def viewfollowing(request):
                 dict={'fo':f}
                 return render(request, 'follow/following.html', dict)
 
-
+@login_required(login_url='login')
 def unfollowfromprofile(request, name):
     for k,v in request.session.items():
             if k in 'username':
@@ -536,6 +536,7 @@ def unfollowfromprofile(request, name):
                 f.delete()
                 return redirect(request.META['HTTP_REFERER'])
 
+@login_required(login_url='login')
 def chatsendimages(request):
     for k,v in request.session.items():
             if k in 'username':
