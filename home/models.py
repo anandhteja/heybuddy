@@ -104,4 +104,8 @@ class Privateaccount(models.Model):
 
 
     
-
+class Privatefollow(models.Model):
+    requester=models.CharField(max_length=100)
+    requesting=models.CharField(max_length=100)
+    def __str__(self):
+        return self.requester

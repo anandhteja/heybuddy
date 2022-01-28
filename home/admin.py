@@ -1,5 +1,5 @@
 from django.contrib import admin
-from home.models import Profile, Post, Comment, Chat, Follow, Chatbackground, Privateaccount
+from home.models import Profile, Post, Comment, Chat, Follow, Chatbackground, Privateaccount, Privatefollow
 from django.contrib.auth.models import User
 
 
@@ -21,4 +21,6 @@ admin.site.register(Follow, Followadmin)
 
 admin.site.register(Chatbackground)
 admin.site.register(Privateaccount)
+admin.site.register(Privatefollow)
+
 

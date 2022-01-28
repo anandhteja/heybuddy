@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from home.models import Post, Profile, Comment, Chat, Follow, Chatbackground
+from home.models import Post, Profile, Comment, Chat, Follow, Chatbackground, Privateaccount, Privatefollow
 from django.contrib.auth.models import auth, User
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -39,9 +39,10 @@ def home(request):
               
             po=Post.objects.all().order_by('-uploaded_on')
             f=list(Follow.objects.filter(follower=v).values_list('following',flat=True))
+            private=list(Privateaccount.objects.all().values_list('username',flat=True))
 
             
-            dict={'usern':usern,'post':po,'pp':pp,'co':c,'p':p, 'f':f}
+            dict={'usern':usern,'post':po,'pp':pp,'co':c,'p':p, 'f':f, 'private':private}
             
             return render(request,'home.html',dict)
 
@@ -167,7 +168,7 @@ def uploadphoto(request):
                             
                 po=Post(username=u,photos=p,description=d)
                 po.save()
-                return HttpResponse('Post uploaded successfully')
+                return render('home')
     
     return render(request,'upload/uploadphoto.html')
 
@@ -185,7 +186,7 @@ def uploadstatus(request):
                             
                 po=Post(username=u,status=s)
                 po.save()
-                return HttpResponse('Post uploaded successfully')
+                return render('home')
     
     return render(request,'upload/uploadstatus.html')
 
@@ -208,14 +209,23 @@ def userspecificprofile(request,name):
             pp=Profile.objects.get(username=name)
 
                     
-            username=usern
+            username=v
                 
                     
             po=Post.objects.filter(username=usern).order_by('-uploaded_on')
             count=Post.objects.filter(username=usern).count()
+            private=list(Privateaccount.objects.all().values_list('username',flat=True))
+            req=Privatefollow.objects.all()
+            try:
+                follow=Follow.objects.get(follower=v,following=name)
+            except:
+                follow=Follow.objects.filter(follower=v,following=name)
+
+            
+            
 
                     
-            dict={'usern':usern,'post':po,'pp':pp,'opp':opp, 'count':count}
+            dict={'usern':usern,'post':po,'pp':pp,'opp':opp, 'count':count, 'private':private,'username':username,'req':req,'follow':follow}
             return render(request,'userspecificprofile.html',dict)
 
 
@@ -229,7 +239,8 @@ def editprofile(request):
             u=v 
             pp=Profile.objects.get(username=v)
             form=Editprofile(instance=pp)
-            dict={'form':form,'username':u}
+            private=list(Privateaccount.objects.all().values_list('username',flat=True))
+            dict={'form':form,'username':u, 'private':private}
             if request.method == 'POST':
                 u=request.POST['username']
                 d=request.POST['description']
@@ -248,7 +259,7 @@ def editprofile(request):
 
                   
 
-                    return HttpResponse('saved successfully. Login again to see the changes')
+                    return render('myprofile')
         
             return render(request, 'edit/editprofile.html',dict)
 
@@ -277,7 +288,7 @@ def editpost(request, id):
         userinput=Editpost(request.POST, instance=s)
         if userinput.is_valid():
             userinput.save()
-            return HttpResponse('saved successfully')
+            return render('home')
 
     return render(request,'edit/editpost.html',dict)
 
@@ -345,7 +356,7 @@ def updateprofilepicture(request):
                     ph.profilephoto=p
                     ph.save()
                 
-                    return HttpResponse('saved successfully')
+                    return render('myprofile')
 
 
 
@@ -409,7 +420,7 @@ def uploadvideo(request):
                             
                 po=Post(username=u,videos=v,video_description=d)
                 po.save()
-                return HttpResponse('Post uploaded successfully')
+                return render('home')
     
     return render(request,'upload/uploadvideo.html')
 
@@ -567,3 +578,83 @@ def changebackgroundimage(request):
                     background.save()
                     return redirect('chathome')
                 return render(request,'backgroundimage/changebackgroundimage.html', dict)
+
+
+def addtoprivate(request):
+    for k,v in request.session.items():
+            if k in 'username':
+                p=Privateaccount(username=v)
+                p.save()
+                return redirect(request.META['HTTP_REFERER'])
+
+
+
+def unprivate(request):
+    for k,v in request.session.items():
+            if k in 'username':
+                p=Privateaccount.objects.get(username=v)
+                p.delete()
+                return redirect(request.META['HTTP_REFERER'])
+
+
+
+def notifications(request):
+    for k,v in request.session.items():
+            if k in 'username':
+                
+                r=Privatefollow.objects.all()   
+                usern=v
+                dict={'r':r,'usern':usern}
+
+
+    return render(request, 'notifications.html',dict)
+
+
+
+
+@login_required(login_url='login')
+def addprivatefollow(request):
+    for k,v in request.session.items():
+            if k in 'username':
+                following=v
+                follower=request.POST['follower']
+                f=Follow(following=following, follower=follower)
+                d=Privatefollow.objects.get(requester=follower, requesting=v)
+                f.save()
+                d.delete()
+                return HttpResponse('accepted request')
+
+@login_required(login_url='login')
+def deleteprivatefollow(request):
+    for k,v in request.session.items():
+            if k in 'username':
+                following=v
+                follower=request.POST['follower']
+                
+                d=Privatefollow.objects.get(requester=follower, requesting=v)
+                
+                d.delete()
+                return HttpResponse('deleted request')
+
+
+def requestprivatefollow(request):
+    for k,v in request.session.items():
+            if k in 'username':
+                requester=request.POST['requester']
+                requesting=request.POST['requesting']
+                p=Privatefollow(requester=requester, requesting=requesting)
+                if Privatefollow.objects.filter(requester=v, requesting=requesting):
+                    return HttpResponse('<h2>Request already sent, wait for the other person to respond</h2>')
+                else:
+                    
+                    p.save()
+                    return redirect(request.META['HTTP_REFERER'])
+
+def searchbox(request):
+    if request.method == 'GET':
+        username=request.GET['username']
+        user=User.objects.all().filter(username=username)
+        dict={'user':user}
+
+
+    return render(request,'searchbox.html',dict)

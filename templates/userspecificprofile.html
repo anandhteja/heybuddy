@@ -102,18 +102,53 @@
           <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-white u-btn-1" href="#">{{pp.username}}</a>
         </p>
         <h4 class="u-text u-text-default u-text-2">{{pp.description}}</h4>
-        <a href="/chat/{{pp.username}}" class="u-border-2 u-border-palette-2-base u-btn u-btn-round u-button-style u-hover-palette-2-base u-none u-radius-6 u-text-body-color u-text-hover-white u-btn-2" >Chat</a>
+       
+       {% if follow.following %}
+       
+       <a href="#" class="u-border-2 u-border-palette-2-base u-btn u-btn-round u-button-style u-hover-palette-2-base u-none u-radius-6 u-text-body-color u-text-hover-white u-btn-2" >Following</a>
 
+       {% else %}
+
+        {% if pp.username in private %}
+        
+          
+        
+         
+            
+             
+           
+            
+          
+           
+          
+        <form method="post" action="/privaterequestfollow/" enctype="multipart/form-data">
+          <input type="hidden" name='requester' value="{{username}}">
+          <input type="hidden" name='requesting' value="{{pp.username}}">
+        <button class="u-border-2 u-border-palette-2-base u-btn u-btn-round u-button-style u-hover-palette-2-base u-none u-radius-6 u-text-body-color u-text-hover-white u-btn-2"  type="submit" style="background-color:white">Request</button>
+          {% csrf_token %}
+      
+      </form>
+      
+     
+      
+        {% else %}  
+
+        <a href="#" class="u-border-2 u-border-palette-2-base u-btn u-btn-round u-button-style u-hover-palette-2-base u-none u-radius-6 u-text-body-color u-text-hover-white u-btn-2" >Follow</a>
+
+        
+        {% endif %}
+        {% endif %}
       </div>
     </section>
     <section class="u-clearfix u-section-2" id="sec-2ba2">
       <div class="u-clearfix u-sheet u-sheet-1">
         
-        <h6 class="u-text u-text-default u-text-2">Total posts:&nbsp;{{count}}&nbsp;&nbsp;<a href="/viewfollowers/">Followers</a>:{{followercount}}&nbsp;&nbsp;<a href="/viewfollowing/">Following</a>:{{followingcount}}</h6>
       </div>
     </section>
-
     
+
+
+
     {% for po in post  %}
 
     {% if po.photos %}
@@ -328,7 +363,6 @@
 
     
     {% endfor %}
-
 
 
 

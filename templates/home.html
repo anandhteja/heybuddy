@@ -70,12 +70,20 @@
             </div>
             </li><li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="/chathome/" style="padding: 10px 20px;">Chats</a>
             </li>
-            <li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="/newfeatures/" style="padding: 10px 20px;">New features</a>
+            </li><li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90"  style="padding: 10px 20px;">
+              <form method="get" action="{% url 'searchbox' %}">
+              <input  type="text" name="username">
+              {% csrf_token %}
+            <button type="submit">search</button>
+            </form>
             </li><li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="#" style="padding: 10px 20px;">{{usern.username}}</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-3"><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="/logout/">Logout</a>
             </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="/mypr/">My profile</a>
             </li>
+            <li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="/notifications/">notifications</a>
+            </li>
             <li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="/mypr/">Contact developer</a>
-            </li></ul>
+            </li>
+          </ul>
             </div>
             </li></ul>
                       </div>
@@ -91,9 +99,18 @@
             </div>
             </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/chathome/" style="padding: 10px 0px;">Chats</a>
             </li>
-            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/newfeatures/" style="padding: 10px 0px;">New features</a>
+              <li class="u-nav-item"><a class="u-button-style u-nav-link"  style="padding: 10px 0px;">
+                <form method="get" action="{% url 'searchbox' %}">
+
+                <input type="text" name="username">
+              {% csrf_token %}
+            <button type="submit">search</button>
+          </form>
+
             </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="#" style="padding: 10px 0px;">{{usern.username}}</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-6"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/logout/">Logout</a>
             </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/mypr/">My profile</a>
+            </li>
+            <li class="u-nav-item"><a class="u-button-style u-nav-link " href="/notifications/">Notifications</a>
             </li>
             <li class="u-nav-item"><a class="u-button-style u-nav-link " href="/mypr/">Contact developer</a>
             </li></ul>
@@ -105,8 +122,13 @@
                       </div>
                     </nav>
                   </div></header>
-                  
+                 
 {% for po in post %}
+
+
+{% if po.username not in private %}
+  
+
     {% if po.photos %}  
         
       
@@ -573,7 +595,7 @@
 
 
 
-
+    {% endif %}
     
     {% endfor %}
 

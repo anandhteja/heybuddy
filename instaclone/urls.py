@@ -34,7 +34,7 @@ urlpatterns = [
     path('login/', hm.login, name='login'),
     path('logout/',hm.logout, name='logout'),
     path('register/',hm.register),
-    path('mypr/', hm.mypr),
+    path('mypr/', hm.mypr, name="myprofile"),
     path('up/',hm.uploadphoto),
     path('us/',hm.uploadstatus),
     path('uv/',hm.uploadvideo),
@@ -64,6 +64,8 @@ urlpatterns = [
     path('chatinfo/', hm.chatinfo),
 
     path('addfollow/', hm.addfollow),
+    path('addprivatefollow/', hm.addprivatefollow),
+    path('deleteprivatefollow/', hm.deleteprivatefollow),
     path('unfollow/', hm.unfollow),
     path('unfollowfromprofile/<str:name>/', hm.unfollowfromprofile),
     path('viewfollowers/', hm.viewfollowers),
@@ -71,6 +73,14 @@ urlpatterns = [
     path('chatsendimages/', hm.chatsendimages),
 
     path('changebackgroundimage/', hm.changebackgroundimage),
+
+    path('addtoprivate/', hm.addtoprivate),
+    path('unprivate/', hm.unprivate),
+    path('notifications/',hm.notifications),
+
+    path('privaterequestfollow/', hm.requestprivatefollow),
+
+    path('searchbox/', hm.searchbox, name='searchbox'),
    
 
 

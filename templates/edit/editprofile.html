@@ -19,6 +19,16 @@ Update Description:<input type='text' name='description'>&nbsp;&nbsp;<br/><br/>
 </form>
 <br/>
 <br/>
+{% if username not in private %}
+  
+
+
+<a href="/addtoprivate/" style="text-decoration:none">Private my account</a>
+{% else %}  
+
+<a href="/unprivate/" style="text-decoration:none">Unprivate my account</a>
+{% endif %}
+<br/>
 <br/>
 <a href="/accounts/password_change/"><button type="submit">Change password</button></a>
 <br/>

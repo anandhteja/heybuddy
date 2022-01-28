@@ -140,7 +140,7 @@ h1.receive{color:darkslateblue}
   
     {% if c.chat_photos %}
 
-    {{c.sender}} :<br/>&nbsp;&nbsp;<a href="{{c.chat_photos.url}}" target="_blank"><img src="{{c.chat_photos.url}}" width=150 height=150></a> &nbsp;-&nbsp;<u style="font-size: 10px;">{{c.uploaded_on}}</u>
+    {{c.sender}} :<br/>&nbsp;&nbsp;<a href="{{c.chat_photos.url}}" target="_blank"><img src="{{c.chat_photos.url}}" width=100 height=150></a> &nbsp;-&nbsp;<u style="font-size: 10px;">{{c.uploaded_on}}</u>
 
     {% endif %}
   </div>
@@ -163,7 +163,7 @@ h1.receive{color:darkslateblue}
 
   {% if c.chat_photos %}
     
-  me: &nbsp;&nbsp;<a href="{{c.chat_photos.url}}" target="_blank"><img src="{{c.chat_photos.url}}" width=150 height=150></a> &nbsp;-&nbsp;<u style="font-size: 10px;">{{c.uploaded_on}}</u>
+  me: &nbsp;&nbsp;<a href="{{c.chat_photos.url}}" target="_blank"><img src="{{c.chat_photos.url}}" width=100 height=150></a> &nbsp;-&nbsp;<u style="font-size: 10px;">{{c.uploaded_on}}</u>
 <div class="tej"><button class="tej" type ="submit"><a href="/deletemymessage/{{c.id}}/">delete</a></button></div>
   {% endif %}
 
