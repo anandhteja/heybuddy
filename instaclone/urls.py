@@ -57,7 +57,7 @@ urlpatterns = [
     path('chat/<str:name>/', hm.chatbox, name='chat'),
     path('addmessage/', hm.addmessage),
 
-    path('chathome/', hm.chathome),
+    path('chathome/', hm.chathome, name='chathome'),
 
     path('deletemymessage/<int:id>/', hm.deletemymessage),
 
@@ -69,6 +69,8 @@ urlpatterns = [
     path('viewfollowers/', hm.viewfollowers),
     path('viewfollowing/', hm.viewfollowing),
     path('chatsendimages/', hm.chatsendimages),
+
+    path('changebackgroundimage/', hm.changebackgroundimage),
    
 
 

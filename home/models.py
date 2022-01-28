@@ -88,7 +88,19 @@ class Chat(models.Model):
 class Follow(models.Model):
     follower=models.CharField(max_length=100)
     following=models.CharField(max_length=100)
-    
+
+
+class Chatbackground(models.Model):
+    username=models.CharField(max_length=100)
+    image=models.ImageField(upload_to='chatbackground', null=True,blank=True, storage=MediaCloudinaryStorage)
+    def __str__(self):
+        return self.username
+
+
+class Privateaccount(models.Model):
+    username=models.CharField(max_length=100)
+    def __str__(self):
+        return self.username 
 
 
     

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from home.models import Profile, Post, Comment, Chat, Follow
+from home.models import Profile, Post, Comment, Chat, Follow, Chatbackground, Privateaccount
 from django.contrib.auth.models import User
 
 
@@ -18,3 +18,7 @@ class Followadmin(admin.ModelAdmin):
     list_display=['follower', 'following']
 
 admin.site.register(Follow, Followadmin)
+
+admin.site.register(Chatbackground)
+admin.site.register(Privateaccount)
+

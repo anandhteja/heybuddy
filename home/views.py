@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from home.models import Post, Profile, Comment, Chat, Follow
+from home.models import Post, Profile, Comment, Chat, Follow, Chatbackground
 from django.contrib.auth.models import auth, User
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -92,6 +92,7 @@ def register(request):
         p2=request.POST['password2']
             
         ph=request.FILES['profilephoto']
+        cbi=request.FILES['backgroundimage']
         d=request.POST['description']
         if User.objects.filter(username=u):
             return HttpResponse("username already exists")
@@ -104,9 +105,11 @@ def register(request):
         elif p1==p2:
             pho=Profile.objects.create(username=u, profilephoto=ph,description=d)
             user=User.objects.create_user(email=e,first_name=f,username=u, password=p1)
+            background=Chatbackground.objects.create(username=u,image=cbi)
             
             user.save()
             pho.save()
+            background.save()
 
             return redirect('login')
            
@@ -441,9 +444,9 @@ def chatbox(request, name):
                 chat=Chat.objects.filter(unique=unique).order_by('-id') | Chat.objects.filter(unique=unique1).order_by('-id')
                 sender=User.objects.get(username=v)
                 receiver=User.objects.get(username=name)
-                
+                background=Chatbackground.objects.get(username=v)
 
-                dict={'chat':chat, 'user':sender, 'receiver': receiver, 'usern':usern}
+                dict={'chat':chat, 'user':sender, 'receiver': receiver, 'usern':usern,'background':background}
                 return render(request, 'chatpage.html', dict)
 
 
@@ -549,3 +552,18 @@ def chatsendimages(request):
                     userinput.save()
                     
                     return redirect(request.META['HTTP_REFERER'])
+
+
+
+def changebackgroundimage(request):
+    for k,v in request.session.items():
+            if k in 'username':
+                usern=v
+                background=Chatbackground.objects.get(username=v)
+                dict={'background':background,'usern':usern}
+                if request.method == 'POST':
+                    cbi=request.FILES['backgroundimage']
+                    background.image=cbi
+                    background.save()
+                    return redirect('chathome')
+                return render(request,'backgroundimage/changebackgroundimage.html', dict)
