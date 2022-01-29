@@ -109,3 +109,21 @@ class Privatefollow(models.Model):
     requesting=models.CharField(max_length=100)
     def __str__(self):
         return self.requester
+
+
+
+class Temporarynotification(models.Model):
+    sender=models.CharField(max_length=100)
+    receiver=models.CharField(max_length=100)
+    message=models.TextField(max_length=1000, null=True,blank=True)
+    chat_photos=models.TextField(max_length=1000, null=True,blank=True)
+    uploaded_on=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.receiver
+
+
+class Chatblock(models.Model):
+    blocked_user=models.CharField(max_length=100)
+    blocked_by=models.CharField(max_length=100)
+    

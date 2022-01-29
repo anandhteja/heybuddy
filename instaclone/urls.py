@@ -29,6 +29,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     path('', hm.home, name='home'),
+    path('discover/', hm.discover, name='discover'),
     path('post/', hm.post),
     
     path('login/', hm.login, name='login'),
@@ -81,6 +82,10 @@ urlpatterns = [
     path('privaterequestfollow/', hm.requestprivatefollow),
 
     path('searchbox/', hm.searchbox, name='searchbox'),
+
+    path('removetempnoti/', hm.removetempnoti),
+
+    path('blockchatuser/', hm.blockchatuser),
    
 
 

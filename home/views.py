@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from home.models import Post, Profile, Comment, Chat, Follow, Chatbackground, Privateaccount, Privatefollow
+from home.models import Post, Profile, Comment, Chat, Follow, Chatbackground, Privateaccount, Privatefollow, Temporarynotification, Chatblock
 from django.contrib.auth.models import auth, User
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -38,13 +38,41 @@ def home(request):
            
               
             po=Post.objects.all().order_by('-uploaded_on')
+            f=list(Follow.objects.all().filter(follower=v).values_list('following',flat=True))
+            private=list(Privateaccount.objects.all().values_list('username',flat=True))
+
+
+            
+            dict={'usern':usern,'post':po,'pp':pp,'co':c,'p':p, 'f':f, 'private':private}
+            
+            return render(request,'home.html',dict)
+
+
+
+@login_required(login_url='login')
+def discover(request):
+    
+    
+    
+    for k,v in request.session.items():
+        if k in 'username':
+            usern=User.objects.get(username=v)
+            pp=Profile.objects.all()
+            p=Profile.objects.get(username=v)
+            c=Comment.objects.all().order_by('-uploaded_on')[:6]
+            usern=usern
+           
+              
+            po=Post.objects.all().order_by('-uploaded_on')
             f=list(Follow.objects.filter(follower=v).values_list('following',flat=True))
             private=list(Privateaccount.objects.all().values_list('username',flat=True))
 
             
             dict={'usern':usern,'post':po,'pp':pp,'co':c,'p':p, 'f':f, 'private':private}
             
-            return render(request,'home.html',dict)
+            return render(request,'discover.html',dict)
+
+
 
 @login_required(login_url='login')
 
@@ -215,6 +243,7 @@ def userspecificprofile(request,name):
             po=Post.objects.filter(username=usern).order_by('-uploaded_on')
             count=Post.objects.filter(username=usern).count()
             private=list(Privateaccount.objects.all().values_list('username',flat=True))
+            f=list(Follow.objects.all().filter(follower=v).values_list('following',flat=True))
             req=Privatefollow.objects.all()
             try:
                 follow=Follow.objects.get(follower=v,following=name)
@@ -225,7 +254,7 @@ def userspecificprofile(request,name):
             
 
                     
-            dict={'usern':usern,'post':po,'pp':pp,'opp':opp, 'count':count, 'private':private,'username':username,'req':req,'follow':follow}
+            dict={'usern':usern,'post':po,'pp':pp,'opp':opp, 'count':count, 'private':private,'username':username,'req':req,'follow':follow, 'f':f}
             return render(request,'userspecificprofile.html',dict)
 
 
@@ -456,8 +485,12 @@ def chatbox(request, name):
                 sender=User.objects.get(username=v)
                 receiver=User.objects.get(username=name)
                 background=Chatbackground.objects.get(username=v)
+                block=list(Chatblock.objects.all().filter(blocked_by=v, blocked_user=name).values_list('blocked_user', flat=True))
+                block_by=list(Chatblock.objects.all().filter(blocked_user=v, blocked_by=name).values_list('blocked_user', flat=True))
 
-                dict={'chat':chat, 'user':sender, 'receiver': receiver, 'usern':usern,'background':background}
+
+
+                dict={'chat':chat, 'user':sender, 'receiver': receiver, 'usern':usern,'background':background, 'block':block, 'block_by':block_by}
                 return render(request, 'chatpage.html', dict)
 
 
@@ -473,7 +506,9 @@ def addmessage(request):
                     message=request.POST['message']
                     unique=v+receiver
                     userinput=Chat(sender=sender, receiver=receiver, message=message, unique=unique)
+                    tempnoti=Temporarynotification(sender=sender, receiver=receiver, message=message)
                     userinput.save()
+                    tempnoti.save()
                     
                     return redirect(request.META['HTTP_REFERER']) 
 
@@ -556,12 +591,14 @@ def chatsendimages(request):
             if k in 'username':
                 if request.method == 'POST':
                     sender=v
+                    n='sent an image'
                     receiver=request.POST['receiver']
                     chatimage=request.FILES['image']
                     unique=v+receiver
                     userinput=Chat(sender=sender, receiver=receiver,chat_photos=chatimage , unique=unique)
+                    tempnoti=Temporarynotification(sender=sender, receiver=receiver,chat_photos=n)
                     userinput.save()
-                    
+                    tempnoti.save()
                     return redirect(request.META['HTTP_REFERER'])
 
 
@@ -603,8 +640,9 @@ def notifications(request):
             if k in 'username':
                 
                 r=Privatefollow.objects.all()   
+                n=Temporarynotification.objects.all().filter(receiver=v).order_by('-uploaded_on')[:10]
                 usern=v
-                dict={'r':r,'usern':usern}
+                dict={'r':r,'usern':usern, 'noti':n}
 
 
     return render(request, 'notifications.html',dict)
@@ -658,3 +696,20 @@ def searchbox(request):
 
 
     return render(request,'searchbox.html',dict)
+
+
+def removetempnoti(request):
+      for k,v in request.session.items():
+            if k in 'username':
+                d=Temporarynotification.objects.all().filter(receiver=v)
+                d.delete()
+                return redirect(request.META['HTTP_REFERER'])
+
+
+def blockchatuser(request):
+    if request.method == 'POST':
+        blocked_user=request.POST['blocked_user']
+        blocked_by=request.POST['blocked_by']
+        b=Chatblock(blocked_user=blocked_user, blocked_by=blocked_by)
+        b.save()
+        return redirect(request.META['HTTP_REFERER'])

@@ -8,6 +8,7 @@
     <style>
 
 div.tej{margin-left:10%}
+div.teja{margin-left:5%}
 
     </style>
 </head>
@@ -46,5 +47,34 @@ div.tej{margin-left:10%}
       {% else %}  
       <h1>No notifications</h1>
     {% endif %}
+
+
+    <br/>
+    <br/>
+    <h2>Messages:</h2><br/>
+    <div class="teja">
+    {% if noti %}
+    
+    <h3>recent top 10 messages</h3>
+   
+    {% for n in noti %}
+   
+    {% if n.message %}
+      
+    
+      <a href="/chat/{{n.sender}}" style="text-decoration:none">{{n.sender}}:{{n.message}}</a><br/><br/>
+      {% endif %}
+    {% if n.chat_photos %}
+      <a href="/chat/{{n.sender}}" style="text-decoration:none">{{n.sender}}:{{n.chat_photos}}</a><br/><br/>
+      {% endif %}
+
+    {% endfor %}
+    <a href="/removetempnoti/" style="text-decoration:none"><button type="submit">Remove all</button></a>
+
+    {% else %}  
+    <h2>No new chat messages</h2><br/>
+     
+    {% endif %}
+  </div>
 </body>
 </html>

@@ -150,6 +150,8 @@
 
 
     {% for po in post  %}
+    {% if po.username in f %}
+  
 
     {% if po.photos %}
       
@@ -356,11 +358,13 @@
 
 
 
+  {% else %} 
+
+  <h1 style="color:darkred">This is a private account</h1>
 
 
 
-
-
+    {% endif %}
     
     {% endfor %}
 

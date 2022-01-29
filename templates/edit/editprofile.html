@@ -22,11 +22,11 @@ Update Description:<input type='text' name='description'>&nbsp;&nbsp;<br/><br/>
 {% if username not in private %}
   
 
-
-<a href="/addtoprivate/" style="text-decoration:none">Private my account</a>
+Everyone can see your profile and posts, would you like to change it to private?
+<a href="/addtoprivate/" style="text-decoration:none"><button>Private</button></a>
 {% else %}  
-
-<a href="/unprivate/" style="text-decoration:none">Unprivate my account</a>
+Only the people you follow can see your posts, would you like to change it to unprivate?
+<a href="/unprivate/" style="text-decoration:none"><button>Unprivate</button></a>
 {% endif %}
 <br/>
 <br/>

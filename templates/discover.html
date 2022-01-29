@@ -10,7 +10,7 @@
     <meta name="keywords" content="Hey Buddy">
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>Home</title>
+    <title>Discover</title>
 
 <style>
 
@@ -64,7 +64,7 @@
                       <div class="u-custom-menu u-nav-container">
                         <ul class="u-nav u-spacing-2 u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="/" style="padding: 10px 20px;">Home</a>
             </li>
-            <li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="/discover/" style="padding: 10px 20px;">Discover</a>
+            <li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="/" style="padding: 10px 20px;">Discover</a>
             </li><li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="#" style="padding: 10px 20px;">Post</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="/us/">status</a>
             </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="/up/">photos</a>
             </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="/uv/">videos</a>
@@ -99,7 +99,7 @@
                             <div class="u-menu-close"></div>
                             <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-4"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/" style="padding: 10px 0px;">Home</a>
             </li>
-            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/discover/" style="padding: 10px 0px;">Discover</a>
+            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/" style="padding: 10px 0px;">Discover</a>
             </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="#" style="padding: 10px 0px;">Post</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-5"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/us/">status</a>
             </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/up/">photos</a>
             </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/uv/">videos</a>
@@ -138,9 +138,7 @@
 {% for po in post %}
 
 
-
-  {% if po.username in f %}
-    
+{% if po.username not in private %}
   
 
     {% if po.photos %}  
@@ -607,9 +605,9 @@
 
 
 
-    {% endif %}
 
-    
+
+    {% endif %}
     
     {% endfor %}
 
