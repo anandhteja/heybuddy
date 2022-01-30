@@ -747,9 +747,10 @@ def viewpost(request, id):
             f=list(Follow.objects.all().filter(follower=v).values_list('following',flat=True))
             l=Likes.objects.all().filter(liked_by=v, postid=id)
             pp=Profile.objects.all()
+            likescount=Likes.objects.all().filter(postid=id).count()
             
             usern=User.objects.get(username=v)
-            dict={'po':po,'co':c,'f':f, 'usern': usern, 'l':l, 'pp':pp}
+            dict={'po':po,'co':c,'f':f, 'usern': usern, 'l':l, 'pp':pp, 'likescount':likescount}
             return render(request,'viewpost.html',dict)
  
 def removelike(request):

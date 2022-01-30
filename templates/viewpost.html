@@ -90,6 +90,7 @@
       <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-text u-text-default u-text-1">photo description: &nbsp;{{po.description}}</p>
         <p class="u-text u-text-default u-text-2">uploaded on:&nbsp;{{po.uploaded_on}}</p>
+        <h3>{{likescount}} people liked this post</h3>
         {% if l %}
         <form method="post" action="/removelike/" enctype="multipart/form-data">
             <input type="hidden" name=postid value={{po.id}}>
@@ -243,6 +244,7 @@
       <div class="u-clearfix u-sheet u-sheet-1">
        
         <p class="u-text u-text-default u-text-2">uploaded on:&nbsp;{{po.uploaded_on}}</p>
+        <h3>{{likescount}} people liked this post</h3>
         {% if l %}
         <form method="post" action="/removelike/" enctype="multipart/form-data">
             <input type="hidden" name=postid value={{po.id}}>
@@ -392,6 +394,7 @@
       <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-text u-text-default u-text-1">Video description: &nbsp;{{po.video_description}}</p>
         <p class="u-text u-text-default u-text-2">uploaded on:&nbsp;{{po.uploaded_on}}</p>
+        <h3>{{likescount}} people liked this post</h3>
         {% if l %}
         <form method="post" action="/removelike/" enctype="multipart/form-data">
             <input type="hidden" name=postid value={{po.id}}>
