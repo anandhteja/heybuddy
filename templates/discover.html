@@ -188,7 +188,7 @@
     
     <section class="u-align-center u-clearfix u-section-3" id="sec-817e">
       <div class="u-clearfix u-sheet u-valign-top u-sheet-1">
-        <img class="u-image u-image-contain u-image-default u-image-1" data-image-width="480" data-image-height="720" data-href="{{po.photos.url}}" data-target="_blank" src="{{po.photos.url}}">
+        <img class="u-image u-image-contain u-image-default u-image-1" data-image-width="480" data-image-height="720" data-href="/viewpost/{{po.id}}" data-target="_blank" src="{{po.photos.url}}">
       </div>
     </section>
     <section class="u-clearfix u-section-4" id="sec-bb50">
@@ -203,7 +203,6 @@
             {% csrf_token %}
           </form>
           <br/>
-        <button type="submit"><a href="/viewpost/{{po.id}}/">View post</a></button>
 
         
         {% if po.username == usern.username %}
@@ -319,7 +318,7 @@
     
     <section class="u-align-center u-clearfix u-section-3" id="sec-817e">
       <div class="u-clearfix u-sheet u-valign-top u-sheet-1" >
-        <p class="u-text u-text-default u-text-1"><p style="font-size: 25px;">Status:</p> <br/>{{po.status}}</p>
+        <a href="/viewpost/{{po.id}}" target="_blank"><p class="u-text u-text-default u-text-1"><p style="font-size: 25px;">Status:</p> <br/>{{po.status}}</p></a>
       </div>
     </section>
     <section class="u-clearfix u-section-4" id="sec-bb50">
@@ -334,7 +333,6 @@
             {% csrf_token %}
           </form>
           <br/>
-        <button type="submit"><a href="/viewpost/{{po.id}}/">View post</a></button>
 
         
         {% if po.username == usern.username %}
