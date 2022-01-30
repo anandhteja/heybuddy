@@ -48,7 +48,7 @@ body:before {
 h1.receive{color:darkslateblue}
 
 
-div.block{margin-left:92%}
+div.block{margin-left:85%}
 </style>
 
 
@@ -123,7 +123,7 @@ div.block{margin-left:92%}
 <body >
     <button onClick="window.location.reload();">refresh</button>
 
-
+    {% if receiver.username not in block %}
     <div class="block">
       <form method="post" action="/blockchatuser/" enctype="multipart/form-data">
         <input type="hidden" name='blocked_user' value={{receiver.username}}>
@@ -132,6 +132,18 @@ div.block{margin-left:92%}
       {% csrf_token %}
     </form>
     </div>
+    {% else %}  
+    <div class="block">
+      <form method="post" action="/unblockchatuser/" enctype="multipart/form-data">
+        <input type="hidden" name='blocked_user' value={{receiver.username}}>
+        <input type="hidden" name='blocked_by' value={{usern}}>
+      <button type="submit">unblock</button>
+      {% csrf_token %}
+    </form>
+    </div>
+
+    {% endif %}  
+
 
 
     <h1 class=receive><a href="/usp/{{receiver.username}}">{{receiver.username}}</h1></a>

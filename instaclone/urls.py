@@ -30,7 +30,7 @@ urlpatterns = [
     
     path('', hm.home, name='home'),
     path('discover/', hm.discover, name='discover'),
-    path('post/', hm.post),
+    
     
     path('login/', hm.login, name='login'),
     path('logout/',hm.logout, name='logout'),
@@ -86,6 +86,13 @@ urlpatterns = [
     path('removetempnoti/', hm.removetempnoti),
 
     path('blockchatuser/', hm.blockchatuser),
+    path('unblockchatuser/', hm.unblockchatuser),
+    path('addlike/',hm.addlike),
+    path('removelike/',hm.removelike),
+    path('viewpost/<int:id>/',hm.viewpost),
+     path('homeaddlike/',hm.homeaddlike),
+
+     path('removelfc/', hm.removelfc),
    
 
 

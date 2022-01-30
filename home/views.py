@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from home.models import Post, Profile, Comment, Chat, Follow, Chatbackground, Privateaccount, Privatefollow, Temporarynotification, Chatblock
+from home.models import Post, Profile, Comment, Chat, Follow, Chatbackground, Privateaccount, Privatefollow,Likefollowcommentnoti, Temporarynotification, Chatblock,Likes
 from django.contrib.auth.models import auth, User
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -15,6 +15,9 @@ from rest_framework.generics import ListAPIView
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.db.models import Q
+from django.test import TestCase
+
+
 
 
 
@@ -43,7 +46,7 @@ def home(request):
 
 
             
-            dict={'usern':usern,'post':po,'pp':pp,'co':c,'p':p, 'f':f, 'private':private}
+            dict={'usern':usern,'post':po,'pp':pp,'co':c,'p':p, 'f':f, 'private':private,}
             
             return render(request,'home.html',dict)
 
@@ -74,14 +77,7 @@ def discover(request):
 
 
 
-@login_required(login_url='login')
 
-def post(request):
-    post=Post.objects.filter(username='praveen')
-    dict={'post':post}
-
-
-    return render(request, 'home.html',dict)
 
 
 
@@ -94,7 +90,6 @@ def login(request):
         p=request.POST['password']
         user=auth.authenticate(username=u, password=p)
         if user is not None:
-            
             auth.login(request, user)
             request.session['username']=u
 
@@ -196,7 +191,7 @@ def uploadphoto(request):
                             
                 po=Post(username=u,photos=p,description=d)
                 po.save()
-                return render('home')
+                return redirect('home')
     
     return render(request,'upload/uploadphoto.html')
 
@@ -244,6 +239,8 @@ def userspecificprofile(request,name):
             count=Post.objects.filter(username=usern).count()
             private=list(Privateaccount.objects.all().values_list('username',flat=True))
             f=list(Follow.objects.all().filter(follower=v).values_list('following',flat=True))
+            
+
             req=Privatefollow.objects.all()
             try:
                 follow=Follow.objects.get(follower=v,following=name)
@@ -331,10 +328,13 @@ def addcomment(request,id):
             if k in 'username':
                 p=request.POST['postid']
                 c=request.POST['comment']
+                u=request.POST['post_user']
                 username=v
                 userinput=Comment.objects.create(username=v,postid=p,comment=c)
+                lfc=Likefollowcommentnoti(postid=p,username=u, commented_by=v, comment=c)
+                lfc.save()
                 userinput.save()
-                return redirect('home')
+                return redirect(request.META['HTTP_REFERER'])
 
 
 @login_required(login_url='login')
@@ -545,7 +545,9 @@ def addfollow(request):
                 follower=v
                 following=request.POST['following']
                 f=Follow(following=following, follower=follower)
+                lfc=Likefollowcommentnoti(username=following,followed_by=v)
                 f.save()
+                lfc.save()
                 return redirect(request.META['HTTP_REFERER'])
 
 
@@ -641,8 +643,9 @@ def notifications(request):
                 
                 r=Privatefollow.objects.all()   
                 n=Temporarynotification.objects.all().filter(receiver=v).order_by('-uploaded_on')[:10]
+                lfc=Likefollowcommentnoti.objects.all().filter(username=v)
                 usern=v
-                dict={'r':r,'usern':usern, 'noti':n}
+                dict={'r':r,'usern':usern, 'noti':n, 'lfc':lfc}
 
 
     return render(request, 'notifications.html',dict)
@@ -713,3 +716,68 @@ def blockchatuser(request):
         b=Chatblock(blocked_user=blocked_user, blocked_by=blocked_by)
         b.save()
         return redirect(request.META['HTTP_REFERER'])
+
+
+def unblockchatuser(request):
+    if request.method == 'POST':
+        blocked_user=request.POST['blocked_user']
+        blocked_by=request.POST['blocked_by']
+        b=Chatblock.objects.all().filter(blocked_user=blocked_user, blocked_by=blocked_by)
+        b.delete()
+        return redirect(request.META['HTTP_REFERER'])
+
+def addlike(request):
+    if request.method == 'POST':
+        postid=request.POST['postid']
+        liked_by=request.POST['liked_by']
+        liked_user=request.POST['liked_user']
+        l=Likes.objects.create(postid=postid,liked_by=liked_by)
+        lfc=Likefollowcommentnoti(postid=postid,username=liked_user, liked_by=liked_by)
+        lfc.save()
+        
+        l.save()
+        return redirect(request.META['HTTP_REFERER'])
+
+def viewpost(request, id):
+     
+    for k,v in request.session.items():
+        if k in 'username':
+            po=Post.objects.get(id=id)
+            c=Comment.objects.all().order_by('-uploaded_on')[:6]
+            f=list(Follow.objects.all().filter(follower=v).values_list('following',flat=True))
+            l=Likes.objects.all().filter(liked_by=v, postid=id)
+            pp=Profile.objects.all()
+            
+            usern=User.objects.get(username=v)
+            dict={'po':po,'co':c,'f':f, 'usern': usern, 'l':l, 'pp':pp}
+            return render(request,'viewpost.html',dict)
+ 
+def removelike(request):
+        if request.method == 'POST':
+            postid=request.POST['postid']
+            liked_by=request.POST['liked_by']
+            l=Likes.objects.get(postid=postid,liked_by=liked_by)
+            
+            l.delete()
+            return redirect(request.META['HTTP_REFERER'])
+
+
+def homeaddlike(request):
+    if request.method == 'POST':
+        postid=request.POST['postid']
+        liked_by=request.POST['liked_by']
+        liked_user=request.POST['liked_user']
+        if Likes.objects.all().filter(postid=postid,liked_by=liked_by):
+            return HttpResponse('<h1> you already liked this post</h1>')
+        else:
+            l=Likes.objects.create(postid=postid,liked_by=liked_by)
+            lfc=Likefollowcommentnoti(postid=postid,username=liked_user, liked_by=liked_by)
+            lfc.save()
+        
+            l.save()
+            return HttpResponse('<h1> You successfully liked this post </h1>')
+
+def removelfc(request):
+    d=Likefollowcommentnoti.objects.all()
+    d.delete()
+    return redirect(request.META['HTTP_REFERER'])

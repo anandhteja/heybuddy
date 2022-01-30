@@ -126,4 +126,26 @@ class Temporarynotification(models.Model):
 class Chatblock(models.Model):
     blocked_user=models.CharField(max_length=100)
     blocked_by=models.CharField(max_length=100)
-    
+
+
+class Likes(models.Model):
+    postid=models.IntegerField()
+    liked_by=models.CharField(max_length=100)
+    def __str__(self):
+        return self.liked_by
+
+
+
+class Likefollowcommentnoti(models.Model):
+    postid=models.IntegerField(null=True, blank=True)
+    username=models.CharField(max_length=100,null=True, blank=True)
+    liked_by=models.CharField(max_length=100,null=True, blank=True)
+    commented_by=models.CharField(max_length=100,null=True, blank=True)
+    followed_by=models.CharField(max_length=100,null=True, blank=True)
+    comment=models.CharField(max_length=1000, null=True, blank=True)
+    uploaded_on=models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.username
+
+
+

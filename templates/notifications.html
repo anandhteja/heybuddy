@@ -13,19 +13,19 @@ div.teja{margin-left:5%}
     </style>
 </head>
 <body>
-    
+  <h2>Private follow requests:</h2>
     {% if r %}
-    <h1>Notifications:</h1>
+    
     
     {% for pri in r  %}
     {% if pri.requesting == usern %}
       
     
-    
+    <div class="tej">
       
     Follow request by {{pri.requester}}<br/>
     <br/>
-    <div class="tej"><form method="post" action="/addprivatefollow/" enctype="multipart/form-data" >
+    <form method="post" action="/addprivatefollow/" enctype="multipart/form-data" >
         <input type="hidden" value="{{pri.requester}}" name="follower">
         {% csrf_token %}
         <button type="submit">accept</button>
@@ -38,16 +38,18 @@ div.teja{margin-left:5%}
         {% csrf_token %}
         <button type="submit">delete</button>
 
-      </form></div>
-    
+      </form>
+    </div>
 
     {% endif %}
     {% endfor %}
 
       {% else %}  
-      <h1>No notifications</h1>
+      <div class="teja">
+      <h3>No Private follow requests</h3>
+    </div>
     {% endif %}
-
+  
 
     <br/>
     <br/>
@@ -76,5 +78,44 @@ div.teja{margin-left:5%}
      
     {% endif %}
   </div>
+  <h2>Notifications:</h2>
+    {% if lfc %}
+    
+    <div class="teja">
+      {% for l in lfc %}
+      {% if l.followed_by %}
+        
+     
+        <a href="/usp/{{l.followed_by}}">{{l.followed_by}}</a> started following you - &nbsp;{{l.uploaded_on}}
+        {% endif %}
+      <br/>
+        {% if l.liked_by %}
+
+        <a href="/usp/{{l.liked_by}}">{{l.liked_by}}</a> liked your <a href="/viewpost/{{l.postid}}">Post</a>- &nbsp;{{l.uploaded_on}}
+          
+        {% endif %}
+        <br/>
+
+
+        {% if l.commented_by %}
+
+        <a href="/usp/{{l.commented_by}}">{{l.commented_by}}</a> commented "{{l.comment}}" on this <a href="/viewpost/{{l.postid}}">post</a>- &nbsp;{{l.uploaded_on}}
+          
+        {% endif %}
+
+      <br/>
+
+      {% endfor %}
+      <br/>
+      <a href="/removelfc/" style="text-decoration:none"><button type="submit">Remove all</button></a>
+      </div>
+
+      {% else %} 
+<div class="teja">
+      <h3>No new notifications</h3>
+    {% endif %}
+
+  </div>
+  
 </body>
 </html>
