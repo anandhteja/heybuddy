@@ -15,11 +15,14 @@
 <meta name="page_type" content="np-template-header-footer-from-plugin">
 <title>Chat</title>
 <style>
-
     div.sender{color:green;margin-left:60%}
     div.receive{margin-left:25px;color:royalblue}
    
     div.tej{padding-left: 0%;}
+    div.basenav{position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;background-color:mintcream}
    
 .input {
 position: fixed;
@@ -34,7 +37,7 @@ text-align: center;
 
 </style>
 
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 <link rel="stylesheet" href="{% static "chat/nicepage.css" %}" media="screen">
 <link rel="stylesheet" href="{% static "chat/Home.css" %}" media="screen">
@@ -131,6 +134,36 @@ text-align: center;
 
 
     {% endif %}
-
+    <div class="basenav">
+      <ul class="nav justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/discover/">discover</a>
+          </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">post</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/us/">status</a></li>
+                <li><a class="dropdown-item" href="/up/">photos</a></li>
+                <li><a class="dropdown-item" href="/uv/">videos</a></li>
+                
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">My account</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/mypr/">My profile</a></li>
+                <li><a class="dropdown-item" href="/notifications/">notifications</a></li>
+                <li><a class="dropdown-item" href="/chathome/">chats</a></li>
+                <li><a class="dropdown-item" href="/logout/">logout</a></li>
+                <li><a class="dropdown-item" href="#">contact developer</a></li>
+                
+              </ul>
+            </li>
+          
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
 </body>
 </html>

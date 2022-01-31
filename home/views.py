@@ -314,7 +314,7 @@ def editpost(request, id):
         userinput=Editpost(request.POST, instance=s)
         if userinput.is_valid():
             userinput.save()
-            return render('home')
+            return redirect('home')
 
     return render(request,'edit/editpost.html',dict)
 
@@ -385,7 +385,7 @@ def updateprofilepicture(request):
                     ph.profilephoto=p
                     ph.save()
                 
-                    return render('myprofile')
+                    return redirect('myprofile')
 
 
 
