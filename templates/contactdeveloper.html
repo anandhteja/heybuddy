@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact developer</title>
+    <style type='text/css'>
+div.contactdeveloper{margin-left:10%; margin-top:5%}
+
+
+    </style>
+</head>
+<body>
+    
+<h1>Contact developer</h1>
+    <div class='contactdeveloper'>
+<form method="post" action="" enctype="multipart/form-data">
+        Your Name: &nbsp;&nbsp;<input type=text name=name><br/><br/>
+        Issue you are facing: &nbsp;&nbsp;<input type=text name=issue><br/><br/>
+        Email:&nbsp;&nbsp;<input type=email name=email><br/><br/>
+        Photo(optional):&nbsp;&nbsp;<input type=file name=photos accept="image/*"><br/><br/>
+        {% csrf_token %}
+        <button type=submit>send</button>
+
+
+
+
+    </form>
+    </div>
+</body>
+</html>

@@ -5,6 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit profile</title>
+    <style type='text/css'>
+div.basenav{position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;background-color:lightslategrey;}
+
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
 </head>
 <body>
     <div>
@@ -25,7 +34,7 @@ Update Description:<input type='text' name='description'>&nbsp;&nbsp;<br/><br/>
 Everyone can see your profile and posts, would you like to change it to private?
 <a href="/addtoprivate/" style="text-decoration:none"><button>Private</button></a>
 {% else %}  
-Only the people you follow can see your posts, would you like to change it to unprivate?
+People following you can only see your posts, would you like to change it to unprivate?
 <a href="/unprivate/" style="text-decoration:none"><button>Unprivate</button></a>
 {% endif %}
 <br/>
@@ -42,15 +51,49 @@ still want to continue?
 <br/>
 
 
-<form  method='POST' enctype="multipart/form-data" action="/deleteaccount/{{username}}/">
 
-<button type="submit">Delete My account</button>
-{% csrf_token %}
 
-</form>
+<button type="submit"><a href="/deleteconfirmation/" style="text-decoration:none">Delete My account</a></button>
+
+
+
 
 
 </div>
+
+<div class="basenav">
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/" style="text-decoration:none; color:white">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/discover/" style="text-decoration:none; color:white">discover</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" style="text-decoration:none; color:white">post</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/us/" >status</a></li>
+              <li><a class="dropdown-item" href="/up/">photos</a></li>
+              <li><a class="dropdown-item" href="/uv/">videos</a></li>
+              
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" style="text-decoration:none; color:white">My account</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/mypr/">My profile</a></li>
+              <li><a class="dropdown-item" href="/notifications/">notifications</a></li>
+              <li><a class="dropdown-item" href="/chathome/">chats</a></li>
+              <li><a class="dropdown-item" href="/logout/">logout</a></li>
+              <li><a class="dropdown-item" href="#">contact developer</a></li>
+              
+            </ul>
+          </li>
+        
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
+
+  
 
 </body>
 </html>

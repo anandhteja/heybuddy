@@ -93,6 +93,13 @@ urlpatterns = [
      path('homeaddlike/',hm.homeaddlike),
 
      path('removelfc/', hm.removelfc),
+
+     path('deleteconfirmation/', hm.deleteconfirmation),
+
+
+     path('contactdeveloper/',hm.contactdeveloper),
+
+     
    
 
 
@@ -105,6 +112,7 @@ urlpatterns = [
 
 #serializer
     path('viewusers/',hm.Viewusers.as_view(), name='viewusers'),
+    path('Viewcontactdeveloperrequest/', hm.Viewcontactdeveloperrequest.as_view()),
     path('auth/', include('rest_framework.urls')),
     
 ]

@@ -149,3 +149,20 @@ class Likefollowcommentnoti(models.Model):
 
 
 
+
+
+class Contactdeveloper(models.Model):
+    username=models.CharField(max_length=100,default='')
+    name=models.CharField(max_length=100,default='')
+    email=models.CharField(max_length=100,default='')
+    issue=models.TextField(max_length=1000,default='')
+    photos=models.ImageField(upload_to='contactdeveloper', null=True,blank=True, storage=MediaCloudinaryStorage, validators=[validate_image])
+    def __str__(self):
+        return self.username
+
+
+
+
+
+
+

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from home.models import Post, Profile, Comment, Chat, Follow, Chatbackground, Privateaccount, Privatefollow,Likefollowcommentnoti, Temporarynotification, Chatblock,Likes
+from home.models import Contactdeveloper, Post, Profile, Comment, Chat, Follow, Chatbackground, Privateaccount, Privatefollow,Likefollowcommentnoti, Temporarynotification, Chatblock,Likes
 from django.contrib.auth.models import auth, User
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -9,13 +9,14 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic.detail import DetailView
-from home.serializers import Userserializer
+from home.serializers import Userserializer, Contactdeveloperserializer
 from rest_framework.generics import ListAPIView
 
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.db.models import Q
 from django.test import TestCase
+from rest_framework.generics import ListAPIView
 
 
 
@@ -366,7 +367,7 @@ def newfeatures(request):
 
 class Viewusers(ListAPIView):
     queryset=User.objects.all()
-    serializer_class=Userserializer
+    serializer_class=Userserializer(many=True)
     authentication_classes=[SessionAuthentication]
     permission_classes=[IsAdminUser]
 
@@ -643,7 +644,7 @@ def notifications(request):
                 
                 r=Privatefollow.objects.all()   
                 n=Temporarynotification.objects.all().filter(receiver=v).order_by('-uploaded_on')[:10]
-                lfc=Likefollowcommentnoti.objects.all().filter(username=v)
+                lfc=Likefollowcommentnoti.objects.all().filter(username=v).order_by('-uploaded_on')
                 usern=v
                 dict={'r':r,'usern':usern, 'noti':n, 'lfc':lfc}
 
@@ -695,12 +696,13 @@ def searchbox(request):
     if request.method == 'GET':
         username=request.GET['username']
         user=User.objects.all().filter(username=username)
-        dict={'user':user}
+        tried=username
+        dict={'user':user, 'tried':tried}
 
 
     return render(request,'searchbox.html',dict)
 
-
+    
 def removetempnoti(request):
       for k,v in request.session.items():
             if k in 'username':
@@ -782,3 +784,36 @@ def removelfc(request):
     d=Likefollowcommentnoti.objects.all()
     d.delete()
     return redirect(request.META['HTTP_REFERER'])
+
+
+def deleteconfirmation(request):
+    for k,v in request.session.items():
+            if k in 'username':
+                username=v
+                dict={'username':username}
+
+    return render(request, 'deleteconfirmation.html',dict) 
+
+
+
+def contactdeveloper(request):
+    for k,v in request.session.items():
+            if k in 'username':
+                username=v
+                dict={'username':username}
+                if request.method == 'POST':
+                    name=request.POST['name']
+                    issue=request.POST['issue']
+                    photos=request.FILES['photos']
+                    email=request.POST['email']
+                    c=Contactdeveloper(username=username, name=name, issue=issue,photos=photos, email=email)
+                    c.save()
+                    return HttpResponse('<h1>request has been sent to the developer, you will be contacted at the earliest possible</h1>')
+                    
+    return render(request, 'contactdeveloper.html', dict)
+
+class Viewcontactdeveloperrequest(ListAPIView):
+    queryset=Contactdeveloper.objects.all()
+    serializer_class=Contactdeveloperserializer
+    authentication_classes=[SessionAuthentication]
+    permission_classes=[IsAdminUser]

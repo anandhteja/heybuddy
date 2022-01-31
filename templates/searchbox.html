@@ -12,11 +12,17 @@ div.tej{margin-left: 35%; margin-top:5%}
 div.basenav{position: fixed;
 left: 0;
 bottom: 0;
-width: 100%;background-color:white}
+width: 100%;background-color:lightslategrey}
 
     </style>
 </head>
 <body><div class="tej">
+    <form method="get" action="{% url 'searchbox' %}">
+        <input  type="text" name="username">
+        {% csrf_token %}
+      <button type="submit" style="text-decoration: none;background-color:deepskyblue; color:white">search</button>
+      </form>
+      <br/>
 
     <h1>Search results Found </h1><br/>
     
@@ -34,7 +40,7 @@ width: 100%;background-color:white}
 
 {% else %}
 
-<h3>no results found</h3>
+<h3>no results found for {{tried}}</h3>
 
 {% endif %}
 
@@ -44,13 +50,13 @@ width: 100%;background-color:white}
 <div class="basenav">
     <ul class="nav justify-content-center">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
+          <a class="nav-link active" aria-current="page" href="/" style="text-decoration:none; color:white">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/discover/">discover</a>
+          <a class="nav-link" href="/discover/" style="text-decoration:none; color:white">discover</a>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">post</a>
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" style="text-decoration:none; color:white">post</a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="/us/">status</a></li>
               <li><a class="dropdown-item" href="/up/">photos</a></li>
@@ -59,13 +65,13 @@ width: 100%;background-color:white}
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">My account</a>
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" style="text-decoration:none; color:white">My account</a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="/mypr/">My profile</a></li>
               <li><a class="dropdown-item" href="/notifications/">notifications</a></li>
               <li><a class="dropdown-item" href="/chathome/">chats</a></li>
               <li><a class="dropdown-item" href="/logout/">logout</a></li>
-              <li><a class="dropdown-item" href="#">contact developer</a></li>
+              <li><a class="dropdown-item" href="/contactdeveloper/">contact developer</a></li>
               
             </ul>
           </li>

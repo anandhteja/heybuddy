@@ -1,5 +1,5 @@
 from django.contrib import admin
-from home.models import Profile, Post, Comment, Chat, Follow,Likefollowcommentnoti, Chatbackground, Privateaccount, Privatefollow, Temporarynotification, Chatblock, Likes
+from home.models import Profile, Post, Comment, Chat,Contactdeveloper, Follow,Likefollowcommentnoti, Chatbackground, Privateaccount, Privatefollow, Temporarynotification, Chatblock, Likes
 from django.contrib.auth.models import User
 
 
@@ -33,4 +33,6 @@ admin.site.register(Chatblock,Chatbloackadmin )
 
 admin.site.register(Likes)
 admin.site.register(Likefollowcommentnoti)
+
+admin.site.register(Contactdeveloper)
 
