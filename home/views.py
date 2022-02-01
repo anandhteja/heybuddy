@@ -210,7 +210,7 @@ def uploadstatus(request):
                             
                 po=Post(username=u,status=s)
                 po.save()
-                return render('home')
+                return redirect('home')
     
     return render(request,'upload/uploadstatus.html')
 
@@ -286,7 +286,7 @@ def editprofile(request):
 
                   
 
-                    return render('myprofile')
+                    return redirect('myprofile')
         
             return render(request, 'edit/editprofile.html',dict)
 
@@ -367,7 +367,7 @@ def newfeatures(request):
 
 class Viewusers(ListAPIView):
     queryset=User.objects.all()
-    serializer_class=Userserializer(many=True)
+    serializer_class=Userserializer
     authentication_classes=[SessionAuthentication]
     permission_classes=[IsAdminUser]
 
@@ -450,7 +450,7 @@ def uploadvideo(request):
                             
                 po=Post(username=u,videos=v,video_description=d)
                 po.save()
-                return render('home')
+                return redirect('home')
     
     return render(request,'upload/uploadvideo.html')
 
@@ -531,7 +531,7 @@ def chathome(request):
 def deletemymessage(request, id):
     d=Chat.objects.get(id=id)
     d.delete()
-    return redirect(request.META['HTTP_REFERER']) 
+    return redirect('chathome') 
     
 
 
@@ -586,7 +586,7 @@ def unfollowfromprofile(request, name):
                 following=name
                 f=Follow.objects.filter(follower=follower,following=following)
                 f.delete()
-                return redirect(request.META['HTTP_REFERER'])
+                return redirect('viewfollowing')
 
 @login_required(login_url='login')
 def chatsendimages(request):
@@ -625,7 +625,7 @@ def addtoprivate(request):
             if k in 'username':
                 p=Privateaccount(username=v)
                 p.save()
-                return redirect(request.META['HTTP_REFERER'])
+                return redirect('editprofile')
 
 
 
@@ -634,7 +634,7 @@ def unprivate(request):
             if k in 'username':
                 p=Privateaccount.objects.get(username=v)
                 p.delete()
-                return redirect(request.META['HTTP_REFERER'])
+                return redirect('editprofile')
 
 
 
@@ -708,7 +708,7 @@ def removetempnoti(request):
             if k in 'username':
                 d=Temporarynotification.objects.all().filter(receiver=v)
                 d.delete()
-                return redirect(request.META['HTTP_REFERER'])
+                return redirect('notifications')
 
 
 def blockchatuser(request):
@@ -783,7 +783,7 @@ def homeaddlike(request):
 def removelfc(request):
     d=Likefollowcommentnoti.objects.all()
     d.delete()
-    return redirect(request.META['HTTP_REFERER'])
+    return redirect('notifications')
 
 
 def deleteconfirmation(request):

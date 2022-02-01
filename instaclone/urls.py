@@ -40,7 +40,7 @@ urlpatterns = [
     path('us/',hm.uploadstatus),
     path('uv/',hm.uploadvideo),
     path('usp/<str:name>/',hm.userspecificprofile),
-    path('editprofile/',hm.editprofile),
+    path('editprofile/',hm.editprofile, name='editprofile'),
     path('delete/<int:id>/',hm.deletepost),
     path('editpost/<int:id>/',hm.editpost),
     path('editvideopost/<int:id>/',hm.editvideopost),
@@ -70,14 +70,14 @@ urlpatterns = [
     path('unfollow/', hm.unfollow),
     path('unfollowfromprofile/<str:name>/', hm.unfollowfromprofile),
     path('viewfollowers/', hm.viewfollowers),
-    path('viewfollowing/', hm.viewfollowing),
+    path('viewfollowing/', hm.viewfollowing, name='viewfollowing'),
     path('chatsendimages/', hm.chatsendimages),
 
     path('changebackgroundimage/', hm.changebackgroundimage),
 
     path('addtoprivate/', hm.addtoprivate),
     path('unprivate/', hm.unprivate),
-    path('notifications/',hm.notifications),
+    path('notifications/',hm.notifications, name='notifications'),
 
     path('privaterequestfollow/', hm.requestprivatefollow),
 
