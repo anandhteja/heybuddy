@@ -1,0 +1,9 @@
+:root{
+
+    –bg: #fff;
+    
+    @media(prefers-color-scheme: dark){
+    
+    –bg: #000;
+    
+    }// change your OS into dark theme to see magic of color-scheme..

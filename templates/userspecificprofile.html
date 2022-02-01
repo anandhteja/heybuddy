@@ -167,88 +167,63 @@ width: 100%;background-color:lightslategrey}
       </div>
     </section>
     
+    
+ 
+      
+    
+    
+{% if usern.username in private %}
 
-
-
-    {% for po in post  %}
-    {% if po.username in f %}
+  {% if usern.username in f %}
+    
   
 
-    {% if po.photos %}
+  
+
+
+                     
+{% for po in post %}
+
+
+
+  
+
+    {% if po.photos %}  
+        
+      
+        
       
     
+    
       
+    
     
     <section class="u-align-center u-clearfix u-section-3" id="sec-817e">
-      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <img class="u-image u-image-contain u-image-default u-image-1" data-image-width="480" data-image-height="720" data-href="{{po.photos.url}}" src="{{po.photos.url}}" data-target='_blank'>
+      <div class="u-clearfix u-sheet u-valign-top u-sheet-1">
+        <img class="u-image u-image-contain u-image-default u-image-1" data-image-width="480" data-image-height="720" data-href="/viewpost/{{po.id}}" data-target="_blank" src="{{po.photos.url}}">
       </div>
     </section>
     <section class="u-clearfix u-section-4" id="sec-bb50">
       <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-text u-text-default u-text-1">photo description: &nbsp;{{po.description}}</p>
-        <p class="u-text u-text-default u-text-2">uploaded on: &nbsp;{{po.uploaded_on}}</p>
-      </div>
-    </section>
-    <section class="u-clearfix u-section-5" id="sec-7fbe">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <p class="u-text u-text-default u-text-1">Comments</p>
-        {% for c in co %}
-        {% if c.comment %}
-        {% if c.postid == po.id %}
-        <a href="/usp/{{c.username}}/" style="text-decoration:none; color:royalblue">{{c.username}}:</a> {{c.comment}} &nbsp;- &nbsp;<u style="font-size:10px">{{c.uploaded_on}}</u><br/>
-
-        {% endif %}
-    
-        {% endif %}
-        {% endfor %}
-        <p style="font-size: 10px" class="u-text u-text-default u-text-1"><a href="/allcomments/{{po.id}}/">See all comments</a></p>
-
-    </div>
-    </section>
-    <section class="u-clearfix u-section-6" id="sec-b8b8">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <p class="u-text u-text-default u-text-1"><form  method="POST" action="/addcomment/{{po.id}}/">
-            <input type="hidden"  name="postid" value={{po.id}}><br/>
-            Comment: &nbsp;<input type="text" name="comment"><br/><br/>
-          
-          {% csrf_token %}
-          <button type="submit">Add comment</button>
-          </form></p>
-      </div>
-    </section>
-    <section class="u-black u-clearfix u-section-7" id="sec-2c2b">
-      <div class="u-clearfix u-sheet u-sheet-1"></div>
-    </section>
-    
-    
-    {% endif %}
-
-
-
-
-
-    {% if po.status %}
-        
-
-    
-   
-    
-    
-    
-    <section class="u-align-center u-clearfix u-section-3" id="sec-817e">
-      <div class="u-clearfix u-sheet u-valign-top u-sheet-1" >
-        <p class="u-text u-text-default u-text-1"><p style="font-size: 25px;">Status:</p> <br/>{{po.status}}</p>
-      </div>
-    </section>
-    <section class="u-clearfix u-section-4" id="sec-bb50">
-      <div class="u-clearfix u-sheet u-sheet-1">
-       
         <p class="u-text u-text-default u-text-2">uploaded on:&nbsp;{{po.uploaded_on}}</p>
+        <form method="post" action="/homeaddlike/" enctype="multipart/form-data">
+            <input type="hidden" name=postid value={{po.id}}>
+            <input type="hidden" name=liked_by value={{usern.username}}>
+  
+            <button type="submit">Like</button>
+            {% csrf_token %}
+          </form>
+          <br/>
+
+        
+        
+        
       </div>
     </section>
     
 
+          
         
         <section class="u-clearfix u-section-5" id="sec-7fbe">
         <div class="u-clearfix u-sheet u-sheet-1">
@@ -258,11 +233,83 @@ width: 100%;background-color:lightslategrey}
         {% if c.postid == po.id %}
             <a href="/usp/{{c.username}}/" style="text-decoration:none; color:royalblue">{{c.username}}:</a> {{c.comment}} &nbsp;- &nbsp;<u style="font-size:10px">{{c.uploaded_on}}</u>
             
-            {% if c.username == usern %}
-            <button type="submit">delete</button>
-              
-            {% endif %}
             
+            <br/> 
+            {% endif %}
+    
+        {% endif %}
+    
+        {% endfor %}
+
+
+
+        
+          
+        
+        <p style="font-size: 10px" class="u-text u-text-default u-text-1"><a href="/allcomments1/{{po.id}}/">See all comments</a></p>
+        
+    
+        </div>
+        
+        </section>
+       
+
+        
+        
+    
+    
+    <section class="u-black u-clearfix u-section-7" id="sec-2c2b">
+      <div class="u-clearfix u-sheet u-sheet-1"></div>
+    </section>
+        
+
+
+
+
+    {% endif %}
+
+
+
+
+
+    {% if po.status %} 
+   
+   
+      
+    
+    
+    <section class="u-align-center u-clearfix u-section-3" id="sec-817e">
+      <div class="u-clearfix u-sheet u-valign-top u-sheet-1" >
+        <a href="/viewpost/{{po.id}}" target="_blank"><p class="u-text u-text-default u-text-1"><p style="font-size: 25px;">Status:</p> <br/>{{po.status}}</p></a>
+      </div>
+    </section>
+    <section class="u-clearfix u-section-4" id="sec-bb50">
+      <div class="u-clearfix u-sheet u-sheet-1">
+       
+        <p class="u-text u-text-default u-text-2">uploaded on:&nbsp;{{po.uploaded_on}}</p>
+        <form method="post" action="/homeaddlike/" enctype="multipart/form-data">
+            <input type="hidden" name=postid value={{po.id}}>
+            <input type="hidden" name=liked_by value={{usern.username}}>
+  
+            <button type="submit">Like</button>
+            {% csrf_token %}
+          </form>
+          <br/>
+
+        
+        
+    </div>
+    </section>
+    
+
+        
+    <section class="u-clearfix u-section-5" id="sec-7fbe">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <p class="u-text u-text-default u-text-1" style="color:orangered">Comments:</p>
+            {% for c in co %}
+        {% if c.comment %}
+        {% if c.postid == po.id %}
+            <a href="/usp/{{c.username}}/" style="text-decoration:none; color:royalblue">{{c.username}}:</a> {{c.comment}} &nbsp;- &nbsp;<u style="font-size:10px">{{c.uploaded_on}}</u>
             
             
             <br/>
@@ -271,24 +318,31 @@ width: 100%;background-color:lightslategrey}
         {% endif %}
     
         {% endfor %}
+
+
+
+        {% if po.username == usern.username %}
+          
+        
         <p style="font-size: 10px" class="u-text u-text-default u-text-1"><a href="/allcomments/{{po.id}}/">See all comments</a></p>
+        
+    
+
+        {% else %}
+          
+        
+        <p style="font-size: 10px" class="u-text u-text-default u-text-1"><a href="/allcomments1/{{po.id}}/">See all comments</a></p>
+        {% endif %}
+    
         </div>
         
         </section>
+       
         
         
     
-    <section class="u-clearfix u-section-6" id="sec-b8b8">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <p class="u-text u-text-default u-text-1">  <form  method="POST" action="/addcomment/{{po.id}}/">
-            <input type="hidden"  name="postid" value={{po.id}}><br/>
-            Comment: &nbsp;<input type="text" name="comment"><br/><br/>
-          
-          {% csrf_token %}
-          <button type="submit">Add comment</button>
-          </form> </p>
-      </div>
-    </section>
+    
+      
     <section class="u-black u-clearfix u-section-7" id="sec-2c2b">
       <div class="u-clearfix u-sheet u-sheet-1"></div>
     </section>
@@ -300,17 +354,21 @@ width: 100%;background-color:lightslategrey}
 
 
 
-
-
-    {% if po.videos %}
+    {% if po.videos %}  
         
-
+      
+        
+      
+    
     
    
     
+      
     
     
-     <section class="u-align-center u-clearfix u-section-3" id="sec-817e">
+    
+    
+    <section class="u-align-center u-clearfix u-section-3" id="sec-817e">
       <div class="u-clearfix u-sheet u-valign-top u-sheet-1">
         <video width="320" height="320" controls>
             <source src="{{po.videos.url}}" type="video/mp4">
@@ -322,12 +380,23 @@ width: 100%;background-color:lightslategrey}
       <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-text u-text-default u-text-1">Video description: &nbsp;{{po.video_description}}</p>
         <p class="u-text u-text-default u-text-2">uploaded on:&nbsp;{{po.uploaded_on}}</p>
+        <form method="post" action="/homeaddlike/" enctype="multipart/form-data">
+            <input type="hidden" name=postid value={{po.id}}>
+            <input type="hidden" name=liked_by value={{usern.username}}>
+  
+            <button type="submit">Like</button>
+            {% csrf_token %}
+          </form>
+          <br/>
+        <button type="submit"><a href="/viewpost/{{po.id}}/">View post</a></button>
+
         
+      
       </div>
     </section>
     
-    
 
+          
         
         <section class="u-clearfix u-section-5" id="sec-7fbe">
         <div class="u-clearfix u-sheet u-sheet-1">
@@ -337,11 +406,198 @@ width: 100%;background-color:lightslategrey}
         {% if c.postid == po.id %}
             <a href="/usp/{{c.username}}/" style="text-decoration:none; color:royalblue">{{c.username}}:</a> {{c.comment}} &nbsp;- &nbsp;<u style="font-size:10px">{{c.uploaded_on}}</u>
             
-            {% if c.username == usern %}
-            <button type="submit">delete</button>
-              
-            {% endif %}
             
+            <br/>
+            {% endif %}
+    
+        {% endif %}
+    
+        {% endfor %}
+
+
+
+      
+          
+        
+        <p style="font-size: 10px" class="u-text u-text-default u-text-1"><a href="/allcomments1/{{po.id}}/">See all comments</a></p>
+       
+    
+        </div>
+        
+        </section>
+       
+
+        
+        
+    
+    
+    <section class="u-black u-clearfix u-section-7" id="sec-2c2b">
+      <div class="u-clearfix u-sheet u-sheet-1"></div>
+    </section>
+        
+
+
+
+
+    {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    {% endfor %}
+
+    {% else %}
+    <h1 style="color:red">This account is private</h1>
+    {% endif %}
+
+    {% else %}
+
+
+    {% for po in post %}
+
+
+
+  
+
+    {% if po.photos %}  
+        
+      
+        
+      
+    
+    
+      
+    
+    
+    <section class="u-align-center u-clearfix u-section-3" id="sec-817e">
+      <div class="u-clearfix u-sheet u-valign-top u-sheet-1">
+        <img class="u-image u-image-contain u-image-default u-image-1" data-image-width="480" data-image-height="720" data-href="/viewpost/{{po.id}}" data-target="_blank" src="{{po.photos.url}}">
+      </div>
+    </section>
+    <section class="u-clearfix u-section-4" id="sec-bb50">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <p class="u-text u-text-default u-text-1">photo description: &nbsp;{{po.description}}</p>
+        <p class="u-text u-text-default u-text-2">uploaded on:&nbsp;{{po.uploaded_on}}</p>
+        <form method="post" action="/homeaddlike/" enctype="multipart/form-data">
+            <input type="hidden" name=postid value={{po.id}}>
+            <input type="hidden" name=liked_by value={{usern.username}}>
+  
+            <button type="submit">Like</button>
+            {% csrf_token %}
+          </form>
+          <br/>
+
+        
+        
+        
+      </div>
+    </section>
+    
+
+          
+        
+        <section class="u-clearfix u-section-5" id="sec-7fbe">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <p class="u-text u-text-default u-text-1" style="color:orangered">Comments:</p>
+            {% for c in co %}
+        {% if c.comment %}
+        {% if c.postid == po.id %}
+            <a href="/usp/{{c.username}}/" style="text-decoration:none; color:royalblue">{{c.username}}:</a> {{c.comment}} &nbsp;- &nbsp;<u style="font-size:10px">{{c.uploaded_on}}</u>
+            
+            
+            <br/> 
+            {% endif %}
+    
+        {% endif %}
+    
+        {% endfor %}
+
+
+
+        
+          
+        
+        <p style="font-size: 10px" class="u-text u-text-default u-text-1"><a href="/allcomments1/{{po.id}}/">See all comments</a></p>
+        
+    
+        </div>
+        
+        </section>
+       
+
+        
+        
+    
+    
+    <section class="u-black u-clearfix u-section-7" id="sec-2c2b">
+      <div class="u-clearfix u-sheet u-sheet-1"></div>
+    </section>
+        
+
+
+
+
+    {% endif %}
+
+
+
+
+
+    {% if po.status %} 
+   
+   
+      
+    
+    
+    <section class="u-align-center u-clearfix u-section-3" id="sec-817e">
+      <div class="u-clearfix u-sheet u-valign-top u-sheet-1" >
+        <a href="/viewpost/{{po.id}}" target="_blank"><p class="u-text u-text-default u-text-1"><p style="font-size: 25px;">Status:</p> <br/>{{po.status}}</p></a>
+      </div>
+    </section>
+    <section class="u-clearfix u-section-4" id="sec-bb50">
+      <div class="u-clearfix u-sheet u-sheet-1">
+       
+        <p class="u-text u-text-default u-text-2">uploaded on:&nbsp;{{po.uploaded_on}}</p>
+        <form method="post" action="/homeaddlike/" enctype="multipart/form-data">
+            <input type="hidden" name=postid value={{po.id}}>
+            <input type="hidden" name=liked_by value={{usern.username}}>
+  
+            <button type="submit">Like</button>
+            {% csrf_token %}
+          </form>
+          <br/>
+
+        
+        
+    </div>
+    </section>
+    
+
+        
+    <section class="u-clearfix u-section-5" id="sec-7fbe">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <p class="u-text u-text-default u-text-1" style="color:orangered">Comments:</p>
+            {% for c in co %}
+        {% if c.comment %}
+        {% if c.postid == po.id %}
+            <a href="/usp/{{c.username}}/" style="text-decoration:none; color:royalblue">{{c.username}}:</a> {{c.comment}} &nbsp;- &nbsp;<u style="font-size:10px">{{c.uploaded_on}}</u>
             
             
             <br/>
@@ -350,24 +606,31 @@ width: 100%;background-color:lightslategrey}
         {% endif %}
     
         {% endfor %}
+
+
+
+        {% if po.username == usern.username %}
+          
+        
         <p style="font-size: 10px" class="u-text u-text-default u-text-1"><a href="/allcomments/{{po.id}}/">See all comments</a></p>
+        
+    
+
+        {% else %}
+          
+        
+        <p style="font-size: 10px" class="u-text u-text-default u-text-1"><a href="/allcomments1/{{po.id}}/">See all comments</a></p>
+        {% endif %}
+    
         </div>
         
         </section>
+       
         
         
     
-    <section class="u-clearfix u-section-6" id="sec-b8b8">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <p class="u-text u-text-default u-text-1">  <form  method="POST" action="/addcomment/{{po.id}}/">
-            <input type="hidden"  name="postid" value={{po.id}}><br/>
-            Comment: &nbsp;<input type="text" name="comment"><br/><br/>
-          
-          {% csrf_token %}
-          <button type="submit">Add comment</button>
-          </form> </p>
-      </div>
-    </section>
+    
+      
     <section class="u-black u-clearfix u-section-7" id="sec-2c2b">
       <div class="u-clearfix u-sheet u-sheet-1"></div>
     </section>
@@ -379,24 +642,123 @@ width: 100%;background-color:lightslategrey}
 
 
 
-  {% else %} 
+    {% if po.videos %}  
+        
+      
+        
+      
+    
+    
+   
+    
+      
+    
+    
+    
+    
+    <section class="u-align-center u-clearfix u-section-3" id="sec-817e">
+      <div class="u-clearfix u-sheet u-valign-top u-sheet-1">
+        <video width="320" height="320" controls>
+            <source src="{{po.videos.url}}" type="video/mp4">
+    
+            Your browser does not support the video tag.
+          </video>      </div>
+    </section>
+    <section class="u-clearfix u-section-4" id="sec-bb50">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <p class="u-text u-text-default u-text-1">Video description: &nbsp;{{po.video_description}}</p>
+        <p class="u-text u-text-default u-text-2">uploaded on:&nbsp;{{po.uploaded_on}}</p>
+        <form method="post" action="/homeaddlike/" enctype="multipart/form-data">
+            <input type="hidden" name=postid value={{po.id}}>
+            <input type="hidden" name=liked_by value={{usern.username}}>
+  
+            <button type="submit">Like</button>
+            {% csrf_token %}
+          </form>
+          <br/>
+        <button type="submit"><a href="/viewpost/{{po.id}}/">View post</a></button>
 
-  <h1 style="color:darkred">This is a private account</h1>
+        
+      
+      </div>
+    </section>
+    
+
+          
+        
+        <section class="u-clearfix u-section-5" id="sec-7fbe">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <p class="u-text u-text-default u-text-1" style="color:orangered">Comments:</p>
+            {% for c in co %}
+        {% if c.comment %}
+        {% if c.postid == po.id %}
+            <a href="/usp/{{c.username}}/" style="text-decoration:none; color:royalblue">{{c.username}}:</a> {{c.comment}} &nbsp;- &nbsp;<u style="font-size:10px">{{c.uploaded_on}}</u>
+            
+            
+            <br/>
+            {% endif %}
+    
+        {% endif %}
+    
+        {% endfor %}
+
+
+
+      
+          
+        
+        <p style="font-size: 10px" class="u-text u-text-default u-text-1"><a href="/allcomments1/{{po.id}}/">See all comments</a></p>
+       
+    
+        </div>
+        
+        </section>
+       
+
+        
+        
+    
+    
+    <section class="u-black u-clearfix u-section-7" id="sec-2c2b">
+      <div class="u-clearfix u-sheet u-sheet-1"></div>
+    </section>
+        
+
 
 
 
     {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     {% endfor %}
 
+    
+    {% endif %}
+
+    
 
 
 
-
-
-
-
-
+  
 
 
     <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-b149"><div class="u-clearfix u-sheet u-sheet-1">

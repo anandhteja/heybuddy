@@ -167,7 +167,7 @@ def mypr(request):
             username=usern
            
             count=Post.objects.filter(username=usern).count()
-            po=Post.objects.filter(username=usern).order_by('-uploaded_on')
+            po=Post.objects.filter(username=v).order_by('-uploaded_on')
             c=Comment.objects.all().order_by('-uploaded_on')[:5]
             followercount=Follow.objects.filter(following=v).count()
             followingcount=Follow.objects.filter(follower=v).count()
@@ -239,7 +239,7 @@ def userspecificprofile(request,name):
             po=Post.objects.filter(username=usern).order_by('-uploaded_on')
             count=Post.objects.filter(username=usern).count()
             private=list(Privateaccount.objects.all().values_list('username',flat=True))
-            f=list(Follow.objects.all().filter(follower=v).values_list('following',flat=True))
+            f=list(Follow.objects.all().filter(follower=v, following=name).values_list('following',flat=True))
             
 
             req=Privatefollow.objects.all()
