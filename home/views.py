@@ -589,6 +589,18 @@ def unfollowfromprofile(request, name):
                 f.delete()
                 return redirect('viewfollowing')
 
+
+
+def removefollowerfromprofile(request, name):
+     for k,v in request.session.items():
+            if k in 'username':
+                follower=name
+                following=v
+                f=Follow.objects.filter(follower=follower,following=following)
+                f.delete()
+
+                return redirect('viewfollowers')
+
 @login_required(login_url='login')
 def chatsendimages(request):
     for k,v in request.session.items():

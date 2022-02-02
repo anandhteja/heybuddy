@@ -16,7 +16,7 @@
 
 {% for f in fo %}
 
-{{f.follower}}&nbsp;&nbsp;<button><a href="/usp/{{f.follower}}">view profile</a></button>&nbsp;&nbsp;<button><a href="/chat/{{f.follower}}">chat</a></button><br/><br/>
+{{f.follower}}&nbsp;&nbsp;<button><a href="/usp/{{f.follower}}">view profile</a></button>&nbsp;&nbsp;<button><a href="/chat/{{f.follower}}">chat</a></button>&nbsp;&nbsp;<button><a href="/removefollowerfromprofile/{{f.follower}}/">remove</a></button><br/><br/>
   
 {% endfor %}
 

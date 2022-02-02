@@ -69,7 +69,7 @@ urlpatterns = [
     path('deleteprivatefollow/', hm.deleteprivatefollow),
     path('unfollow/', hm.unfollow),
     path('unfollowfromprofile/<str:name>/', hm.unfollowfromprofile),
-    path('viewfollowers/', hm.viewfollowers),
+    path('viewfollowers/', hm.viewfollowers, name='viewfollowers'),
     path('viewfollowing/', hm.viewfollowing, name='viewfollowing'),
     path('chatsendimages/', hm.chatsendimages),
 
@@ -100,6 +100,7 @@ urlpatterns = [
      path('contactdeveloper/',hm.contactdeveloper),
 
      path('viewlikes/<int:id>/', hm.viewlikes),
+     path('removefollowerfromprofile/<str:name>/', hm.removefollowerfromprofile),
 
      
    
