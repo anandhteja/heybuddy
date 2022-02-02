@@ -161,6 +161,8 @@ width: 100%;background-color:lightslategrey}
         <form method="post" action="/homeaddlike/" enctype="multipart/form-data">
             <input type="hidden" name=postid value={{po.id}}>
             <input type="hidden" name=liked_by value={{usern.username}}>
+            <input type="hidden" name=liked_user value={{po.username}}>
+
   
             <button type="submit">Like</button>
             {% csrf_token %}
@@ -291,6 +293,8 @@ width: 100%;background-color:lightslategrey}
         <form method="post" action="/homeaddlike/" enctype="multipart/form-data">
             <input type="hidden" name=postid value={{po.id}}>
             <input type="hidden" name=liked_by value={{usern.username}}>
+            <input type="hidden" name=liked_user value={{po.username}}>
+
   
             <button type="submit">Like</button>
             {% csrf_token %}
@@ -419,6 +423,8 @@ width: 100%;background-color:lightslategrey}
         <form method="post" action="/homeaddlike/" enctype="multipart/form-data">
             <input type="hidden" name=postid value={{po.id}}>
             <input type="hidden" name=liked_by value={{usern.username}}>
+            <input type="hidden" name=liked_user value={{po.username}}>
+
   
             <button type="submit">Like</button>
             {% csrf_token %}

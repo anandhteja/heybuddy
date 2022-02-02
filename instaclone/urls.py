@@ -99,6 +99,8 @@ urlpatterns = [
 
      path('contactdeveloper/',hm.contactdeveloper),
 
+     path('viewlikes/<int:id>/', hm.viewlikes),
+
      
    
 

@@ -1,3 +1,4 @@
+from logging.config import dictConfig
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from home.models import Contactdeveloper, Post, Profile, Comment, Chat, Follow, Chatbackground, Privateaccount, Privatefollow,Likefollowcommentnoti, Temporarynotification, Chatblock,Likes
@@ -751,6 +752,7 @@ def viewpost(request, id):
             pp=Profile.objects.all()
             likescount=Likes.objects.all().filter(postid=id).count()
             
+            
             usern=User.objects.get(username=v)
             dict={'po':po,'co':c,'f':f, 'usern': usern, 'l':l, 'pp':pp, 'likescount':likescount}
             return render(request,'viewpost.html',dict)
@@ -817,3 +819,10 @@ class Viewcontactdeveloperrequest(ListAPIView):
     serializer_class=Contactdeveloperserializer
     authentication_classes=[SessionAuthentication]
     permission_classes=[IsAdminUser]
+
+
+
+def viewlikes(request,id):
+    likes=Likes.objects.all().filter(postid=id)
+    dict={'likes':likes}
+    return render(request, 'viewlikes.html', dict)
