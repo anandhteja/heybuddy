@@ -40,65 +40,52 @@ width: 100%;background-color:lightslategrey}
     <meta property="og:title" content="Profile">
     <meta property="og:type" content="website">
   </head>
-  <body data-home-page="Profile.html" data-home-page-title="Profile" class="u-body"><header class="u-border-2 u-border-palette-4-light-1 u-clearfix u-header u-palette-4-light-2 u-sticky u-header" id="sec-4054"><div class="u-clearfix u-sheet u-sheet-1">
-        <a href="https://nicepage.com" class="u-image u-logo u-image-1" data-image-width="269" data-image-height="188">
-          <img src="{% static "images/heybuddy.png" %}" class="u-logo-image u-logo-image-1">
+  <body data-home-page="Profile.html" data-home-page-title="Profile" class="u-body">
+
+
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+          <img src="{% static "images/heybuddy.png" %}" alt="" width="30" height="24" class="d-inline-block align-text-top">
+          My profile
         </a>
-        <h1 class="u-text u-text-default u-text-1">Hey Buddy</h1>
-        <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
-          <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px; font-weight: 400;">
-            <a class="u-button-style u-custom-active-border-color u-custom-active-color u-custom-border u-custom-border-color u-custom-borders u-custom-hover-border-color u-custom-hover-color u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-color u-custom-text-decoration u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
-              <svg viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
-              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><symbol id="menu-hamburger" viewBox="0 0 16 16" style="width: 16px; height: 16px;"><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
-</symbol>
-</defs></svg>
-            </a>
-          </div>
-          <div class="u-custom-menu u-nav-container">
-            <ul class="u-nav u-spacing-2 u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="/" style="padding: 10px 20px;">Home</a>
-</li><li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="#" style="padding: 10px 20px;">Post</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="/us/">status</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="/up/">photos</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="/uv/">videos</a>
-</li></ul>
-</div>
-</li><li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="/chathome/" style="padding: 10px 20px;">Chats</a>
-</li>
-<li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="/newfeatures/" style="padding: 10px 20px;">New features</a>
-</li><li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="#" style="padding: 10px 20px;">{{usern.username}}</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-3"><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="/logout/">Logout</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="/mypr/">My profile</a>
-</li>
-<li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="/">Contact developer</a>
-</li></ul>
-</div>
-</li></ul>
-          </div>
-          <div class="u-custom-menu u-nav-container-collapse">
-            <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
-              <div class="u-inner-container-layout u-sidenav-overflow">
-                <div class="u-menu-close"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-4"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/" style="padding: 10px 0px;">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="#" style="padding: 10px 0px;">Post</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-5"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/us/">status</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/up/">photos</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/uv/">videos</a>
-</li></ul>
-</div>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/chathome/" style="padding: 10px 0px;">Chats</a>
-</li>
-<li class="u-nav-item"><a class="u-button-style u-nav-link" href="/newfeatures/" style="padding: 10px 0px;">New features</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="#" style="padding: 10px 0px;">{{usern.username}}</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-6"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/logout/">Logout</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/mypr/">My profile</a>
-</li>
-<li class="u-nav-item"><a class="u-button-style u-nav-link" href="/mypr/">Contact developer</a>
-</li>
-</ul>
-</div>
-</li></ul>
-              </div>
-            </div>
-            <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
-          </div>
-        </nav>
-      </div></header>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/discover/">Discover</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                My account
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/mypr/">My profile</a></li>
+                <li><a class="dropdown-item" href="/notifications/">Notifications</a></li>
+                <li><a class="dropdown-item" href="/chathome/">Chats</a></li>
+                
+              </ul>
+            </li>
+            
+          </ul>
+          <form class="d-flex" method="get", action='/searchbox/'>
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name=username>
+            <button class="btn btn-outline-success" type="submit">Search</button>
+            {% csrf_token %}
+          </form>
+        </div>
+      </div>
+    </nav>
+
+
+
+
+
       
     <section class="u-clearfix u-palette-1-base u-section-1" id="sec-87b1">
       <div class="u-clearfix u-sheet u-sheet-1">
