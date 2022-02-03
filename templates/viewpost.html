@@ -75,7 +75,15 @@ width: 100%;background-color:lightslategrey}
       </nav>
 
 
-    
+      {% for msg in messages %}
+          
+        
+      <div class="alert alert-info" role="alert">
+        {{msg}}
+      </div>  
+
+      {% endfor %}
+
 
     
   
@@ -135,6 +143,12 @@ width: 100%;background-color:lightslategrey}
         <p class="u-text u-text-default u-text-1">photo description: &nbsp;{{po.description}}</p>
         <p class="u-text u-text-default u-text-2">uploaded on:&nbsp;{{po.uploaded_on}}</p>
         <a href="/viewlikes/{{po.id}}/"><h3>{{likescount}} people liked this post</h3></a>
+        
+
+
+        
+
+
         {% if l %}
         <form method="post" action="/removelike/" enctype="multipart/form-data">
             <input type="hidden" name=postid value={{po.id}}>

@@ -24,7 +24,7 @@ width: 100%;background-color:lightslategrey}
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
         <img src="{% static "images/heybuddy.png" %}" alt="" width="30" height="24" class="d-inline-block align-text-top">
-        Discover
+        Notifications
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -58,6 +58,14 @@ width: 100%;background-color:lightslategrey}
       </div>
     </div>
   </nav>
+  {% for msg in messages %}
+          
+        
+      <div class="alert alert-info" role="alert">
+        {{msg}}
+      </div>  
+
+      {% endfor %}
 
 
   <h2>Private follow requests:</h2>

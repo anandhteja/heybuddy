@@ -35,7 +35,7 @@ urlpatterns = [
     
     path('login/', hm.login, name='login'),
     path('logout/',hm.logout, name='logout'),
-    path('register/',hm.register),
+    path('register/',hm.register, name='register'),
     path('mypr/', hm.mypr, name="myprofile"),
     path('up/',hm.uploadphoto),
     path('us/',hm.uploadstatus),

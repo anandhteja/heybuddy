@@ -20,6 +20,7 @@ from django.test import TestCase
 from rest_framework.generics import ListAPIView
 
 
+from django.contrib import messages
 
 
 
@@ -101,7 +102,9 @@ def login(request):
 
             return redirect('home')
         else:
-            return HttpResponse("invalid credentials or account doesn't exists")
+            messages.success(request,"invalid credentials or Account doesn't exists")
+            return redirect('home')
+            
     return render(request,'authentication/login.html')
 
 
@@ -124,13 +127,13 @@ def register(request):
         ph=request.FILES['profilephoto']
         cbi=request.FILES['backgroundimage']
         d=request.POST['description']
-        if User.objects.filter(username=u):
-            return HttpResponse("username already exists")
+        if User.objects.all().filter(username=u):
+            messages.error(request,'username already exists')
         
-        elif Profile.objects.filter(username=u):
-            return HttpResponse("record already exists")
-        elif User.objects.filter(email=u):
-            return HttpResponse("email already exists")
+        elif Profile.objects.all().filter(username=u):
+            messages.error(request,'username already exists')
+        elif User.objects.all().filter(email=e):
+            messages.error(request,'email already exists')
 
         elif p1==p2:
             pho=Profile.objects.create(username=u, profilephoto=ph,description=d)
@@ -140,7 +143,7 @@ def register(request):
             user.save()
             pho.save()
             background.save()
-
+            messages.success(request,'Your account has been created successfully')
             return redirect('login')
            
         else:
@@ -197,6 +200,7 @@ def uploadphoto(request):
                             
                 po=Post(username=u,photos=p,description=d)
                 po.save()
+                messages.success(request,'Photo uploaded successfully')
                 return redirect('home')
     
     return render(request,'upload/uploadphoto.html')
@@ -215,6 +219,8 @@ def uploadstatus(request):
                             
                 po=Post(username=u,status=s)
                 po.save()
+                messages.success(request,'Status uploaded successfully')
+
                 return redirect('home')
     
     return render(request,'upload/uploadstatus.html')
@@ -274,24 +280,18 @@ def editprofile(request):
             private=list(Privateaccount.objects.all().values_list('username',flat=True))
             dict={'form':form,'username':u, 'private':private}
             if request.method == 'POST':
-                u=request.POST['username']
-                d=request.POST['description']
-                if User.objects.filter(username=u):
-                   return HttpResponse('username alreadu exists, try any other username')
                 
-                else:
-
-
-                    userinputpost=Post.objects.filter(username=v).update(username=u)
-                    userinputprofile=Profile.objects.filter(username=v).update(username=u,description=d)
-                    userinputcomment=Comment.objects.filter(username=v).update(username=u)
-                    userinputchat=Chat.objects.filter(sender=v).update(sender=u)
+                d=request.POST['description']
+                userinput=Profile.objects.filter(username=v).update(description=d)
+                
+                messages.success(request,'Your profile description has been updated successfully')
+                    
 
                     
 
                   
 
-                    return redirect('myprofile')
+                return redirect('myprofile')
         
             return render(request, 'edit/editprofile.html',dict)
 
@@ -351,12 +351,14 @@ def deleteaccount(request, name):
     co=Comment.objects.filter(username=name)
     ch=Chat.objects.filter(sender=name)
     ch1=Chat.objects.filter(receiver=name)
+    cbi=Chatbackground.objects.all().filter(username=name)
     u.delete()
     p.delete()
     po.delete()
     co.delete()
     ch.delete()
     ch1.delete()
+    cbi.delete()
     return HttpResponse('account deleted succesfully')
 
 
@@ -390,6 +392,7 @@ def updateprofilepicture(request):
                     d='Changed profilepicture'
                     ph.profilephoto=p
                     ph.save()
+                    messages.success(request,'Profile picture has been updated successfully')
                 
                     return redirect('myprofile')
 
@@ -455,6 +458,8 @@ def uploadvideo(request):
                             
                 po=Post(username=u,videos=v,video_description=d)
                 po.save()
+                messages.success(request,'Video uploaded successfully')
+
                 return redirect('home')
     
     return render(request,'upload/uploadvideo.html')
@@ -634,6 +639,7 @@ def changebackgroundimage(request):
                     cbi=request.FILES['backgroundimage']
                     background.image=cbi
                     background.save()
+                    messages.success(request,'Changed chat background successfully')
                     return redirect('chathome')
                 return render(request,'backgroundimage/changebackgroundimage.html', dict)
 
@@ -643,6 +649,7 @@ def addtoprivate(request):
             if k in 'username':
                 p=Privateaccount(username=v)
                 p.save()
+                messages.success(request,'Your account is now private')
                 return redirect('editprofile')
 
 
@@ -652,6 +659,7 @@ def unprivate(request):
             if k in 'username':
                 p=Privateaccount.objects.get(username=v)
                 p.delete()
+                messages.success(request,'Your account is now open')
                 return redirect('editprofile')
 
 
@@ -682,7 +690,8 @@ def addprivatefollow(request):
                 d=Privatefollow.objects.get(requester=follower, requesting=v)
                 f.save()
                 d.delete()
-                return HttpResponse('accepted request')
+                messages.success(request,'Accepted request successfully')
+                return  redirect(request.META['HTTP_REFERER'])
 
 @login_required(login_url='login')
 def deleteprivatefollow(request):
@@ -694,7 +703,8 @@ def deleteprivatefollow(request):
                 d=Privatefollow.objects.get(requester=follower, requesting=v)
                 
                 d.delete()
-                return HttpResponse('deleted request')
+                messages.success(request,'Deleted request successfully')
+                return redirect(request.META['HTTP_REFERER'])
 
 
 def requestprivatefollow(request):
@@ -704,7 +714,8 @@ def requestprivatefollow(request):
                 requesting=request.POST['requesting']
                 p=Privatefollow(requester=requester, requesting=requesting)
                 if Privatefollow.objects.filter(requester=v, requesting=requesting):
-                    return HttpResponse('<h2>Request already sent, wait for the other person to respond</h2>')
+                    messages.success(request,"Request already sent, wait for the other person to respond")
+                    return redirect(request.META['HTTP_REFERER'])
                 else:
                     
                     p.save()
@@ -726,6 +737,7 @@ def removetempnoti(request):
             if k in 'username':
                 d=Temporarynotification.objects.all().filter(receiver=v)
                 d.delete()
+                messages.success(request,"cleared")
                 return redirect('notifications')
 
 
@@ -735,6 +747,7 @@ def blockchatuser(request):
         blocked_by=request.POST['blocked_by']
         b=Chatblock(blocked_user=blocked_user, blocked_by=blocked_by)
         b.save()
+        messages.success(request,'user blocked')
         return redirect(request.META['HTTP_REFERER'])
 
 
@@ -744,6 +757,7 @@ def unblockchatuser(request):
         blocked_by=request.POST['blocked_by']
         b=Chatblock.objects.all().filter(blocked_user=blocked_user, blocked_by=blocked_by)
         b.delete()
+        messages.success(request,'user unblocked')
         return redirect(request.META['HTTP_REFERER'])
 
 def addlike(request):
@@ -756,6 +770,7 @@ def addlike(request):
         lfc.save()
         
         l.save()
+        messages.success(request,'like added sucessfully')
         return redirect(request.META['HTTP_REFERER'])
 
 def viewpost(request, id):
@@ -781,6 +796,7 @@ def removelike(request):
             l=Likes.objects.get(postid=postid,liked_by=liked_by)
             
             l.delete()
+            messages.success(request,"like removed successfully")
             return redirect(request.META['HTTP_REFERER'])
 
 
@@ -802,6 +818,7 @@ def homeaddlike(request):
 def removelfc(request):
     d=Likefollowcommentnoti.objects.all()
     d.delete()
+    messages.success(request,"cleared")
     return redirect('notifications')
 
 
@@ -827,7 +844,8 @@ def contactdeveloper(request):
                     email=request.POST['email']
                     c=Contactdeveloper(username=username, name=name, issue=issue,photos=photos, email=email)
                     c.save()
-                    return HttpResponse('<h1>request has been sent to the developer, you will be contacted at the earliest possible</h1>')
+                    messages.success(request,'request has been sent to the developer, you will be contacted at the earliest possible')
+                    return redirect('myprofile')
                     
     return render(request, 'contactdeveloper.html', dict)
 
