@@ -44,17 +44,16 @@ def home(request):
             pp=Profile.objects.all()
             p=Profile.objects.get(username=v)
             c=Comment.objects.all().order_by('-uploaded_on')[:6]
-            usern=usern
-           
+            user=v
               
             po=Post.objects.all().order_by('-uploaded_on')
-            fo=list(Follow.objects.all().filter(follower=v).values_list('following',flat=True))
-            f=fo.append(v)
+            f=list(Follow.objects.all().filter(follower=v).values_list('following',flat=True))
+            
             private=list(Privateaccount.objects.all().values_list('username',flat=True))
 
 
             
-            dict={'usern':usern,'post':po,'pp':pp,'co':c,'p':p, 'f':f, 'private':private,}
+            dict={'usern':usern,'post':po,'pp':pp,'co':c,'p':p, 'f':f, 'private':private,user:user,}
             
             return render(request,'home.html',dict)
 
