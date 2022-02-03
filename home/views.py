@@ -545,7 +545,7 @@ def chathome(request):
 def deletemymessage(request, id):
     d=Chat.objects.get(id=id)
     d.delete()
-    return redirect('chathome') 
+    return redirect('chatpage') 
     
 
 
