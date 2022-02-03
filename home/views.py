@@ -74,7 +74,9 @@ def discover(request):
            
               
             po=Post.objects.all().order_by('-uploaded_on')
-            f=list(Follow.objects.filter(follower=v).values_list('following',flat=True))
+            fo=list(Follow.objects.filter(follower=v).values_list('following',flat=True))
+            f=fo.append(v)
+
             private=list(Privateaccount.objects.all().values_list('username',flat=True))
 
             
