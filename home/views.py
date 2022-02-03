@@ -44,7 +44,7 @@ def home(request):
             pp=Profile.objects.all()
             p=Profile.objects.get(username=v)
             c=Comment.objects.all().order_by('-uploaded_on')[:6]
-            user=v
+            user=list(User.objects.all().filter(username=v).values_list('username', flat=True))
               
             po=Post.objects.all().order_by('-uploaded_on')
             f=list(Follow.objects.all().filter(follower=v).values_list('following',flat=True))
