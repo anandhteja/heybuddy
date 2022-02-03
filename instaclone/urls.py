@@ -21,7 +21,6 @@ from django.conf.urls.static import static
 
 from django.views.static import serve
 from django.conf.urls import url
-import notifications.urls
 
 
 
@@ -112,7 +111,6 @@ urlpatterns = [
     url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
 
 
-    url('^inbox/notifications/', include(notifications.urls, namespace='notifications')),
 
 
 #serializer

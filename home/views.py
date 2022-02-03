@@ -19,7 +19,6 @@ from django.db.models import Q
 from django.test import TestCase
 from rest_framework.generics import ListAPIView
 
-from notifications.signals import notify
 
 
 
@@ -510,15 +509,13 @@ def addmessage(request):
                 if request.method == 'POST':
                     sender=v
                     receiver=request.POST['receiver']
-                    s=User.objects.get(username=sender)
-                    r = User.objects.get(username=receiver)
+                    
                     message=request.POST['message']
                     unique=v+receiver
                     userinput=Chat(sender=sender, receiver=receiver, message=message, unique=unique)
                     tempnoti=Temporarynotification(sender=sender, receiver=receiver, message=message)
                     userinput.save()
                     tempnoti.save()
-                    notify.send(s, recipient=r, verb='Message', description=message)
 
                     return redirect(request.META['HTTP_REFERER']) 
 

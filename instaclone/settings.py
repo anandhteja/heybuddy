@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
-    'home','rest_framework','notifications',
+    'home','rest_framework',
     
 
 ]
