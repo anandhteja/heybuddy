@@ -722,6 +722,8 @@ def requestprivatefollow(request):
                 else:
                     
                     p.save()
+                    messages.success(request,"Request sent successfully")
+
                     return redirect(request.META['HTTP_REFERER'])
 
 def searchbox(request):
