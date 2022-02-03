@@ -53,7 +53,7 @@ def home(request):
 
 
             
-            dict={'usern':usern,'post':po,'pp':pp,'co':c,'p':p, 'f':f, 'private':private,user:user,}
+            dict={'usern':usern,'post':po,'pp':pp,'co':c,'p':p, 'f':f, 'private':private,'user':user,}
             
             return render(request,'home.html',dict)
 
