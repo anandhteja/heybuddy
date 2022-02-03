@@ -304,7 +304,7 @@ def deletepost(request,id):
     co=Comment.objects.filter(postid=id)
     p.delete()
     co.delete()
-    messages.success(request,'message removed successfully')
+    messages.success(request,'post removed successfully')
     return redirect(request.META['HTTP_REFERER'])
 
 
