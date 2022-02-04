@@ -13,6 +13,7 @@
     <title>Home</title>
 
 <style>
+  div.photo{background-color:aquamarine}
 
 div.basenav{position: fixed;
 left: 0;
@@ -125,7 +126,7 @@ width: 100%;background-color:lightslategrey;}
     {% if po.photos %}  
         
       
-        
+    <div class='photo'>  
     
     <section class="u-clearfix u-section-1" id="sec-3756">
       <div class="u-clearfix u-sheet u-sheet-1">
@@ -149,7 +150,7 @@ width: 100%;background-color:lightslategrey;}
     </section>
     
    
-  
+    
       
     
     <section class="u-clearfix u-section-2" id="sec-87b1">
@@ -165,7 +166,7 @@ width: 100%;background-color:lightslategrey;}
     </section>
       
     
-    
+  
     <section class="u-align-center u-clearfix u-section-3" id="sec-817e">
       <div class="u-clearfix u-sheet u-valign-top u-sheet-1">
         <img class="u-image u-image-contain u-image-default u-image-1" data-image-width="480" data-image-height="720" data-href="/viewpost/{{po.id}}" data-target="_blank" src="{{po.photos.url}}">
@@ -260,14 +261,14 @@ width: 100%;background-color:lightslategrey;}
 
     {% endif %}
 
-
+  </div>
 
 
 
 
     {% if po.status %}
         
-      
+    <div class='photo'> 
         
       
     <section class="u-clearfix u-section-1" id="sec-3756">
@@ -310,7 +311,7 @@ width: 100%;background-color:lightslategrey;}
     
     <section class="u-align-center u-clearfix u-section-3" id="sec-817e">
       <div class="u-clearfix u-sheet u-valign-top u-sheet-1" >
-        <a href="/viewpost/{{po.id}}" target="_blank"><p class="u-text u-text-default u-text-1"><p style="font-size: 25px;">Status:</p> <br/>{{po.status}}</p></a>
+        <a href="/viewpost/{{po.id}}" target="_blank"><p class="u-text u-text-default u-text-1"><p style="font-size: 25px; text-decoration: none; color:black">Status:</p> <br/><p style="font-size: 15px; text-decoration: none; color:black">{{po.status}}</p></a>
       </div>
     </section>
     <section class="u-clearfix u-section-4" id="sec-bb50">
@@ -387,7 +388,7 @@ width: 100%;background-color:lightslategrey;}
     {% endif %}
 
 
-
+</div>
 
 
 
