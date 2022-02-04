@@ -828,13 +828,7 @@ def removelfc(request):
     return redirect('notifications')
 
 
-def deleteconfirmation(request):
-    for k,v in request.session.items():
-            if k in 'username':
-                username=v
-                dict={'username':username}
 
-    return render(request, 'deleteconfirmation.html',dict) 
 
 
 

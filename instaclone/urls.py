@@ -95,7 +95,6 @@ urlpatterns = [
 
      path('removelfc/', hm.removelfc),
 
-     path('deleteconfirmation/', hm.deleteconfirmation),
 
 
      path('contactdeveloper/',hm.contactdeveloper),

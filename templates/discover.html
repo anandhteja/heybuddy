@@ -193,8 +193,8 @@ width: 100%;background-color:lightslategrey}
           
         
         <a href="/editpost/{{po.id}}" class="u-border-2 u-border-palette-2-base u-btn u-btn-round u-button-style u-hover-palette-2-base u-none u-radius-6 u-text-body-color u-text-hover-white u-btn-1">Edit Post</a>
-        <a href="/delete/{{po.id}}" class="u-border-2 u-border-palette-2-base u-btn u-btn-round u-button-style u-hover-palette-2-base u-none u-radius-6 u-text-body-color u-text-hover-white u-btn-2">Delete</a>
-      
+        <button onclick="return confirm('Are you sure you want to Delete?');" 
+        id="btnDelete"><a style="text-decoration: none" href="/delete/{{po.id}}">Delete</a></button>      
         {% endif %}
       </div>
     </section>
@@ -324,8 +324,8 @@ width: 100%;background-color:lightslategrey}
         {% if po.username == usern.username %}
           
         
-        <a href="/delete/{{po.id}}" class="u-border-2 u-border-palette-2-base u-btn u-btn-round u-button-style u-hover-palette-2-base u-none u-radius-6 u-text-body-color u-text-hover-white u-btn-2">Delete</a>
-      
+        <button onclick="return confirm('Are you sure you want to Delete?');" 
+        id="btnDelete"><a style="text-decoration: none" href="/delete/{{po.id}}">Delete</a></button>      
         {% endif %}
     </div>
     </section>
@@ -466,8 +466,8 @@ width: 100%;background-color:lightslategrey}
           
         
         <a href="/editvideopost/{{po.id}}" class="u-border-2 u-border-palette-2-base u-btn u-btn-round u-button-style u-hover-palette-2-base u-none u-radius-6 u-text-body-color u-text-hover-white u-btn-1">Edit Post</a>
-        <a href="/delete/{{po.id}}" class="u-border-2 u-border-palette-2-base u-btn u-btn-round u-button-style u-hover-palette-2-base u-none u-radius-6 u-text-body-color u-text-hover-white u-btn-2">Delete</a>
-      
+        <button onclick="return confirm('Are you sure you want to Delete?');" 
+        id="btnDelete"><a style="text-decoration: none" href="/delete/{{po.id}}">Delete</a></button>      
         {% endif %}
       </div>
     </section>
