@@ -82,7 +82,7 @@ width: 100%;background-color:lightslategrey}
   
 
   <div class="alert alert-warning alert-dismissible fade show" role="alert">
-  {{msg}}
+   {{msg}}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 
@@ -200,6 +200,7 @@ width: 100%;background-color:lightslategrey}
         <form method="post" action="/homeaddlike/" enctype="multipart/form-data">
             <input type="hidden" name=postid value={{po.id}}>
             <input type="hidden" name=liked_by value={{usern.username}}>
+            <input type="hidden" name=liked_user value={{po.username}}>
   
             <button type="submit">Like</button>
             {% csrf_token %}
@@ -280,6 +281,7 @@ width: 100%;background-color:lightslategrey}
         <form method="post" action="/homeaddlike/" enctype="multipart/form-data">
             <input type="hidden" name=postid value={{po.id}}>
             <input type="hidden" name=liked_by value={{usern.username}}>
+            <input type="hidden" name=liked_user value={{pp.username}}>
   
             <button type="submit">Like</button>
             {% csrf_token %}
@@ -373,6 +375,7 @@ width: 100%;background-color:lightslategrey}
         <form method="post" action="/homeaddlike/" enctype="multipart/form-data">
             <input type="hidden" name=postid value={{po.id}}>
             <input type="hidden" name=liked_by value={{usern.username}}>
+            <input type="hidden" name=liked_user value={{po.username}}>
   
             <button type="submit">Like</button>
             {% csrf_token %}
@@ -568,6 +571,7 @@ width: 100%;background-color:lightslategrey}
         <form method="post" action="/homeaddlike/" enctype="multipart/form-data">
             <input type="hidden" name=postid value={{po.id}}>
             <input type="hidden" name=liked_by value={{usern.username}}>
+            <input type="hidden" name=liked_user value={{po.username}}>
   
             <button type="submit">Like</button>
             {% csrf_token %}

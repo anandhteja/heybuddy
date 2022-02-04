@@ -729,12 +729,12 @@ def requestprivatefollow(request):
 def searchbox(request):
     if request.method == 'GET':
         username=request.GET['username']
-        user=User.objects.all().filter(username=username)
+        user=User.objects.all().filter(username__icontains=username)
         tried=username
         dict={'user':user, 'tried':tried}
 
 
-    return render(request,'searchbox.html',dict)
+    return render(request,'searchbox.html',dict)    
 
     
 def removetempnoti(request):
@@ -775,7 +775,7 @@ def addlike(request):
         lfc.save()
         
         l.save()
-        messages.success(request,'like added sucessfully')
+        messages.success(request,'liked sucessfully')
         return redirect(request.META['HTTP_REFERER'])
 
 def viewpost(request, id):
@@ -813,6 +813,7 @@ def homeaddlike(request):
         if Likes.objects.all().filter(postid=postid,liked_by=liked_by):
             return HttpResponse('<h1> you already liked this post</h1>')
         else:
+            
             l=Likes.objects.create(postid=postid,liked_by=liked_by)
             lfc=Likefollowcommentnoti(postid=postid,username=liked_user, liked_by=liked_by)
             lfc.save()
