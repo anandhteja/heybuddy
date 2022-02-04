@@ -89,7 +89,7 @@ body{color:white}
             </li>
             
           </ul>
-          <form class="d-flex" method="get", action='/searchbox/'>
+          <form class="d-flex" method="get" action='/searchbox/'>
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name=username>
             <button class="btn btn-outline-success" type="submit">Search</button>
             {% csrf_token %}
@@ -456,27 +456,20 @@ body{color:white}
     
             Your browser does not support the video tag.
           </video>      </div>
+          <div class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              Share
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+              <li><a class="dropdown-item" href="#">{% post_to_facebook  po.videos.url "Facebook" %}</a></li>
+              <li><a class="dropdown-item" href="#">{% post_to_whatsapp  po.videos.url "Whatsapp" %}</a></li>
+              <li><a class="dropdown-item" href="#">{% post_to_twitter  po.videos.url "Twitter" %}</a></li>
+            </ul>
+          </div>
+
     </section>
-    <div class="btn-group" role="group">
-      <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        Share
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <li><a class="dropdown-item" href="#">{% post_to_facebook  po.videos.url "Facebook" %}</a></li>
-        <li><a class="dropdown-item" href="#">{% post_to_whatsapp  po.videos.url "Whatsapp" %}</a></li>
-        <li><a class="dropdown-item" href="#">{% post_to_twitter  po.photos.url "Twitter" %}</a></li>
-      </ul>
-    </div>
-    <div class="btn-group" role="group">
-      <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        Share
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <li><a class="dropdown-item" href="#">{% post_to_facebook  po.photos.url "Facebook" %}</a></li>
-        <li><a class="dropdown-item" href="#">{% post_to_whatsapp  po.photos.url "Whatsapp" %}</a></li>
-        <li><a class="dropdown-item" href="#">{% post_to_twitter  po.photos.url "Twitter" %}</a></li>
-      </ul>
-    </div>
+    
+    
     <section class="u-clearfix u-section-4" id="sec-bb50">
       <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-text u-text-default u-text-1">Video description: &nbsp;{{po.video_description}}</p>
