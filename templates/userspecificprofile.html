@@ -100,13 +100,10 @@ width: 100%;background-color:lightslategrey}
       <p class="u-text u-text-default u-text-1">
         <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-white u-btn-1" href="#">{{pp.username}}</a>&nbsp;<img  src="{% static "images/verified-icon-png-5.jpg" %}" alt="" width=30 height=30>
 
-       <p style="font-size: 8px;" > <a href="/updateprofilepicture/">update profile picture</a></p>
       </p>
       <h4 class="u-text u-text-default u-text-2">{{pp.description}}</h4>
-      <a href="/editprofile/" class="u-border-2 u-border-palette-2-base u-btn u-btn-round u-button-style u-hover-palette-2-base u-none u-radius-6 u-text-body-color u-text-hover-white u-btn-2" >Edit Profile</a>
 
-    </div>
-  </section>
+   
 
   {% else %} 
   <section class="u-clearfix u-palette-1-base u-section-1" id="sec-87b1">
@@ -115,13 +112,13 @@ width: 100%;background-color:lightslategrey}
       <p class="u-text u-text-default u-text-1">
         <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-white u-btn-1" href="#">{{pp.username}}</a>
 
-       <p style="font-size: 8px;" > <a href="/updateprofilepicture/">update profile picture</a></p>
       </p>
       <h4 class="u-text u-text-default u-text-2">{{pp.description}}</h4>
-
+    
     
   {% endif %} 
-       
+
+ 
        {% if follow.following %}
        
        <a href="#" class="u-border-2 u-border-palette-2-base u-btn u-btn-round u-button-style u-hover-palette-2-base u-none u-radius-6 u-text-body-color u-text-hover-white u-btn-2" >Following</a>
@@ -181,9 +178,7 @@ width: 100%;background-color:lightslategrey}
       </div>
     </section>
     
-  </div>
-</section>
- 
+
       
     
     
