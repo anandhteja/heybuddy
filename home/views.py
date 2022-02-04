@@ -798,10 +798,11 @@ def viewpost(request, id):
             l=Likes.objects.all().filter(liked_by=v, postid=id)
             pp=Profile.objects.all()
             likescount=Likes.objects.all().filter(postid=id).count()
+            verified=list(Verifiedaccounts.objects.all().values_list('username', flat=True))
             
             
             usern=User.objects.get(username=v)
-            dict={'po':po,'co':c,'f':f, 'usern': usern, 'l':l, 'pp':pp, 'likescount':likescount}
+            dict={'po':po,'co':c,'f':f, 'usern': usern, 'l':l, 'pp':pp, 'likescount':likescount,'verified':verified}
             return render(request,'viewpost.html',dict)
  
 def removelike(request):
