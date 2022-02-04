@@ -1,4 +1,5 @@
 {% load static %} 
+{% load social_share %}
 
 
 <!DOCTYPE html>
@@ -137,6 +138,17 @@ width: 100%;background-color:lightslategrey}
       <div class="u-clearfix u-sheet u-valign-top u-sheet-1">
         <img class="u-image u-image-contain u-image-default u-image-1" data-image-width="480" data-image-height="720" data-href="/viewpost/{{po.id}}" data-target="_blank" src="{{po.photos.url}}">
       </div>
+      <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Share
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <li><a class="dropdown-item" href="#">{% post_to_facebook  po.photos.url "Facebook" %}</a></li>
+          <li><a class="dropdown-item" href="#">{% post_to_whatsapp  po.photos.url "Whatsapp" %}</a></li>
+          <li><a class="dropdown-item" href="#">{% post_to_twitter  po.photos.url "Twitter" %}</a></li>
+        </ul>
+      </div>
+
     </section>
     <section class="u-clearfix u-section-4" id="sec-bb50">
       <div class="u-clearfix u-sheet u-sheet-1">
@@ -311,6 +323,17 @@ width: 100%;background-color:lightslategrey}
     
             Your browser does not support the video tag.
           </video>      </div>
+          <div class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              Share
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+              <li><a class="dropdown-item" href="#">{% post_to_facebook  po.videos.url "Facebook" %}</a></li>
+              <li><a class="dropdown-item" href="#">{% post_to_whatsapp  po.videos.url "Whatsapp" %}</a></li>
+              <li><a class="dropdown-item" href="#">{% post_to_twitter  po.videos.url "Twitter" %}</a></li>
+            </ul>
+          </div>
+
     </section>
     <section class="u-clearfix u-section-4" id="sec-bb50">
       <div class="u-clearfix u-sheet u-sheet-1">

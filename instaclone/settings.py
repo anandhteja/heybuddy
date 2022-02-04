@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
-    'home','rest_framework',
+    'home','rest_framework','django_social_share',
 
 ]
 
@@ -85,7 +85,6 @@ WSGI_APPLICATION = 'instaclone.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
-
 DATABASES = {
 
     'default': {
@@ -105,7 +104,6 @@ DATABASES = {
     }
 
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

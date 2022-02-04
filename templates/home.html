@@ -1,5 +1,5 @@
 {% load static %}   
-
+{% load social_share %}
 
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
     <title>Home</title>
 
 <style>
-
+div.share{font-size:15px;}
 div.basenav{position: fixed;
 left: 0;
 bottom: 0;
@@ -169,8 +169,21 @@ body{color:white}
     <section class="u-align-center u-clearfix u-section-3" id="sec-817e">
       <div class="u-clearfix u-sheet u-valign-top u-sheet-1">
         <img class="u-image u-image-contain u-image-default u-image-1" data-image-width="480" data-image-height="720" data-href="/viewpost/{{po.id}}" data-target="_blank" src="{{po.photos.url}}">
+       
       </div>
+      <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Share
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <li><a class="dropdown-item" href="#">{% post_to_facebook  po.photos.url "Facebook" %}</a></li>
+          <li><a class="dropdown-item" href="#">{% post_to_whatsapp  po.photos.url "Whatsapp" %}</a></li>
+          <li><a class="dropdown-item" href="#">{% post_to_twitter  po.photos.url "Twitter" %}</a></li>
+        </ul>
+      </div>
+      
     </section>
+  
     <section class="u-clearfix u-section-4" id="sec-bb50">
       <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-text u-text-default u-text-1">photo description: &nbsp;{{po.description}}</p>
@@ -184,6 +197,7 @@ body{color:white}
             {% csrf_token %}
           </form>        
           {% else %}
+
         
         <form method="post" action="/homeaddlike/" enctype="multipart/form-data">
           <input type="hidden" name=postid value={{po.id}}>
@@ -196,7 +210,7 @@ body{color:white}
         {% endif %}
 
         <br/>
-          
+        
           
         {% if po.username == usern.username %}
           
@@ -443,6 +457,26 @@ body{color:white}
             Your browser does not support the video tag.
           </video>      </div>
     </section>
+    <div class="btn-group" role="group">
+      <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        Share
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+        <li><a class="dropdown-item" href="#">{% post_to_facebook  po.videos.url "Facebook" %}</a></li>
+        <li><a class="dropdown-item" href="#">{% post_to_whatsapp  po.videos.url "Whatsapp" %}</a></li>
+        <li><a class="dropdown-item" href="#">{% post_to_twitter  po.photos.url "Twitter" %}</a></li>
+      </ul>
+    </div>
+    <div class="btn-group" role="group">
+      <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        Share
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+        <li><a class="dropdown-item" href="#">{% post_to_facebook  po.photos.url "Facebook" %}</a></li>
+        <li><a class="dropdown-item" href="#">{% post_to_whatsapp  po.photos.url "Whatsapp" %}</a></li>
+        <li><a class="dropdown-item" href="#">{% post_to_twitter  po.photos.url "Twitter" %}</a></li>
+      </ul>
+    </div>
     <section class="u-clearfix u-section-4" id="sec-bb50">
       <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-text u-text-default u-text-1">Video description: &nbsp;{{po.video_description}}</p>
