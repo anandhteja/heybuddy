@@ -11,8 +11,18 @@
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
     <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
+  .fa {
+  font-size: 50px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fa:hover {
+  color: darkblue;
+}
 div.share{font-size:15px;}
 div.basenav{position: fixed;
 left: 0;
@@ -197,16 +207,15 @@ body{color:white}
             {% csrf_token %}
           </form>        
           {% else %}
-
-        
-        <form method="post" action="/homeaddlike/" enctype="multipart/form-data">
-          <input type="hidden" name=postid value={{po.id}}>
-          <input type="hidden" name=liked_user value={{po.username}}>
-          <input type="hidden" name=liked_by value={{usern.username}}>
-
-          <button type="submit">Like</button>
-          {% csrf_token %}
-        </form>
+          <form method="post" action="/homeaddlike/" enctype="multipart/form-data">
+            <input type="hidden" name=postid value={{po.id}}>
+            <input type="hidden" name=liked_user value={{po.username}}>
+            <input type="hidden" name=liked_by value={{usern.username}}>
+  
+            <button class="btn btn-primary" type="submit">Like</button>            
+            {% csrf_token %}
+          </form>
+       
         {% endif %}
 
         <br/>
@@ -336,7 +345,7 @@ body{color:white}
           <input type="hidden" name=liked_user value={{po.username}}>
           <input type="hidden" name=liked_by value={{usern.username}}>
 
-          <button type="submit" class="like">Like</button>
+          <button  class="btn btn-primary" type="submit">Like</button> 
           {% csrf_token %}
         </form>
         <br/>
@@ -479,7 +488,7 @@ body{color:white}
           <input type="hidden" name=liked_user value={{po.username}}>
           <input type="hidden" name=liked_by value={{usern.username}}>
 
-          <button type="submit"  class="like">Like</button>
+          <button  class="btn btn-primary" type="submit">Like</button> 
           {% csrf_token %}
         </form>
         <br/>
