@@ -121,20 +121,47 @@ width: 100%;background-color:lightslategrey}
     <section class="u-clearfix u-section-1" id="sec-3756">
       <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-text u-text-default u-text-1">
-            {% if po.username == usern.username %}
-              
+          {% if po.username in verified %}
+          {% if po.username == usern.username %}
             
-          <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="/mypr/">{{po.username}}</a>
           
+            
+          
+            
+          
+        <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="/mypr/">{{po.username}}</a>&nbsp;<img  src="{% static "images/verified-icon-png-5.jpg" %}" alt="" width=30 height=30>
+        
           {% else %}
 
-          <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="/usp/{{po.username}}">{{po.username}}</a>
+        <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="/usp/{{po.username}}">{{po.username}}</a>&nbsp;<img  src="{% static "images/verified-icon-png-5.jpg" %}" alt="" width=30 height=30>
 
-          
-          {% endif %}
+        
+        {% endif %}
+
+        
+        {% endif %}
+
+
+
+        {% if po.username not in verified %}
+          {% if po.username == usern.username %}
+            
           
             
           
+            
+          
+        <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="/mypr/">{{po.username}}</a>       
+          {% else %}
+
+        <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="/usp/{{po.username}}">{{po.username}}</a>
+
+        
+        {% endif %}
+
+        
+        {% endif %}
+
           
         </p>
       </div>
@@ -265,17 +292,47 @@ width: 100%;background-color:lightslategrey}
     <section class="u-clearfix u-section-1" id="sec-3756">
       <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-text u-text-default u-text-1">
-            {% if po.username == usern.username %}
-              
+          {% if po.username in verified %}
+          {% if po.username == usern.username %}
             
-          <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="/mypr/">{{po.username}}</a>
           
+            
+          
+            
+          
+        <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="/mypr/">{{po.username}}</a>&nbsp;<img  src="{% static "images/verified-icon-png-5.jpg" %}" alt="" width=30 height=30>
+        
           {% else %}
 
-          <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="/usp/{{po.username}}">{{po.username}}</a>
+        <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="/usp/{{po.username}}">{{po.username}}</a>&nbsp;<img  src="{% static "images/verified-icon-png-5.jpg" %}" alt="" width=30 height=30>
 
+        
+        {% endif %}
+
+        
+        {% endif %}
+
+
+
+        {% if po.username not in verified %}
+          {% if po.username == usern.username %}
+            
           
-          {% endif %}
+            
+          
+            
+          
+        <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="/mypr/">{{po.username}}</a>       
+          {% else %}
+
+        <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="/usp/{{po.username}}">{{po.username}}</a>
+
+        
+        {% endif %}
+
+        
+        {% endif %}
+
           
           
         </p>
@@ -391,17 +448,47 @@ width: 100%;background-color:lightslategrey}
     <section class="u-clearfix u-section-1" id="sec-3756">
       <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-text u-text-default u-text-1">
-            {% if po.username == usern.username %}
-              
+          {% if po.username in verified %}
+          {% if po.username == usern.username %}
             
-          <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="/mypr/">{{po.username}}</a>
           
+            
+          
+            
+          
+        <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="/mypr/">{{po.username}}</a>&nbsp;<img  src="{% static "images/verified-icon-png-5.jpg" %}" alt="" width=30 height=30>
+        
           {% else %}
 
-          <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="/usp/{{po.username}}">{{po.username}}</a>
+        <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="/usp/{{po.username}}">{{po.username}}</a>&nbsp;<img  src="{% static "images/verified-icon-png-5.jpg" %}" alt="" width=30 height=30>
 
+        
+        {% endif %}
+
+        
+        {% endif %}
+
+
+
+        {% if po.username not in verified %}
+          {% if po.username == usern.username %}
+            
           
-          {% endif %}
+            
+          
+            
+          
+        <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="/mypr/">{{po.username}}</a>       
+          {% else %}
+
+        <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="/usp/{{po.username}}">{{po.username}}</a>
+
+        
+        {% endif %}
+
+        
+        {% endif %}
+
           
 
 

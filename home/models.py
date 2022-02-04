@@ -162,6 +162,15 @@ class Contactdeveloper(models.Model):
 
 
 
+class Verifiedaccounts(models.Model):
+    username=models.CharField(max_length=100,default='')
+    def __str__(self):
+        return self.username
+
+
+
+
+
 
 
 

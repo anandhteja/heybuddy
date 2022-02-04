@@ -1,7 +1,7 @@
 from logging.config import dictConfig
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from home.models import Contactdeveloper, Post, Profile, Comment, Chat, Follow, Chatbackground, Privateaccount, Privatefollow,Likefollowcommentnoti, Temporarynotification, Chatblock,Likes
+from home.models import Contactdeveloper, Post, Profile,Verifiedaccounts, Comment, Chat, Follow, Chatbackground, Privateaccount, Privatefollow,Likefollowcommentnoti, Temporarynotification, Chatblock,Likes
 from django.contrib.auth.models import auth, User
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -50,10 +50,12 @@ def home(request):
             f=list(Follow.objects.all().filter(follower=v).values_list('following',flat=True))
             
             private=list(Privateaccount.objects.all().values_list('username',flat=True))
+            verified=list(Verifiedaccounts.objects.all().values_list('username', flat=True))
+
 
 
             
-            dict={'usern':usern,'post':po,'pp':pp,'co':c,'p':p, 'f':f, 'private':private,'user':user,}
+            dict={'usern':usern,'post':po,'pp':pp,'co':c,'p':p, 'f':f, 'private':private,'user':user, 'verified':verified}
             
             return render(request,'home.html',dict)
 
@@ -78,9 +80,10 @@ def discover(request):
             
 
             private=list(Privateaccount.objects.all().values_list('username',flat=True))
+            verified=list(Verifiedaccounts.objects.all().values_list('username', flat=True))
 
             
-            dict={'usern':usern,'post':po,'pp':pp,'co':c,'p':p, 'f':f, 'private':private}
+            dict={'usern':usern,'post':po,'pp':pp,'co':c,'p':p, 'f':f, 'private':private,'verified':verified}
             
             return render(request,'discover.html',dict)
 
@@ -181,10 +184,11 @@ def mypr(request):
             c=Comment.objects.all().order_by('-uploaded_on')[:5]
             followercount=Follow.objects.filter(following=v).count()
             followingcount=Follow.objects.filter(follower=v).count()
+            verified=list(Verifiedaccounts.objects.all().values_list('username', flat=True))
 
 
             
-            dict={'usern':usern,'post':po,'pp':pp,'co':c,'count':count, 'followercount':followercount,'followingcount':followingcount}
+            dict={'usern':usern,'post':po,'pp':pp,'co':c,'count':count, 'followercount':followercount,'followingcount':followingcount,'verified':verified}
             return render(request,'myprofile.html',dict)
 
 
@@ -218,12 +222,16 @@ def uploadstatus(request):
                
                 s=request.POST['status']
 
-                            
-                po=Post(username=u,status=s)
-                po.save()
-                messages.success(request,'Status uploaded successfully')
+                if len(s) > 0:
 
-                return redirect('home')
+                    po=Post(username=u,status=s)
+                    po.save()
+                    messages.success(request,'Status uploaded successfully')
+
+                    return redirect('home')
+                else:
+                    messages.info(request,"Status shouldn't be empty")
+                    return redirect('us')
     
     return render(request,'upload/uploadstatus.html')
 
@@ -253,6 +261,7 @@ def userspecificprofile(request,name):
             count=Post.objects.filter(username=usern).count()
             private=list(Privateaccount.objects.all().values_list('username',flat=True))
             f=list(Follow.objects.all().filter(follower=v, following=name).values_list('following',flat=True))
+            verified=list(Verifiedaccounts.objects.all().values_list('username', flat=True))
             
 
             req=Privatefollow.objects.all()
@@ -265,7 +274,7 @@ def userspecificprofile(request,name):
             
 
                     
-            dict={'usern':usern,'post':po,'pp':pp,'opp':opp, 'count':count, 'private':private,'username':username,'req':req,'follow':follow, 'f':f}
+            dict={'usern':usern,'post':po,'pp':pp,'opp':opp, 'count':count, 'private':private,'username':username,'req':req,'follow':follow, 'f':f, 'verified':verified}
             return render(request,'userspecificprofile.html',dict)
 
 
@@ -307,7 +316,7 @@ def deletepost(request,id):
     p.delete()
     co.delete()
     messages.success(request,'post removed successfully')
-    return redirect(request.META['HTTP_REFERER'])
+    return redirect('home')
 
 
 
@@ -563,6 +572,7 @@ def addfollow(request):
                 lfc=Likefollowcommentnoti(username=following,followed_by=v)
                 f.save()
                 lfc.save()
+                messages.success(request,'Following')
                 return redirect(request.META['HTTP_REFERER'])
 
 
@@ -828,7 +838,13 @@ def removelfc(request):
     return redirect('notifications')
 
 
+def deleteconfirmation(request):
+    for k,v in request.session.items():
+            if k in 'username':
+                username=v
+                dict={'username':username}
 
+    return render(request, 'deleteconfirmation.html',dict) 
 
 
 

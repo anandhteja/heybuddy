@@ -38,7 +38,7 @@ urlpatterns = [
     path('register/',hm.register, name='register'),
     path('mypr/', hm.mypr, name="myprofile"),
     path('up/',hm.uploadphoto),
-    path('us/',hm.uploadstatus),
+    path('us/',hm.uploadstatus, name='us'),
     path('uv/',hm.uploadvideo),
     path('usp/<str:name>/',hm.userspecificprofile),
     path('editprofile/',hm.editprofile, name='editprofile'),
