@@ -50,12 +50,13 @@ def home(request):
             f=list(Follow.objects.all().filter(follower=v).values_list('following',flat=True))
             
             private=list(Privateaccount.objects.all().values_list('username',flat=True))
+            likes=Likes.objects.all()
             verified=list(Verifiedaccounts.objects.all().values_list('username', flat=True))
 
 
 
             
-            dict={'usern':usern,'post':po,'pp':pp,'co':c,'p':p, 'f':f, 'private':private,'user':user, 'verified':verified}
+            dict={'usern':usern,'post':po,'pp':pp,'co':c,'p':p, 'f':f, 'private':private,'user':user, 'verified':verified,'likes':likes}
             
             return render(request,'home.html',dict)
 
@@ -878,3 +879,5 @@ def viewlikes(request,id):
     likes=Likes.objects.all().filter(postid=id)
     dict={'likes':likes}
     return render(request, 'viewlikes.html', dict)
+
+    
