@@ -54,7 +54,7 @@ left: 0;
 bottom: 0;
 width: 100%;background-color:mintcream}
 
-div.goback{background-color:darkslateblue; position: fixed;width: 100%;}
+div.goback{background-color:transparent;; position: fixed;width: 100%;}
 
 
 </style>
@@ -102,12 +102,22 @@ function goBack(){
 
   
 <body>
+  {% for msg in messages %}
+  
+
+ <div class="alert alert-warning alert-dismissible fade show" role="alert">
+   <strong>Done!</strong> {{msg}}
+   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+   
+ </div>
+
+ {% endfor %}
   
 
   
   <div class="goback">
 
-  <center><a href="/usp/{{receiver.username}}" style="color:white; font-size:25px">{{receiver.username}}</a></center> <br/><br/>
+    <button onClick="window.location.reload();">refresh</button><center><a href="/usp/{{receiver.username}}" style="color:white; font-size:25px">{{receiver.username}}</a></center>
   
   {% if receiver.username not in block %}
   <div class="block">
@@ -137,18 +147,9 @@ function goBack(){
   <br/>
   <br/>
  <br/>
- {% for msg in messages %}
+ 
   
-
- <div class="alert alert-warning alert-dismissible fade show" role="alert">
-   <strong>Done!</strong> {{msg}}
-   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
    
- </div>
-
- {% endfor %}
-  
-    <button onClick="window.location.reload();">refresh</button>
     
     
 <br/>
