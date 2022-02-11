@@ -89,17 +89,17 @@ DATABASES = {
 
     'default': {
 
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': 'instagram',
+        'NAME': 'dds1cci2aeqgpb',
 
-        'USER': 'root',
+        'USER': 'nvrqsvmfixsikq',
 
-        'PASSWORD': 'pass@143',
+        'PASSWORD': 'b28ddc3ee01f9cf18ca522b6a6985efd9495c23a177b85a8d04ccaee11585e5a',
 
-        'HOST': 'localhost',
+        'HOST': 'ec2-54-208-139-247.compute-1.amazonaws.com',
 
-        'PORT': '3306',
+        'PORT': '5432',
 
     }
 
