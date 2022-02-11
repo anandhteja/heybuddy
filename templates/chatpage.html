@@ -117,7 +117,7 @@ function goBack(){
   <div class="goback">
 
     <a href="/chathome/"><button>back</button></a><center><a href="/usp/{{receiver.username}}" style="color: black;font-weight: bold; font-size:35px">{{receiver.username}}</a></center>
-  
+  <div class=total>
   {% if receiver.username not in block %}
   <div class="block">
     <form method="post" action="/blockchatuser/" enctype="multipart/form-data">
@@ -146,7 +146,7 @@ function goBack(){
   <br/>
   <br/>
  <br/>
- <div class=total>
+ 
   
      <button onClick="window.location.reload();">refresh</button>
     
