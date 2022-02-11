@@ -40,7 +40,7 @@ body:before {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color:cornflowerblue;
+  background-color:;
   color:black;
   text-align: center;
 }
@@ -117,7 +117,7 @@ function goBack(){
   
   <div class="goback">
 
-    <button onClick="window.location.reload();">refresh</button><center><a href="/usp/{{receiver.username}}" style="color:white; font-size:25px">{{receiver.username}}</a></center>
+    <a href="/chathome/"><button>back</button></a><center><a href="/usp/{{receiver.username}}" style="color:white; font-size:25px">{{receiver.username}}</a></center>
   
   {% if receiver.username not in block %}
   <div class="block">
@@ -149,7 +149,7 @@ function goBack(){
  <br/>
  
   
-   
+     <button onClick="window.location.reload();">refresh</button>
     
     
 <br/>
@@ -158,7 +158,7 @@ function goBack(){
 
     <br/>
     
-   
+ 
     
     {% for c in chat  %}
     
