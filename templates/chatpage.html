@@ -117,7 +117,7 @@ function goBack(){
   <div class="goback">
 
     <a href="/chathome/"><button>back</button></a><center><a href="/usp/{{receiver.username}}" style="color: black;font-weight: bold; font-size:35px">{{receiver.username}}</a></center>
-  
+ 
   {% if receiver.username not in block %}
   <div class="block">
     <form method="post" action="/blockchatuser/" enctype="multipart/form-data">
@@ -137,14 +137,21 @@ function goBack(){
   </form>
   </div>
 
+
   {% endif %}  
-<div class=total>
+
 </div>
+
   <br/>
+
   <br/>
+
   <br/>
+<div class=total> 
   <br/>
+ 
   <br/>
+
  <br/>
  
   
@@ -158,6 +165,7 @@ function goBack(){
     <br/>
     
  
+
     
     {% for c in chat  %}
     
@@ -226,8 +234,8 @@ function goBack(){
    <br/>
    <br/>
   <br/>
-</div>
-   
+
+   </div>
    {% if receiver.username not in block %}
 
    {% if usern not in block_by %}
