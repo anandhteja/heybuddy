@@ -39,7 +39,7 @@ body:before {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color:;
+  background-color: gainsboro;
   color:black;
   text-align: center;
 }
@@ -101,6 +101,7 @@ function goBack(){
 
   
 <body>
+  <div class=total> 
   {% for msg in messages %}
   
 
@@ -116,7 +117,7 @@ function goBack(){
   
   <div class="goback">
 
-    <a href="/chathome/"><button>back</button></a><center><a href="/usp/{{receiver.username}}" style="color: black;font-weight: bold; font-size:35px">{{receiver.username}}</a></center>
+    <a href="/chathome/"><button>back</button></a><center><a href="/usp/{{receiver.username}}" style="color:black;font-weight: bold; font-size:35px">{{receiver.username}}</a></center>
  
   {% if receiver.username not in block %}
   <div class="block">
@@ -147,7 +148,7 @@ function goBack(){
   <br/>
 
   <br/>
-<div class=total> 
+
   <br/>
  
   <br/>
@@ -199,7 +200,7 @@ function goBack(){
       {% if c.message %}
     
   me: &nbsp;&nbsp;{{c.message}} &nbsp;-&nbsp;<u style="font-size: 10px;">{{c.uploaded_on}}</u>
-<div class="tej"><button class="tej" type ="submit"><a href="/deletemymessage/{{c.id}}/">delete</a></button></div>
+<div class="tej"><button class="tej" type ="submit" onclick="return confirm('Are you sure you want to Delete?');" ><a href="/deletemymessage/{{c.id}}/">delete</a></button></div>
   {% endif %}
 
 
