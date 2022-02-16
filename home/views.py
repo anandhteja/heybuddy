@@ -529,13 +529,17 @@ def addmessage(request):
                     receiver=request.POST['receiver']
                     
                     message=request.POST['message']
-                    unique=v+receiver
-                    userinput=Chat(sender=sender, receiver=receiver, message=message, unique=unique)
-                    tempnoti=Temporarynotification(sender=sender, receiver=receiver, message=message)
-                    userinput.save()
-                    tempnoti.save()
+                    if len(message)==0:
+                        messages.info(request,"Can't send empty message")
+                        return redirect(request.META['HTTP_REFERER'])
+                    else:
+                        unique=v+receiver
+                        userinput=Chat(sender=sender, receiver=receiver, message=message, unique=unique)
+                        tempnoti=Temporarynotification(sender=sender, receiver=receiver, message=message)
+                        userinput.save()
+                        tempnoti.save()
 
-                    return redirect(request.META['HTTP_REFERER']) 
+                        return redirect(request.META['HTTP_REFERER']) 
 
 
 

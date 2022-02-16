@@ -44,6 +44,7 @@ body:before {
   text-align: center;
 }
 
+
 h1.receive{color:darkslateblue}
 
 
@@ -53,7 +54,11 @@ left: 0;
 bottom: 0;
 width: 100%;background-color:mintcream}
 
-div.goback{background-color:transparent;; position: fixed;width: 100%;}
+div.goback{background-color:gainsboro;; position: fixed;width: 100%;}
+div.bot{  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;background-color: gainsboro;}
 
 
 </style>
@@ -102,16 +107,7 @@ function goBack(){
   
 <body>
   <div class=total> 
-  {% for msg in messages %}
   
-
- <div class="alert alert-warning alert-dismissible fade show" role="alert">
-   <strong>Done!</strong> {{msg}}
-   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-   
- </div>
-
- {% endfor %}
   
 
   
@@ -119,6 +115,7 @@ function goBack(){
 
     <a href="/chathome/"><button>back</button></a><center><a href="/usp/{{receiver.username}}" style="color:black;font-weight: bold; font-size:35px">{{receiver.username}}</a></center>
  
+  
   {% if receiver.username not in block %}
   <div class="block">
     <form method="post" action="/blockchatuser/" enctype="multipart/form-data">
@@ -142,7 +139,16 @@ function goBack(){
   {% endif %}  
 
 </div>
+{% for msg in messages %}
+  
 
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Done!</strong> {{msg}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  
+</div>
+
+{% endfor %}
   <br/>
 
   <br/>
@@ -154,7 +160,7 @@ function goBack(){
   <br/>
 
  <br/>
- 
+
   
      <button onClick="window.location.reload();">refresh</button>
     
@@ -233,35 +239,44 @@ function goBack(){
    <br/>
    <br/>
    <br/>
-   <br/>
   <br/>
 
-   </div>
    {% if receiver.username not in block %}
 
    {% if usern not in block_by %}
-     
    
-   
-      
-  
-   <div class="input">
-<form method='POST' enctype="multipart/form-data" action="/addmessage/">
-
+  <div class="bot">
+    <br/>
+   <form method='POST' enctype="multipart/form-data" action="/addmessage/">
+   <div class="input-group">
+    
     <input type=hidden name='receiver' value={{receiver.username}}>
-    <input type="text" name='message'>
+    <input type="text" name='message' class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Write message">
+    <button type="submit" class="btn btn-outline-secondary">Send</button>
+    <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+      <span class="visually-hidden">Toggle Dropdown</span>
+    </button>
     {% csrf_token %}
-<button type="submit">send</button>
-</form>
-<form method='POST' enctype="multipart/form-data" action="/chatsendimages/">
+    </form>
+    <ul class="dropdown-menu dropdown-menu-end">
+      
+      <li>
+        
+        <form method='POST' enctype="multipart/form-data" action="/chatsendimages/">
 
-  <input type=hidden name='receiver' value={{receiver.username}}>
-  <p class="tej" style="font-size:11px"><input type="file" name='image'>
-  {% csrf_token %}
-<button type="submit">send</button></p>
-</form>
+          <input type=hidden name='receiver' value={{receiver.username}}>
+          <p class="tej" style="font-size:11px"><input type="file" name='image'>
+          {% csrf_token %}
+        <button type="submit">send</button></p>
+        </form>
+      </li>
+      
+    </ul>
+    
+  </div>
+  <br/>
 </div>
-{% else %}  
+    {% else %}  
 <div class="input">
 <h4 style="color:darkred;">you were blocked by this user</h4>
 </div>
@@ -276,8 +291,14 @@ function goBack(){
 </div>
 
 {% endif %}
+  </div>
+ 
 
+   </div>
+   <br/>
 
+  
+   
 
 
 
