@@ -59,7 +59,11 @@ div.bot{  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;background-color: gainsboro;}
+ 
+div.na{
 
+  position:fixed; width: 100%;
+}
 
 </style>
 
@@ -106,39 +110,53 @@ function goBack(){
 
   
 <body>
+  <div class="na">
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        
+        <center><a href="/usp/{{receiver.username}}" style="color:black;font-weight: bold; font-size:35px">{{receiver.username}}</a></center>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/chathome/"><button>go back</button></a>
+          </li>
+          {% if receiver.username not in block %}
+          <li class="nav-item">
+            <form method="post" action="/blockchatuser/" enctype="multipart/form-data">
+              <input type="hidden" name='blocked_user' value={{receiver.username}}>
+              <input type="hidden" name='blocked_by' value={{usern}}>
+            <button type="submit">block</button>
+            {% csrf_token %}
+          </form>
+          </li>
+          {% else %}  
+          <li class="nav-item">
+            <form method="post" action="/unblockchatuser/" enctype="multipart/form-data">
+              <input type="hidden" name='blocked_user' value={{receiver.username}}>
+              <input type="hidden" name='blocked_by' value={{usern}}>
+            <button type="submit">unblock</button>
+            {% csrf_token %}
+          </form>
+
+          </li>
+          {% endif %}  
+          
+          
+        </ul>
+        
+  </nav>
+</div>
   <div class=total> 
   
   
 
   
-  <div class="goback">
-
-    <a href="/chathome/"><button>back</button></a><center><a href="/usp/{{receiver.username}}" style="color:black;font-weight: bold; font-size:35px">{{receiver.username}}</a></center>
- 
   
-  {% if receiver.username not in block %}
-  <div class="block">
-    <form method="post" action="/blockchatuser/" enctype="multipart/form-data">
-      <input type="hidden" name='blocked_user' value={{receiver.username}}>
-      <input type="hidden" name='blocked_by' value={{usern}}>
-    <button type="submit">block</button>
-    {% csrf_token %}
-  </form>
-  </div>
-  {% else %}  
-  <div class="block">
-    <form method="post" action="/unblockchatuser/" enctype="multipart/form-data">
-      <input type="hidden" name='blocked_user' value={{receiver.username}}>
-      <input type="hidden" name='blocked_by' value={{usern}}>
-    <button type="submit">unblock</button>
-    {% csrf_token %}
-  </form>
-  </div>
-
-
-  {% endif %}  
-
-</div>
 {% for msg in messages %}
   
 
@@ -149,20 +167,15 @@ function goBack(){
 </div>
 
 {% endfor %}
-  <br/>
+<button onClick="window.location.reload();">refresh</button>
 
-  <br/>
-
-  <br/>
-
-  <br/>
+ 
  
   <br/>
 
  <br/>
 
   
-     <button onClick="window.location.reload();">refresh</button>
     
     
 <br/>

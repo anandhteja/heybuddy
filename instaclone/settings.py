@@ -30,9 +30,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(ewv664&anwa)+5&t!ruys88!c&f_ni#489fmqvx943m9+^b!i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['tej-socialmedia.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
-
+    
     'home','rest_framework','django_social_share',
 
 ]
@@ -90,17 +90,17 @@ DATABASES = {
 
     'default': {
 
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.mysql',
 
-        'NAME': 'dds1cci2aeqgpb',
+        'NAME': 'instagram',
 
-        'USER': 'nvrqsvmfixsikq',
+        'USER': 'root',
 
-        'PASSWORD': 'b28ddc3ee01f9cf18ca522b6a6985efd9495c23a177b85a8d04ccaee11585e5a',
+        'PASSWORD': 'pass@143',
 
-        'HOST': 'ec2-54-208-139-247.compute-1.amazonaws.com',
+        'HOST': 'localhost',
 
-        'PORT': '5432',
+        'PORT': '3306',
 
     }
 
