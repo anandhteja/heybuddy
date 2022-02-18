@@ -110,6 +110,8 @@ urlpatterns = [
 
      path('changegrouppicture/', hm.changegrouppicture),
 
+     path('creategroup/', hm.creategroup),
+
      
    
 

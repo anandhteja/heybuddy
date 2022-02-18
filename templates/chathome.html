@@ -107,18 +107,12 @@ text-align: center;
 
 </head>
 <body>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-    {% for notification in  user.notifications.unread %}
-      <div>
-        Message from <b>{{ notification.actor }}</b>
-        <button class="dropdown-item" type="button">{{ notification.description }}</button>			
-      </div>
-      <div class="dropdown-divider"></div>
-    {% endfor %}
-  </div>
+  
     <h1 style=color:darkgrey>My chats</h1><div class="tej">
         <button style='font-size:10px;'><a href="/chatinfo/">info</a></button>
-        <button style='font-size:10px;' ><a href="/changebackgroundimage/">Change chat background</a></button></div>
+        <button style='font-size:10px;' ><a href="/changebackgroundimage/">Change chat background</a></button>
+        <button style='font-size:10px;' ><a href="/creategroup/">Create group</a></button></div>
+
 
     <h2>Chats</h2>
     {% if chat %}

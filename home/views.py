@@ -1,4 +1,5 @@
 from logging.config import dictConfig
+from venv import create
 from webbrowser import get
 from django.dispatch import receiver
 from django.shortcuts import render, redirect
@@ -1007,4 +1008,18 @@ def changegrouppicture(request):
         messages.info(request, 'Group picture changed successfully')
         return redirect('chathome')
 
+def creategroup(request):
+    for k,v in request.session.items():
+            if k in 'username':
+                if request.method == 'POST':
+                    group_name=request.POST['group_name']
+                    group_photo=request.FILES['group_photo']
+                    group_description=request.POST['group_description']
+                    created_by=v
+                    userinput=Creategroup(group_name=group_name, group_description=group_description, group_photo=group_photo, created_by=created_by)
+                    userinput.save()
+                    messages.info(request, 'Group created successfully')
+                    return redirect('chathome')
+
+    return render(request, 'creategroup.html')
                     
