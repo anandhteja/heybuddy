@@ -126,6 +126,9 @@ function goBack(){
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/chathome/"><button>go back</button></a>
           </li>
+          <li class="nav-item">
+            <button onClick="window.location.reload();">refresh</button>
+          </li>
           {% if receiver.username not in block %}
           <li class="nav-item">
             <form method="post" action="/blockchatuser/" enctype="multipart/form-data">
