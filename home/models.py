@@ -1,4 +1,5 @@
 # Create your models here.
+from email.policy import default
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
@@ -171,7 +172,36 @@ class Verifiedaccounts(models.Model):
 
 
 
+#groups
+
+class Creategroup(models.Model):
+    group_name=models.CharField(max_length=100,default='')
+    group_photo=models.ImageField(upload_to='group_photo',null=True, storage=MediaCloudinaryStorage, validators=[validate_image])
+
+    group_description=models.CharField(max_length=1000, default='')
+    created_by=models.CharField(max_length=100,default='')
+    created_on=models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.group_name
 
 
+class Grouppeople(models.Model):
+    group_id=models.IntegerField()
+    group_name=models.CharField(max_length=100,default='')
+    username=models.CharField(max_length=100,default='')
+    
+    added_on=models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.group_name
+        
+
+
+class Groupsendmessages(models.Model):
+    group_id=models.IntegerField()
+    sender=models.CharField(max_length=100,default='')
+    message=models.CharField(max_length=1000)
+    sent_on=models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.sender
 
 

@@ -104,12 +104,24 @@ urlpatterns = [
      path('viewlikes/<int:id>/', hm.viewlikes),
      path('removefollowerfromprofile/<str:name>/', hm.removefollowerfromprofile),
 
+     path('grouppage/<int:id>/', hm.grouppage),
+
+     path('changegrouppicturepage/<int:id>/', hm.changegrouppicturepage),
+
+     path('changegrouppicture/', hm.changegrouppicture),
+
      
    
 
 
     url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
     url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
+
+    path('groupchat/<int:id>/', hm.groupchat),
+    path('groupsendmessages/', hm.groupsendmessages),
+    path('addpeoplepage/<int:id>/', hm.addpeoplepage, name='addpeoplepage'),
+    path('addmember/', hm.addmember, name='addmember'),
+
 
 
 

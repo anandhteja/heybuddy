@@ -1,8 +1,9 @@
 from logging.config import dictConfig
+from webbrowser import get
 from django.dispatch import receiver
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from home.models import Contactdeveloper, Post, Profile,Verifiedaccounts, Comment, Chat, Follow, Chatbackground, Privateaccount, Privatefollow,Likefollowcommentnoti, Temporarynotification, Chatblock,Likes
+from home.models import Contactdeveloper, Post, Profile,Creategroup,Grouppeople,Groupsendmessages,Verifiedaccounts, Comment, Chat, Follow, Chatbackground, Privateaccount, Privatefollow,Likefollowcommentnoti, Temporarynotification, Chatblock,Likes
 from django.contrib.auth.models import auth, User
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -549,7 +550,11 @@ def chathome(request):
     for k,v in request.session.items():
             if k in 'username':
                 chat=Chat.objects.filter(sender=v).values('receiver').distinct
-                dict={'chat':chat}
+                
+                groups=Creategroup.objects.filter(created_by=v)
+                groups1=Grouppeople.objects.filter(username=v)
+
+                dict={'chat':chat, 'groups':groups, 'groups1':groups1}
 
     return render(request, 'chathome.html',dict)
 
@@ -885,4 +890,121 @@ def viewlikes(request,id):
     dict={'likes':likes}
     return render(request, 'viewlikes.html', dict)
 
+
+
+
+def groupchat(request, id):
+    for k,v in request.session.items():
+        if k in 'username':
+            username=v
+
+            people=Grouppeople.objects.all().filter(group_id=id).values_list('username', flat=True)
+            people1=Creategroup.objects.all().filter(id=id).values_list('created_by', flat=True)
+            if username in people or username in people1:
+
+
+                c=Creategroup.objects.get(id=id)
+                m=Groupsendmessages.objects.filter(group_id=id).order_by('-sent_on')
+                background=Chatbackground.objects.get(username=v)
+                dict={'c':c, 'username':username, 'm':m, 'background':background}
+                return render(request, 'groupchat.html', dict)
+            else:
+                messages.info(request, 'You are not a member of this group')
+                return redirect('chathome')
+
+
+def groupsendmessages(request):
+    if request.method == 'POST':
+        group_id=request.POST['group_id']
+        sender=request.POST['sender']
+        message=request.POST['message']
+        if len(message) == 0:
+            messages.info(request,"Can't send empty messages")
+            return redirect(request.META['HTTP_REFERER']) 
+        else:
+            g=Groupsendmessages(group_id=group_id, sender=sender, message=message)
+            g.save()
+            return redirect(request.META['HTTP_REFERER']) 
+
+
+
+
+
+
+
+def addpeoplepage(request, id):
+    for k,v in request.session.items():
+            if k in 'username':
+                f=Follow.objects.all().filter(follower=v)
+                group_id=Creategroup.objects.get(id=id)
+                
+                people=list(Creategroup.objects.all().filter(id=id).values_list('created_by', flat=True))
+                    
+                
+                people1=list(Grouppeople.objects.filter(group_id=id).values_list('username', flat=True))
+
+                   
+                dict={'f':f, 'group_id':group_id, 'people':people, 'people1':people1}
+
     
+    return render(request,'addgrouppeople.html', dict)
+
+def addmember(request):
+   
+    if request.method == 'POST':
+        group_id=request.POST['group_id']
+        username_1=request.POST['username']
+        group_name=request.POST['group_name']
+        for k,v in request.session.items():
+            if k in 'username':
+                username=v
+
+                people=Grouppeople.objects.all().filter(group_id=group_id).values_list('username', flat=True)
+                people1=Creategroup.objects.all().filter(id=group_id).values_list('created_by', flat=True)
+                if username in people or username in people1:
+                    user_input=Grouppeople(group_id=group_id, username=username_1, group_name=group_name)
+                    user_input.save()
+                    messages.info(request, 'Member added successfully')
+                    return redirect('chathome')
+                else:
+                    messages.info(request, 'You are not a member of this group')
+                    return redirect('chathome')
+                
+def grouppage(request, id):
+    for k,v in request.session.items():
+            if k in 'username':
+                username=v
+
+                people=list(Grouppeople.objects.all().filter(group_id=id).values_list('username', flat=True))
+                people1=list(Creategroup.objects.all().filter(id=id).values_list('created_by', flat=True))
+                if username in people or username in people1:
+                    group=Creategroup.objects.get(id=id)
+                    members=Grouppeople.objects.all().filter(group_id=id)
+                    members1=Creategroup.objects.get(id=id)
+                    dict={'group':group, 'members':members, 'members1':members1}
+                    return render(request, 'grouppage.html', dict)
+
+
+def changegrouppicturepage(request, id):
+    for k,v in request.session.items():
+            if k in 'username':
+                username=v
+
+                people=list(Grouppeople.objects.all().filter(group_id=id).values_list('username', flat=True))
+                people1=list(Creategroup.objects.all().filter(id=id).values_list('created_by', flat=True))
+                if username in people or username in people1:
+                    id=id
+                    dict={'id':id}
+                    return render(request, 'changegrouppicturepage.html', dict)
+
+def changegrouppicture(request):
+    if request.method == 'POST':
+        group_photo=request.FILES['group_photo']
+        id=request.POST['id']
+        object=Creategroup.objects.get(id=id)
+        object.group_photo=group_photo
+        object.save()
+        messages.info(request, 'Group picture changed successfully')
+        return redirect('chathome')
+
+                    

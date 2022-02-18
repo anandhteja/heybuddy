@@ -120,18 +120,18 @@ text-align: center;
         <button style='font-size:10px;'><a href="/chatinfo/">info</a></button>
         <button style='font-size:10px;' ><a href="/changebackgroundimage/">Change chat background</a></button></div>
 
-    
+    <h2>Chats</h2>
     {% if chat %}
       
     {% for c in chat %}
     
       
     
-      <a href="/chat/{{c.receiver}}"><h3 style="text-decoration:none">  {{c.receiver}}</h3></a><br/>
+      <a href="/chat/{{c.receiver}}"><h3 style="text-decoration:none">  {{c.receiver}}</h3></a>
       
 
  
-        <br/>
+        
 
       
     {% endfor %}
@@ -144,6 +144,24 @@ text-align: center;
 
 
     <br/>
+    <h2>Groups</h2>
+{% if groups %}
+
+{% for g in groups %}
+  
+
+<a href="/groupchat/{{g.id}}"><h3 style="text-decoration:none">{{g.group_name}}</a></h3>
+{% endfor %}
+{% endif %}
+
+
+{% if groups1 %}
+
+{% for g in groups1 %}
+<a href="/groupchat/{{g.group_id}}"><h3 style="text-decoration:none">{{g.group_name}}</a></h3>
+{% endfor %}
+  
+{% endif %}
         <br/>
         <br/>
         <br/>

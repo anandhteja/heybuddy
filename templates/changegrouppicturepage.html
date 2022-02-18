@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Group photo</title>
+</head>
+<body>
+    {{id}}
+    <form method="post" enctype="multipart/form-data" action="/changegrouppicture/">
+
+        <input type="hidden" name="id" value="{{id}}">
+        <input type="file" name="group_photo" accept="image/*"><br/>
+        <br/>
+        <button type="submit">save</button>
+{% csrf_token %}
+    </form>
+
+</body>
+</html>
