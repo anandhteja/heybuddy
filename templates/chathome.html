@@ -33,7 +33,7 @@ background-color: gray;
 color: green;
 text-align: center;
 }
-
+div.groups{margin-bottom: 40%;}
 
 </style>
 
@@ -139,6 +139,7 @@ text-align: center;
 
     <br/>
     <h2>Groups</h2>
+    <div class="groups">
 {% if groups %}
 
 {% for g in groups %}
@@ -156,9 +157,11 @@ text-align: center;
 {% endfor %}
   
 {% endif %}
+
+</div>
         <br/>
         <br/>
-        <br/>
+       
         <div class="basenav">
           <ul class="nav justify-content-center">
               <li class="nav-item">
