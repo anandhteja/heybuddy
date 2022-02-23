@@ -982,7 +982,7 @@ def grouppage(request, id):
                     group=Creategroup.objects.get(id=id)
                     members=Grouppeople.objects.all().filter(group_id=id)
                     members1=Creategroup.objects.get(id=id)
-                    dict={'group':group, 'members':members, 'members1':members1}
+                    dict={'group':group, 'members':members, 'members1':members1, 'login_user':username}
                     return render(request, 'grouppage.html', dict)
 
 
@@ -1023,3 +1023,60 @@ def creategroup(request):
 
     return render(request, 'creategroup.html')
                     
+def deletegroup(request, id):
+    for k,v in request.session.items():
+            if k in 'username':
+                group=Creategroup.objects.get(id=id)
+                if group.created_by == v:
+                    g=Creategroup.objects.get(id=id)
+                    gp=Grouppeople.objects.all().filter(group_id=id)
+                    gsp=Groupsendmessages.objects.all().filter(group_id=id)
+                    g.delete()
+                    gp.delete()
+                    gsp.delete()
+                    messages.info(request, 'Group deleted successfully')
+                    return redirect('chathome')
+                else:
+                    messages.info(request, "you don't have access")
+                    return redirect('chathome')
+
+def leavegroup(request, id):
+    for k,v in request.session.items():
+            if k in 'username':
+                group=Creategroup.objects.get(id=id)
+                if group.created_by == v:
+                    messages.info(request, 'Error! Only group members able to leave the group not the admin')
+                    return redirect('chathome')
+                else:
+
+                    gp=Grouppeople.objects.all().filter(group_id=id, username=v)
+                    gp.delete()
+                    messages.info(request, 'You left the group successfully')
+                    return redirect('chathome')
+
+
+def removemember(request):
+    for k,v in request.session.items():
+            if k in 'username':
+                login_user=v
+                if request.method == 'POST':
+                    group_id=request.POST['group_id']
+                    username=request.POST['username']
+                    people1=list(Creategroup.objects.all().filter(id=group_id).values_list('created_by', flat=True))
+                    if login_user in people1:
+                        gp=Grouppeople.objects.get(username=username)
+                        gp.delete()
+                        messages.success(request, 'User removed successfully')
+                        return redirect('chathome')
+                    else:
+                        messages.success(request, "You don't have access")
+                        return redirect('chathome')
+
+
+                    
+                
+
+
+
+            
+                

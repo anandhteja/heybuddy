@@ -125,6 +125,11 @@ urlpatterns = [
     path('addmember/', hm.addmember, name='addmember'),
 
 
+    path('deletegroup/<int:id>/', hm.deletegroup),
+    path('leavegroup/<int:id>/',hm.leavegroup),
+    path('removemember/', hm.removemember, name='removemember'),
+
+
 
 
 #serializer

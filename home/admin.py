@@ -40,6 +40,11 @@ admin.site.register(Verifiedaccounts)
 #groups
 admin.site.register(Creategroup)
 admin.site.register(Grouppeople)
-admin.site.register(Groupsendmessages)
+
+
+
+class Groupsendmessagesadmin(admin.ModelAdmin):
+    list_display=['group_id']
+admin.site.register(Groupsendmessages, Groupsendmessagesadmin)
 
 

@@ -64,7 +64,8 @@ div.na{
 
   position:fixed; width: 100%;
 }
-
+button:hover{background-color:cyan; color:black}
+button{background-color:coral}
 </style>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -125,12 +126,17 @@ function goBack(){
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/chathome/"><button>go back</button></a>
           </li>
+          <li class="nav-item">
+            <button onClick="window.location.reload();">refresh</button>
+          </li>
           
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/addpeoplepage/{{c.id}}/"><button>Add members</button></a>
           </li>
-          
-          
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/leavegroup/{{c.id}}" onclick="return confirm('Are you sure you want to leave the {{c.group_name}} group?')"><button>Leave group</button></a>
+          </li>
+
         </ul>
         
   </nav>
@@ -153,17 +159,8 @@ function goBack(){
 {% endfor %}
 <br/>
 <br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<button onClick="window.location.reload();">refresh</button>
 
- 
- 
-  <br/>
 
- <br/>
 
   
     

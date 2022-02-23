@@ -9,6 +9,8 @@
     <style type="text/css">
 div.head{background-color: blueviolet; padding-left:25%}
 div.members{margin-left:15%; margin-top: 2%; font-size: 100%; margin-bottom: 50%;}
+button:hover{background-color:cyan; color:black}
+button{background-color:steelblue; color:white}
 
 div.basenav{position: fixed;
 left: 0;
@@ -24,7 +26,7 @@ width: 100%;background-color:lightslategrey}
         <div style="font-size:200%; color:black; font-weight:bold">
             {{group.group_name}}</div>
 
-        <div style="font-size:100% ;">{{group.group_description}}</div>
+        <div style="font-size:100% ; color:beige">{{group.group_description}}</div>
         <br/>
         <a href="/addpeoplepage/{{group.id}}/"><button>Add members</button></a><br/>
         <br/>
@@ -32,13 +34,42 @@ width: 100%;background-color:lightslategrey}
         <a href="/changegrouppicturepage/{{group.id}}/"><button>Change group picture</button></a>
         <br/>
         <br/>
-    </div>
+      
+      {% if group.created_by == login_user %}
+      <a href="/deletegroup/{{group.id}}/" onclick="return confirm('Are you sure you want to Delete this {{group.group_name}} group?');" onclick="return confirm('Are you sure you want to')"><button>Delete group</button></a>
+
+      {% endif %}
+        </div>
+      
     <div class="members">
     Group created by:{{members1.created_by}}<br/><br/>
     members:<br/>
+    {% if login_user == members1.created_by %}
+      
+    
     {% for m in members %}
-      <a href="/usp/{{m.username}}" style="text-decoration:none">{{m.username}}</a><br/>
+      <a href="/usp/{{m.username}}" style="text-decoration:none">{{m.username}}</a>
+
+        <form method="post" action="/removemember/">
+<input type="hidden" name="group_id" value="{{group.id}}">
+<input type="hidden" name="username" value="{{m.username}}">
+
+  <button style="font-size:10px" onclick="return confirm('Are you sure you want to remove {{m.username}} from {{group.group_name}} group?')">remove</button>
+
+
+  {% csrf_token %}
+      </form>
+      
+      <br/><br/>
     {% endfor %}
+
+    {% else %}
+    {% for m in members %}
+    <a href="/usp/{{m.username}}" style="text-decoration:none">{{m.username}}</a><br/><br/>
+
+    {% endfor %}
+
+    {% endif %}
 </div>
 
 
@@ -66,7 +97,7 @@ width: 100%;background-color:lightslategrey}
               <li><a class="dropdown-item" href="/mypr/">My profile</a></li>
               <li><a class="dropdown-item" href="/notifications/">notifications</a></li>
               <li><a class="dropdown-item" href="/chathome/">chats</a></li>
-              <li><a class="dropdown-item" href="/logout/">logout</a></li>
+              <li><a class="dropdown-item" href="/logout/" onclick="return confirm('Are you sure you want to log out?')">logout</a></li>
               <li><a class="dropdown-item" href="/contactdeveloper/">contact developer</a></li>
               
             </ul>
