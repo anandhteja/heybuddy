@@ -145,7 +145,7 @@ div.groups{margin-bottom: 40%;}
 {% for g in groups %}
   
 
-<a href="/groupchat/{{g.id}}"><h3 style="text-decoration:none">{{g.group_name}}</a></h3>
+<h3 style="text-decoration:none"><a href="/groupchat/{{g.id}}"><img src="{{g.group_photo.url}}" width=40 height=40 style="border-radius: 100px;">&nbsp;{{g.group_name}}</a></h3>
 {% endfor %}
 {% endif %}
 
@@ -153,6 +153,7 @@ div.groups{margin-bottom: 40%;}
 {% if groups1 %}
 
 {% for g in groups1 %}
+
 <a href="/groupchat/{{g.group_id}}"><h3 style="text-decoration:none">{{g.group_name}}</a></h3>
 {% endfor %}
   

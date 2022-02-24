@@ -84,26 +84,19 @@ WSGI_APPLICATION = 'instaclone.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'cloudinary_storage',
+    'django.contrib.staticfiles',
+    'cloudinary',
+    
+    'home','rest_framework','django_social_share',
 
-DATABASES = {
-
-    'default': {
-
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-        'NAME': 'dds1cci2aeqgpb',
-
-        'USER': 'nvrqsvmfixsikq',
-
-        'PASSWORD': 'b28ddc3ee01f9cf18ca522b6a6985efd9495c23a177b85a8d04ccaee11585e5a',
-
-        'HOST': 'ec2-54-208-139-247.compute-1.amazonaws.com',
-
-        'PORT': '5432',
-
-    }
-
-}
+]
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 

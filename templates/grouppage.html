@@ -42,8 +42,10 @@ width: 100%;background-color:lightslategrey}
         </div>
       
     <div class="members">
-    Group created by:{{members1.created_by}}<br/><br/>
+    Group created by:&nbsp;{{members1.created_by}} (admin)<br/><br/>
     members:<br/>
+    <a href="/usp/{{members1.created_by}}" style="text-decoration:none">{{members1.created_by}}</a><br/><br/>
+
     {% if login_user == members1.created_by %}
       
     

@@ -964,7 +964,9 @@ def addmember(request):
                 people1=Creategroup.objects.all().filter(id=group_id).values_list('created_by', flat=True)
                 if username in people or username in people1:
                     user_input=Grouppeople(group_id=group_id, username=username_1, group_name=group_name)
+                    gsm=Groupsendmessages(added_left=1,group_id=group_id, sender=username_1)
                     user_input.save()
+                    gsm.save()
                     messages.info(request, 'Member added successfully')
                     return redirect('chathome')
                 else:
@@ -1050,7 +1052,9 @@ def leavegroup(request, id):
                 else:
 
                     gp=Grouppeople.objects.all().filter(group_id=id, username=v)
+                    gsp=Groupsendmessages(added_left=0, group_id=id, sender=v)
                     gp.delete()
+                    gsp.save()
                     messages.info(request, 'You left the group successfully')
                     return redirect('chathome')
 
@@ -1065,7 +1069,10 @@ def removemember(request):
                     people1=list(Creategroup.objects.all().filter(id=group_id).values_list('created_by', flat=True))
                     if login_user in people1:
                         gp=Grouppeople.objects.get(username=username)
+                        gsp=Groupsendmessages(added_left=2, group_id=group_id, sender=username)
+                        gsp.save()
                         gp.delete()
+                        
                         messages.success(request, 'User removed successfully')
                         return redirect('chathome')
                     else:

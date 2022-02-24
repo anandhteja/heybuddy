@@ -201,6 +201,8 @@ class Groupsendmessages(models.Model):
     sender=models.CharField(max_length=100,default='')
     message=models.CharField(max_length=1000)
     sent_on=models.DateTimeField(auto_now_add=True)
+    added_left=models.IntegerField(null=True,blank=True)
+    
     
 
 
